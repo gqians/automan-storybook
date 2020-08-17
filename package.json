@@ -1,0 +1,54 @@
+{
+  "name": "@automan/vue-storybook",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "setup": "lerna bootstrap",
+    "lerna-link": "lerna link",
+    "postrelease": "lerna publish from-package",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "storybook": "REALM=WEB  start-storybook -p 9001 -c .storybook",
+    "build-storybook": "build-storybook -c .storybook -o .out"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "ol": "^6.4.3",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@fullhuman/postcss-purgecss": "^2.3.0",
+    "@storybook/addon-actions": "^6.0.10",
+    "@storybook/addon-docs": "^6.0.10",
+    "@storybook/addon-links": "^6.0.10",
+    "@storybook/addon-notes": "^5.3.19",
+    "@storybook/addon-viewport": "^6.0.10",
+    "@storybook/addons": "^6.0.10",
+    "@storybook/vue": "^6.0.10",
+    "@vue/cli-plugin-babel": "^4.5.3",
+    "@vue/cli-service": "^4.5.3",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-preset-vue": "^2.0.2",
+    "eslint": "^7.7.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "lerna": "^3.22.1",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.6.2",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "workspaces": [
+    "packages/*",
+    "components/*",
+    "storybook/components/*"
+  ]
+}

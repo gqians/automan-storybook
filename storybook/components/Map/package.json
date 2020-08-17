@@ -1,0 +1,16 @@
+{
+  "name": "@automan-component/map",
+  "version": "1.0.0",
+  "main": "src/index.vue",
+  "license": "MIT",
+  "author": "qianh",
+  "dependencies": {
+    "@automan-component/zoom": "^1.0.0",
+    "element-resize-detector": "^1.2.1",
+    "ol": "^6.4.3",
+    "vue-types": "^2.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

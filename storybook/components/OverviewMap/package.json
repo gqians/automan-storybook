@@ -1,0 +1,13 @@
+{
+  "name": "@automan-component/overviewmap",
+  "version": "1.0.0",
+  "main": "src/index.vue",
+  "license": "MIT",
+  "dependencies": {
+    "ol": "^6.4.3",
+    "vue-types": "^2.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
