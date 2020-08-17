@@ -4,8 +4,7 @@ import { action } from '@storybook/addon-actions'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import Map from '../../components/Map'
 import { transform } from 'ol/proj'
-// import ButtonMd from './Button.md'
-
+import MapMd from './Map.md'
 export default {
 	title: 'Map',
 	component: Map,
@@ -67,11 +66,11 @@ export const Basic = () => ({
 	},
 })
 
-// 基础使用.story = {
-// 	parameters: {
-// 		notes: { ButtonMd }
-// 	}
-// }
+Basic.story = {
+	parameters: {
+		notes: { MapMd }
+	}
+}
 
 // export const 使用viewport插件 = () => ({
 // 	components: {
