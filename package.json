@@ -1,7 +1,7 @@
 {
   "name": "@automanh/vue-storybook",
   "version": "0.1.0",
-  "private": false,
+  "license": "MIT",
   "scripts": {
     "setup": "lerna bootstrap",
     "lerna-link": "lerna link",
@@ -45,10 +45,5 @@
     "postcss-import": "^12.0.1",
     "tailwindcss": "^1.6.2",
     "vue-template-compiler": "^2.6.10"
-  },
-  "workspaces": [
-    "packages/*",
-    "components/*",
-    "storybook/components/*"
-  ]
+  }
 }

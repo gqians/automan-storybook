@@ -5,6 +5,10 @@
       :zoom-in-tip-label="config.control.zoom.zoomInTipLabel"
       :zoom-out-tip-label="config.control.zoom.zoomOutTipLabel"
       :delta="config.control.zoom.delta"
+      :position="config.control.zoom.position"
+      :background-color="config.control.zoom.backgroundColor"
+      :color="config.control.zoom.color"
+      :zoom-style="config.control.zoom.zoomStyle"
       @getZoom="getZoom"
     />
   </div>
@@ -37,13 +41,21 @@ export default {
 				zoom: VueTypes.integer.def(4),
 				maxZoom: VueTypes.integer.def(18),
 				minZoom: VueTypes.integer.def(4),
-				fit: VueTypes.arrayOf(Number)
+				fit: VueTypes.arrayOf(Number),
+				fitElement: VueTypes.string
 			}),
 			control: VueTypes.shape({
 				zoom: VueTypes.shape({
 					show: VueTypes.bool.def(true),
-					position: VueTypes.oneOf(['leftTop', 'rightTop']).def('rightTop'),
-					style: VueTypes.oneOf(['origin', 'white']).def('origin'),
+					position: VueTypes.shape({
+						left: VueTypes.string,
+						right: VueTypes.string,
+						top: VueTypes.string,
+						bottom: VueTypes.string
+					}),
+					backgroundColor: VueTypes.string,
+					color: VueTypes.string,
+					zoomStyle: VueTypes.oneOf(['origin', 'circle']).def('origin'),
 					duration: VueTypes.integer.def(250),
 					delta: VueTypes.integer.def(1),
 					zoomInTipLabel: VueTypes.string.def('放大'),
@@ -93,20 +105,8 @@ export default {
 					this.map.addLayer(layer)
 				}
 			})
-			// this.config.tileLayers.forEach(element => {
-			// 	const tempLayer = new TileLayer({
-			// 		title: element.title,
-			// 		source: new XYZ({
-			// 			crossOrigin: element.crossOrigin,
-			// 			url: element.sourceUrl
-			// 		})
-			// 	})
-			// 	tempLayer.setZIndex(element.zIndex)
-			// 	tempLayer.setVisible(element.visible)
-			// 	this.map.addLayer(tempLayer)
-			// })
 			if (this.config.control.zoom.show) this.map.addControl(this.zoom.instance)
-			// this.$emit('getMap', this.map)
+			this.$emit('getMap', this.map)
 		},
 		// 获取zoom
 		getZoom(zoom) {
@@ -114,13 +114,15 @@ export default {
 		},
 		// 设置resize事件
 		resize() {
+			if (!this.config.view.fitElement) return
 			const erd = elementResizeDetectorMaker()
-			erd.listenTo(document.getElementById('map'), () => {
+			erd.listenTo(document.getElementById(this.config.view.fitElement), () => {
 				this.mapfit()
 			})
 		},
 		// 设置自适应大小
 		mapfit() {
+			if (!this.config.view.fit) return
 			const view = this.map.getView()
 			// const min = transform([73, 18], 'EPSG:4326', 'EPSG:3857')
 			// const max = transform([135, 53.6], 'EPSG:4326', 'EPSG:3857')

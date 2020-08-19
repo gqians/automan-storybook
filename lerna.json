@@ -5,6 +5,6 @@
     "storybook/components/*"
   ],
   "npmClient": "yarn",
-  "useWorkspaces": true,
+  "useWorkspaces": false,
   "version": "independent"
 }
