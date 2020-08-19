@@ -1,6 +1,6 @@
 import '../../css/utils.css'
 import './global.css'
-// import { action } from '@storybook/addon-actions'
+import { action } from '@storybook/addon-actions'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import Map from '../../components/Map'
 import OverView from '../../components/OverviewMap'
@@ -12,7 +12,7 @@ export default {
 	parameters: {
 		viewport: {
 			viewports: INITIAL_VIEWPORTS,
-			defaultViewport: 'iphone6'
+			defaultViewport: 'reset'
 		}
 	}
 }
@@ -80,7 +80,8 @@ export const Basic = () => ({
 	methods: {
 		getMap(map) {
 			console.dir(map)
-		}
+		},
+		// getMap: action('getMap')
 	},
 })
 
@@ -175,9 +176,6 @@ export const AddOverviewMap = () => ({
 	},
 	methods: {
 		getMap(map) {
-			this.map = map
-			// console.log(map)
-			// console.log(this.overviewControl)
 			map.addControl(this.overviewControl)
 		},
 		getOverviewMapControl(control) {

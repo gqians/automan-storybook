@@ -1,6 +1,10 @@
 module.exports = {
 	theme: {
-		extend: {},
+		extend: {
+			width: {
+				'w-40': '10rem'
+			}
+		},
 		zIndex: {
 			'1': 1
 		}
@@ -8,6 +12,7 @@ module.exports = {
 	variants: {},
 	plugins: [],
 	corePlugins: {
-  		height: true,
+		height: true,
+		width: true
 	}
 }

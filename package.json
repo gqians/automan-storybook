@@ -5,7 +5,7 @@
   "scripts": {
     "setup": "lerna bootstrap",
     "lerna-link": "lerna link",
-    "postrelease": "lerna publish from-package --force-publish",
+    "postrelease": "lerna publish",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "storybook": "REALM=WEB  start-storybook -p 9001 -c .storybook",
@@ -20,6 +20,7 @@
     "@babel/core": "^7.10.2",
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "@storybook/addon-actions": "^6.0.10",
+    "@storybook/addon-backgrounds": "^6.0.12",
     "@storybook/addon-docs": "^6.0.10",
     "@storybook/addon-links": "^6.0.10",
     "@storybook/addon-notes": "^5.3.19",
