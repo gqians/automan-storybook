@@ -8,7 +8,7 @@
     "postrelease": "lerna publish",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "storybook": "REALM=WEB  start-storybook -p 9001 -c .storybook",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -c .storybook -o .out"
   },
   "dependencies": {
@@ -44,7 +44,7 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "lerna": "^3.22.1",
     "postcss-import": "^12.0.1",
-    "tailwindcss": "^1.6.2",
+    "tailwindcss": "^1.7.2",
     "vue-template-compiler": "^2.6.10"
   }
 }

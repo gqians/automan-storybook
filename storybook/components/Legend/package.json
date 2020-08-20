@@ -5,6 +5,7 @@
   "author": "qianh",
   "license": "MIT",
   "dependencies": {
+    "textcolor": "^1.0.2",
     "vue-types": "^2.0.1"
   }
 }

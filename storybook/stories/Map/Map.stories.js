@@ -1,6 +1,6 @@
 import '../../css/utils.css'
 import './global.css'
-import { action } from '@storybook/addon-actions'
+// import { action } from '@storybook/addon-actions'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import Map from '../../components/Map'
 import OverView from '../../components/OverviewMap'
