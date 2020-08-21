@@ -14,43 +14,49 @@ export default{
 	...
 	//在components中注册
 	components: { Map }
+	methods:{
+		getMap(map){
+			//可以获取到map实例
+			...
+		}
+	}
 }
 //使用组件
 <template>
-	<Map />
+	<Map @getMap="getMap"/>
 </template>
 ```
 ### props
 
 ``` javascript
 config: VueTypes.shape({
-			tileLayers: VueTypes.arrayOf(VueTypes.shape({
-				sourceType: VueTypes.oneOf(['xyz']).def('xyz'),
-				sourceUrl: VueTypes.string.def(''),
-				crossOrigin: VueTypes.oneOf(['Anonymous']).def('Anonymous'),
-				title: VueTypes.string.def(''),
-				visible: VueTypes.bool.def(true),
-				zIndex: VueTypes.integer
-			})),
-			view: VueTypes.shape({
-				center: VueTypes.arrayOf(Number).def([0, 0]),
-				zoom: VueTypes.integer.def(4),
-				maxZoom: VueTypes.integer.def(18),
-				minZoom: VueTypes.integer.def(4),
-				fit: VueTypes.arrayOf(Number)
-			}),
-			control: VueTypes.shape({
-				zoom: VueTypes.shape({
-					show: VueTypes.bool.def(true),
-					position: VueTypes.oneOf(['leftTop', 'rightTop']).def('rightTop'),
-					style: VueTypes.oneOf(['origin', 'white']).def('origin'),
-					duration: VueTypes.integer.def(250),
-					delta: VueTypes.integer.def(1),
-					zoomInTipLabel: VueTypes.string.def('放大'),
-					zoomOutTipLabel: VueTypes.string.def('缩小')
-				})
-			})
+	tileLayers: VueTypes.arrayOf(VueTypes.shape({
+		sourceType: VueTypes.oneOf(['xyz']).def('xyz'),
+		sourceUrl: VueTypes.string.def(''),
+		crossOrigin: VueTypes.oneOf(['Anonymous']).def('Anonymous'),
+		title: VueTypes.string.def(''),
+		visible: VueTypes.bool.def(true),
+		zIndex: VueTypes.integer
+	})),
+	view: VueTypes.shape({
+		center: VueTypes.arrayOf(Number).def([0, 0]),
+		zoom: VueTypes.integer.def(4),
+		maxZoom: VueTypes.integer.def(18),
+		minZoom: VueTypes.integer.def(4),
+		fit: VueTypes.arrayOf(Number)
+	}),
+	control: VueTypes.shape({
+		zoom: VueTypes.shape({
+			show: VueTypes.bool.def(true),
+			position: VueTypes.oneOf(['leftTop', 'rightTop']).def('rightTop'),
+			style: VueTypes.oneOf(['origin', 'white']).def('origin'),
+			duration: VueTypes.integer.def(250),
+			delta: VueTypes.integer.def(1),
+			zoomInTipLabel: VueTypes.string.def('放大'),
+			zoomOutTipLabel: VueTypes.string.def('缩小')
 		})
+	})
+})
 ```
 
  1. tileLayers为初始化的图层，目前仅支持TileLayer并且source为'xyz'。
@@ -61,7 +67,7 @@ config: VueTypes.shape({
 1.通过getMap可以获得初始化后的map对象。
 
 ### 其他
-1.组件采取tailwind.css,需要在外部配置好tailwind.css运行的环境。
+1.组件采取tailwindcss,需要在外部配置好tailwindcss运行的环境。
 
 ## 基于openlayers的zoom组件
 ### 使用
@@ -78,11 +84,18 @@ import Zoom from @automan-component/zoom
 export default{
 	...
 	//在components中注册
-	components: { Zoom }
+	components: { Zoom },
+	methods:{
+		getZoom(zoom){
+			//可以获取到zoom实例
+			map.addControl(zoom)//添加到map中
+		}
+		...
+	}
 }
 //使用组件
 <template>
-	<Zoom />
+	<Zoom @getZoom="getZoom"/>
 </template>
 ```
 ### props

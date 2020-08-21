@@ -20,13 +20,25 @@
         </div>
       </div>
     </div>
-    <div v-if="type==='liner'">
-      <span :class="linerOption.titleBackgroudColor">{{ linerOption.title }}</span>
+    <div
+      v-if="type==='liner'"
+      :class="[...linerStyle.content]"
+      :style="{
+        backgroundImage: linerOption.gradient? linerOption.backgroundImage || '' : ''
+      }"
+    >
+      <span
+        v-if="linerOption.title.text"
+        :class="[linerOption.title.backgroudColor,...linerStyle.span,...linerOption.title.extra]"
+      >
+        {{ linerOption.title.text }}
+      </span>
       <span
         v-for="i in config"
         :key="i.key"
+        :class="[...linerStyle.span,...linerOption.extra]"
         :style="{
-          backgroundColor: i.color,
+          backgroundColor: linerOption.gradient ? '' : i.color,
           color: findTextColor(i.color) }"
       >
         {{ i.value }}
@@ -41,26 +53,31 @@ import TEXTColor from 'textcolor'
 export default {
 	name: 'Legend',
 	props: {
-		type: VueTypes.oneOf(['default', 'liner', 'gradient']).def('default'),
+		type: VueTypes.oneOf(['default', 'liner']).def('default'),
 		defaultOption: VueTypes.shape({
 			compress: VueTypes.bool.def(false),
 			title: VueTypes.shape({
 				text: VueTypes.string,
 				textColor: VueTypes.string,
 				backgroundColor: VueTypes.string,
-				extra: VueTypes.arrayOf(VueTypes.string)
+				extra: VueTypes.arrayOf(VueTypes.string).def([])
 			}),
 			content: VueTypes.shape({
 				backgroundColor: VueTypes.string.def('bg-white'),
-				extra: VueTypes.arrayOf(VueTypes.string)
+				extra: VueTypes.arrayOf(VueTypes.string).def([])
 			})
 		}),
 		linerOption: VueTypes.shape({
 			horizontal: VueTypes.bool.def(false),
-			title: VueTypes.string,
-			titleBackgroudColor: VueTypes.string.def('bg-white')
+			gradient: VueTypes.bool.def(true),
+			backgroundImage: VueTypes.string,
+			title: VueTypes.shape({
+				text: VueTypes.string,
+				backgroudColor: VueTypes.string.def('bg-white'),
+				extra: VueTypes.arrayOf(VueTypes.string).def([])
+			}),
+			extra: VueTypes.arrayOf(VueTypes.string).def([])
 		}),
-		gradientOption: VueTypes.shape({}),
 		config: VueTypes.arrayOf(VueTypes.shape({
 			color: VueTypes.string,
 			value: VueTypes.string,
@@ -78,7 +95,6 @@ export default {
 				itemObject: ['flex justify-between text-sm items-center px-8'],
 				squreObject: []
 			}
-			console.log(this.type)
 			if (this.type !== 'default') return finalClass
 			if (this.defaultOption.compress) {
 				finalClass.itemObject.push(['leading-7'])
@@ -86,6 +102,21 @@ export default {
 			} else {
 				finalClass.itemObject.push(['leading-10'])
 				finalClass.squreObject.push(['w-4', 'h-4'])
+			}
+			return finalClass
+		},
+		linerStyle: function() {
+			if (this.type !== 'liner') return []
+			const finalClass = {
+				content: ['inline-flex', 'content-center'],
+				span: ['text-center']
+			}
+			if (this.linerOption.horizontal) {
+				finalClass.span.push('w-8')
+				finalClass.content.push(['flex-row'])
+			} else {
+				finalClass.span.push('w-10')
+				finalClass.content.push(['flex-col'])
 			}
 			return finalClass
 		}

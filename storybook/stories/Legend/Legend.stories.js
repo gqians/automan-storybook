@@ -1,11 +1,13 @@
 import '../../css/utils.css'
 import './global.css'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+import { withKnobs } from '@storybook/addon-knobs'
 import Legend from '../../components/Legend'
 import LegendMd from './Legend.md'
 export default {
 	title: 'Legend',
 	component: Legend,
+	decorators: [withKnobs],
 	parameters: {
 		viewport: {
 			viewports: INITIAL_VIEWPORTS,
@@ -16,6 +18,9 @@ export default {
 export const Default = () => ({
 	components: {
 		Legend
+	},
+	props: {
+
 	},
 	template: `
     <Legend :default-option="defaultOption" :config="config" />
@@ -177,14 +182,140 @@ export const Liner = () => ({
 		Legend
 	},
 	template: `
-    <Legend :type="type" :default-option="defaultOption" :config="config" />
+    <Legend :type="type" :liner-option="linerOption" :config="config" />
 	`,
 	data() {
 		return {
 			type: 'liner',
-			linerOption:{
-				title: 'KBDI',
-				titleBackgroudColor: 'bg-white'
+			linerOption: {
+				horizontal: false,
+				gradient: false,
+				title: {
+					text: '',
+					backgroudColor: 'bg-white'
+				}
+			},
+			config: [{
+				color: '#46060F',
+				gradient: 'from-orange-900',
+				value: '>50',
+				key: 'tem-1'
+			  }, {
+				color: '#660917',
+				value: '45',
+				gradient: 'via-orange-800',
+				key: 'tem-2'
+			  }, {
+				color: '#A91517',
+				gradient: 'via-orange-700',
+				value: '40',
+				key: 'tem-3'
+			  }, {
+				color: '#E74B1F',
+				gradient: 'via-orange-600',
+				value: '35',
+				key: 'tem-4'
+			  }, {
+				color: '#F0760C',
+				gradient: 'via-orange-500',
+				value: '30',
+				key: 'tem-18'
+			  }, {
+				color: '#F29B11',
+				gradient: 'via-orange-400',
+				value: '25',
+				key: 'tem-5'
+			  }, {
+				color: '#FFCD4F',
+				gradient: 'via-orange-300',
+				value: '20',
+				key: 'tem-6'
+			  }, {
+				color: '#FFE579',
+				gradient: 'via-yellow-200',
+				value: '15',
+				key: 'tem-7'
+			  }, {
+				color: '#FCF1A0',
+				gradient: 'via-orange-200',
+				value: '10',
+				key: 'tem-8'
+			  }, {
+				color: '#FFFFC9',
+				gradient: 'via-orange-100',
+				value: '5',
+				key: 'tem-9'
+			  }, {
+				color: '#EAFFFF',
+				gradient: 'via-blue-200',
+				value: '0',
+				key: 'tem-10'
+			  }, {
+				color: '#C0E7FA',
+				gradient: 'via-blue-300',
+				value: '-5',
+				key: 'tem-11'
+			  }, {
+				color: '#97CFF4',
+				gradient: 'via-blue-400',
+				value: '-10',
+				key: 'tem-12'
+			  }, {
+				color: '#65B8F7',
+				gradient: 'via-blue-500',
+				value: '-15',
+				key: 'tem-13'
+			  }, {
+				color: '#3293F5',
+				gradient: 'via-blue-600',
+				value: '-20',
+				key: 'tem-14'
+			  }, {
+				color: '#1A6BD5',
+				gradient: 'via-blue-700',
+				value: '-25',
+				key: 'tem-15'
+			  }, {
+				color: '#1743C5',
+				gradient: 'via-blue-800',
+				value: '-30',
+				key: 'tem-16'
+			  }, {
+				color: '#0F2795',
+				gradient: 'to-blue-900',
+				value: '<-30',
+				key: 'tem-17'
+			  }]
+		}
+	},
+	methods: {
+	},
+})
+
+Liner.story = {
+	parameters: {
+		notes: { LegendMd }
+	}
+}
+
+export const LinerHorizontal = () => ({
+	components: {
+		Legend
+	},
+	template: `
+    <Legend :type="type" :liner-option="linerOption" :config="config" />
+	`,
+	data() {
+		return {
+			type: 'liner',
+			linerOption: {
+				horizontal: true,
+				gradient: true,
+				backgroundImage: 'linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)',
+				title: {
+					text: '',
+					backgroudColor: 'bg-white'
+				}
 			},
 			config: [{
 				color: '#46060F',
@@ -265,7 +396,7 @@ export const Liner = () => ({
 	},
 })
 
-Liner.story = {
+LinerHorizontal.story = {
 	parameters: {
 		notes: { LegendMd }
 	}
