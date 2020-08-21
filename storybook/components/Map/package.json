@@ -1,11 +1,11 @@
 {
   "name": "@automan-component/map",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "src/index.vue",
   "license": "MIT",
   "author": "qianh",
   "dependencies": {
-    "@automan-component/zoom": "^1.0.3",
+    "@automan-component/zoom": "^1.0.5",
     "element-resize-detector": "^1.2.1",
     "ol": "^6.4.3",
     "vue-types": "^2.0.1"

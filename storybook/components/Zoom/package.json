@@ -1,6 +1,6 @@
 {
   "name": "@automan-component/zoom",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "src/index.vue",
   "author": "qianh",
   "license": "MIT",
