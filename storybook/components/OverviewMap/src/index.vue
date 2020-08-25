@@ -19,8 +19,12 @@ export default {
 				title: VueTypes.string.def(''),
 				maxZoom: VueTypes.integer,
 				minZoom: VueTypes.integer
-			}))
-		})
+			})),
+		}),
+		boxBackgroundColor: VueTypes.string,
+		boxBorderColor: VueTypes.string,
+		boxBorderStyle: VueTypes.string,
+		boxBorderWidth: VueTypes.string
 	},
 	data() {
 		return {
@@ -31,6 +35,15 @@ export default {
 	},
 	mounted() {
 		this.initOverView()
+		this.$nextTick(() => {
+			const box = document.getElementsByClassName('ol-overviewmap-box')[0]
+			console.dir(box)
+			console.log(box.style.backgroundColor)
+			box.style.backgroundColor = this.boxBackgroundColor
+			box.style.borderColor = this.boxBorderColor
+			box.style.borderStyle = this.boxBorderStyle
+			box.style.borderWidth = this.boxBorderWidth
+		})
 	},
 	methods: {
 		initOverView() {
@@ -49,8 +62,8 @@ export default {
 			const overviewMapControl = new OverviewMap({
 				className: 'ol-overviewmap ol-custom-overviewmap',
 				layers,
-				collapseLabel: '\u00BB',
-				label: '\u00AB',
+				collapseLabel: '-',
+				label: '+',
 				collapsed: false,
 			})
 			// const control = defaultControls().extend(overviewMapControl)
@@ -63,36 +76,36 @@ export default {
 <style>
 	#map .ol-custom-overviewmap,
 	#map .ol-custom-overviewmap.ol-uncollapsible {
-		bottom: 2px;
-		left: 2px;
+		bottom: 20px;
+		left: 10px;
 		right: auto;
 		top: auto;
 	}
 	#map .ol-overviewmap-map{
 		width: 400px !important;
 		height: 180px !important;
-		margin: 0 !important;
+		/* margin: 0 !important;
+		padding: 1px 1px 3px; */
 	}
 	#map .ol-custom-overviewmap:not(.ol-collapsed)  {
 		border: 1px solid black;
 	}
 	#map .ol-overviewmap.ol-custom-overviewmap.ol-unselectable.ol-control{
-		height: 180px;
+		height: 182px;
 		background-color: transparent;
 	}
 	#map .ol-custom-overviewmap .ol-overviewmap-map {
 		border: none;
 		width: 300px;
 	}
-
-	#map .ol-custom-overviewmap .ol-overviewmap-box {
-		border: 2px solid rgb(82,82,251);
+	.ol-overviewmap .ol-overviewmap-map{
+		margin:0;
 	}
-
 	#map .ol-custom-overviewmap:not(.ol-collapsed) button{
-		bottom: auto;
+		display: none;
+		/* bottom: auto;
 		left: auto;
 		right: 1px;
-		top: 1px;
+		top: 1px; */
 	}
 </style>

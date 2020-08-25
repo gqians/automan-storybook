@@ -99,7 +99,12 @@ export const AddOverviewMap = () => ({
 	template: `
 	<div :style="{width:'100%',height:'100%'}">
 		<OverView
-			:overview-map-config="overviewConfig" @getOverviewMapControl="getOverviewMapControl" />
+			:overview-map-config="overviewConfig"
+			:box-background-color="boxBackgroundColor"
+			:box-border-color="boxBorderColor"
+			:box-border-style="boxBorderStyle"
+			:box-border-width = "boxBorderWidth"
+			@getOverviewMapControl="getOverviewMapControl" />
 		<Map :config="mapConfig" @getMap="getMap" />
 	</div>
 	`,
@@ -171,7 +176,11 @@ export const AddOverviewMap = () => ({
 					maxZoom: 18,
 					minZoom: 0,
 				}]
-			}
+			},
+			boxBackgroundColor: 'rgba(79,209,197,0.4)',
+			boxBorderColor: 'rgb(79,209,197)',
+			boxBorderStyle: 'solid',
+			boxBorderWidth: '4px'
 		}
 	},
 	methods: {

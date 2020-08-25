@@ -86,10 +86,6 @@ export default {
 	top: 1.5rem;
 	/* @apply absolute z-1 top-0 right-0 shadow-2xl */
 }
-.leftTop{
-  left: 3.1rem;
-  top: 1.5rem;
-}
 .ol-control{
   padding: 0px !important;
   /* box-shadow: 0 0 10px hsla(0, 0%, 40%, .65); */
