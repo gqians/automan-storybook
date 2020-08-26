@@ -6,6 +6,7 @@ import Map from '../../components/Map'
 import OverView from '../../components/OverviewMap'
 import { transform } from 'ol/proj'
 import MapMd from './Map.md'
+import OverviewMd from './OverviewMap.md'
 export default {
 	title: 'Map',
 	component: Map,
@@ -100,10 +101,8 @@ export const AddOverviewMap = () => ({
 	<div :style="{width:'100%',height:'100%'}">
 		<OverView
 			:overview-map-config="overviewConfig"
-			:box-background-color="boxBackgroundColor"
-			:box-border-color="boxBorderColor"
-			:box-border-style="boxBorderStyle"
-			:box-border-width = "boxBorderWidth"
+			:box-config="boxConfig"
+			:collapse-button-config="collapseButtonConfig"
 			@getOverviewMapControl="getOverviewMapControl" />
 		<Map :config="mapConfig" @getMap="getMap" />
 	</div>
@@ -175,12 +174,35 @@ export const AddOverviewMap = () => ({
 					title: '3857_cva_overview',
 					maxZoom: 18,
 					minZoom: 0,
-				}]
+				}],
+				style: {
+					bottom: '20px',
+					left: '10px',
+					right: 'auto',
+					top: 'auto',
+					backgroundColor: 'transparent',
+					margin: '0',
+					border: 'solid 2px #4fd1c5'
+				},
+				collapseLabel: '-',
+				label: '+',
+				collapsed: false,
+				tipLabel: '鹰眼'
 			},
-			boxBackgroundColor: 'rgba(79,209,197,0.4)',
-			boxBorderColor: 'rgb(79,209,197)',
-			boxBorderStyle: 'solid',
-			boxBorderWidth: '4px'
+			boxConfig: {
+				boxBackgroundColor: 'rgba(79,209,197,0.4)',
+				boxBorderColor: 'rgb(79,209,197)',
+				boxBorderStyle: 'solid',
+				boxBorderWidth: '4px'
+			},
+			collapseButtonConfig: {
+				bottom: '9px',
+				left: '5px',
+				right: 'auto',
+				top: 'auto',
+				backgroundColor: 'white',
+				color: 'turquoise'
+			}
 		}
 	},
 	methods: {
@@ -195,7 +217,7 @@ export const AddOverviewMap = () => ({
 
 AddOverviewMap.story = {
 	parameters: {
-		notes: { MapMd }
+		notes: { OverviewMd }
 	}
 }
 

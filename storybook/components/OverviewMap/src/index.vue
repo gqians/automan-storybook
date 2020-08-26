@@ -20,11 +20,34 @@ export default {
 				maxZoom: VueTypes.integer,
 				minZoom: VueTypes.integer
 			})),
+			style: VueTypes.shape({
+				bottom: VueTypes.string.def('20px'),
+				left: VueTypes.string.def('10px'),
+				right: VueTypes.string.def('auto'),
+				top: VueTypes.string.def('auto'),
+				backgroundColor: VueTypes.string.def('transparent'),
+				margin: VueTypes.string.def('0'),
+				border: VueTypes.string.def('solid 2px #4fd1c5')
+			}),
+			collapseLabel: VueTypes.string.def('-'),
+			label: VueTypes.string.def('+'),
+			collapsed: VueTypes.bool.def(true),
+			tipLabel: VueTypes.string.def('鹰眼')
 		}),
-		boxBackgroundColor: VueTypes.string,
-		boxBorderColor: VueTypes.string,
-		boxBorderStyle: VueTypes.string,
-		boxBorderWidth: VueTypes.string
+		boxConfig: VueTypes.shape({
+			boxBackgroundColor: VueTypes.string,
+			boxBorderColor: VueTypes.string,
+			boxBorderStyle: VueTypes.string,
+			boxBorderWidth: VueTypes.string
+		}),
+		collapseButtonConfig: VueTypes.shape({
+			bottom: VueTypes.string.def('7px'),
+			left: VueTypes.string.def('3px'),
+			right: VueTypes.string.def('auto'),
+			top: VueTypes.string.def('auto'),
+			backgroundColor: VueTypes.string.def('white'),
+			color: VueTypes.string.def('turquoise'),
+		})
 	},
 	data() {
 		return {
@@ -37,12 +60,40 @@ export default {
 		this.initOverView()
 		this.$nextTick(() => {
 			const box = document.getElementsByClassName('ol-overviewmap-box')[0]
-			console.dir(box)
-			console.log(box.style.backgroundColor)
-			box.style.backgroundColor = this.boxBackgroundColor
-			box.style.borderColor = this.boxBorderColor
-			box.style.borderStyle = this.boxBorderStyle
-			box.style.borderWidth = this.boxBorderWidth
+			const collapseButton = document.querySelectorAll('#map .ol-custom-overviewmap.ol-collapsed button')[0]
+			const notcollapseButton = document.querySelectorAll('#map .ol-custom-overviewmap:not(.ol-collapsed) button')[0]
+			const overviewmap = document.getElementsByClassName('ol-custom-overviewmap')[0]
+			const overviewmapMap = document.getElementsByClassName('ol-overviewmap-map')[0]
+			const boxStyle = `
+				background-color: ${this.boxConfig.boxBackgroundColor};
+				border-color: ${this.boxConfig.boxBorderColor};
+				border-style: ${this.boxConfig.boxBorderStyle};
+				border-width: ${this.boxConfig.boxBorderWidth};
+			`
+			const collapseButtonStyle = `
+				bottom: ${this.collapseButtonConfig.bottom};
+				left: ${this.collapseButtonConfig.left};
+				right: ${this.collapseButtonConfig.right};
+				top: ${this.collapseButtonConfig.top};
+				background-color: ${this.collapseButtonConfig.backgroundColor};
+				color: ${this.collapseButtonConfig.color};
+			`
+			const overviewmapStyle = `
+				bottom: ${this.overviewMapConfig.style.bottom};
+				left: ${this.overviewMapConfig.style.left};
+				right: ${this.overviewMapConfig.style.right};
+				top: ${this.overviewMapConfig.style.top};
+				background-color: ${this.overviewMapConfig.style.backgroundColor};
+			`
+			const overviewmapMapStyle = `
+				margin: ${this.overviewMapConfig.style.margin};
+				border: ${this.overviewMapConfig.style.border};
+			`
+			box.style.cssText += boxStyle
+			collapseButton && (collapseButton.style.cssText += collapseButtonStyle)
+			notcollapseButton && (notcollapseButton.style.cssText += collapseButtonStyle)
+			overviewmap && (overviewmap.style.cssText += overviewmapStyle)
+			overviewmapMap && (overviewmapMap.style.cssText += overviewmapMapStyle)
 		})
 	},
 	methods: {
@@ -62,9 +113,10 @@ export default {
 			const overviewMapControl = new OverviewMap({
 				className: 'ol-overviewmap ol-custom-overviewmap',
 				layers,
-				collapseLabel: '-',
-				label: '+',
-				collapsed: false,
+				collapseLabel: this.overviewMapConfig.collapseLabel,
+				label: this.overviewMapConfig.label,
+				collapsed: this.overviewMapConfig.collapsed,
+				tipLabel: this.overviewMapConfig.tipLabel
 			})
 			// const control = defaultControls().extend(overviewMapControl)
 			this.$emit('getOverviewMapControl', overviewMapControl)
@@ -74,38 +126,22 @@ export default {
 </script>
 
 <style>
-	#map .ol-custom-overviewmap,
-	#map .ol-custom-overviewmap.ol-uncollapsible {
-		bottom: 20px;
-		left: 10px;
-		right: auto;
-		top: auto;
-	}
 	#map .ol-overviewmap-map{
 		width: 400px !important;
 		height: 180px !important;
-		/* margin: 0 !important;
-		padding: 1px 1px 3px; */
+		box-sizing: content-box;
+		/* margin: 0 !important; */
+		/* padding: 1px 1px 3px; */
 	}
 	#map .ol-custom-overviewmap:not(.ol-collapsed)  {
-		border: 1px solid black;
-	}
-	#map .ol-overviewmap.ol-custom-overviewmap.ol-unselectable.ol-control{
-		height: 182px;
-		background-color: transparent;
-	}
-	#map .ol-custom-overviewmap .ol-overviewmap-map {
 		border: none;
-		width: 300px;
 	}
 	.ol-overviewmap .ol-overviewmap-map{
-		margin:0;
+		border: none;
 	}
-	#map .ol-custom-overviewmap:not(.ol-collapsed) button{
-		display: none;
-		/* bottom: auto;
-		left: auto;
-		right: 1px;
-		top: 1px; */
+	#map .ol-custom-overviewmap button{
+		outline: none;
+		margin: 0;
+		position: absolute;
 	}
 </style>
