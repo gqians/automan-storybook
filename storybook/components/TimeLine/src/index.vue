@@ -34,7 +34,7 @@
 <script>
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import VueTypes from 'vue-types'
 export default {
 	name: 'TimeLine',
@@ -42,16 +42,19 @@ export default {
 	props: {
 		controlStyle: VueTypes.shape({
 			backgroundColor: VueTypes.string,
-			extra: VueTypes.arrayOf(VueTypes.string).def([])
-		}),
+			extra: VueTypes.arrayOf(VueTypes.string)
+		}).def(() => ({
+			backgroundColor: '#5252fb',
+			extra: [' border', 'rounded-full', 'border-purple-900']
+		})),
 		slider: VueTypes.shape({
-			marks: VueTypes.bool.def(true),
-			height: VueTypes.string.def('12px'),
-			lazy: VueTypes.bool.def(true),
-			useKeyboard: VueTypes.bool.def(true),
-			hideLabel: VueTypes.bool.def(true),
-			tooltip: VueTypes.oneOf(['none', 'always', 'hover', 'focus', 'active']).def('always'),
-			duration: VueTypes.number.def(0.5), // 滑动条的过度样式
+			marks: VueTypes.bool,
+			height: VueTypes.string,
+			lazy: VueTypes.bool,
+			useKeyboard: VueTypes.bool,
+			hideLabel: VueTypes.bool,
+			tooltip: VueTypes.oneOf(['none', 'always', 'hover', 'focus', 'active']),
+			duration: VueTypes.number, // 滑动条的过度样式
 			railStyle: VueTypes.any, // 轨道的样式
 			processStyle: VueTypes.any, // 经度条的样式
 			tooltipStyle: VueTypes.any, // 工具提示的样式
@@ -59,9 +62,32 @@ export default {
 			stepActiveStyle: VueTypes.any, // 步长激活下的样式
 			labelStyle: VueTypes.any, // 标签样式mr-3mr-3
 			labelActiveStyle: VueTypes.any, // 标签激活下的样式
-			extra: VueTypes.arrayOf(VueTypes.string).def([])
-		}),
-		startDate: VueTypes.string,
+			extra: VueTypes.arrayOf(VueTypes.string)
+		}).def(() => ({
+			marks: true,
+			height: '12px',
+			lazy: true,
+			useKeyboard: true,
+			hideLabel: true,
+			tooltip: 'always',
+			railStyle: {
+				backgroundColor: 'rgba(0,0,0,0.4)'
+			},
+			processStyle: {
+				backgroundColor: 'rgb(82,82,251)'
+			},
+			tooltipStyle: {
+				backgroundColor: 'rgb(82,82,251)',
+				borderColor: 'rgb(82,82,251)'
+			},
+			stepStyle: {
+				backgroundColor: 'rgba(255,255,255,0.4)',
+				width: '1px',
+  					borderRadius: 'none'
+			},
+			extra: ['leading-3']
+		})),
+		startDate: VueTypes.string.def('2020-08-27'),
 		days: VueTypes.integer.def(10),
 		dateFormat: VueTypes.string.def('MM-DD'),
 		intervals: VueTypes.integer.def(1000)
@@ -69,13 +95,14 @@ export default {
 	data() {
 		return {
 			play: true,
-			sliderValue: moment(this.startDate).format(this.dateFormat),
+			sliderValue: dayjs(this.startDate).format(this.dateFormat),
 			preTime: [],
 			timer: null,
 		}
 	},
 	mounted() {
 		this.initTimeLine()
+		console.log(dayjs.locale())
 	},
 	methods: {
 		playClickHandler() {
@@ -84,7 +111,7 @@ export default {
 		initTimeLine() {
 			const result = []
 			for (let i = 0; i < this.days; i++) {
-				result.push(moment(this.startDate).add(i, 'd').format(this.dateFormat))
+				result.push(dayjs(this.startDate).add(i, 'd').format(this.dateFormat))
 			}
 			this.preTime = result
 		},
@@ -112,11 +139,4 @@ export default {
 	}
 }
 </script>
-<style>
-/* .vue-slider-ltr .vue-slider-mark-step{
-  background-color: rgba(255,255,255,0.4);
-  width: 1px;
-  border-radius: 0;
-} */
-</style>
 

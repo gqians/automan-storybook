@@ -6,7 +6,6 @@
 import 'ol/ol.css'
 import Zoom from 'ol/control/Zoom'
 import VueTypes from 'vue-types'
-// import { css } from 'styled-vue'
 export default {
 	name: 'Zoom',
 	props: {
@@ -15,10 +14,18 @@ export default {
 			right: VueTypes.string,
 			top: VueTypes.string,
 			bottom: VueTypes.string
-		}),
+		}).def(() => ({
+			right: '5rem',
+			top: '2rem',
+			left: 'auto',
+			bottom: 'auto'
+		})),
+		width: VueTypes.string.def('2.2rem'),
+		height: VueTypes.string.def('2.2rem'),
+		hoverColor: VueTypes.string.def('#5253FB'),
 		zoomStyle: VueTypes.oneOf(['origin', 'circle']).def('origin'),
-		backgroundColor: VueTypes.string,
-		color: VueTypes.string,
+		backgroundColor: VueTypes.string.def('#ffffff'),
+		color: VueTypes.string.def('#999999'),
 		duration: VueTypes.integer.def(250),
 		zoomInTipLabel: VueTypes.string.def('放大'),
 		zoomOutTipLabel: VueTypes.string.def('缩小'),
@@ -46,30 +53,68 @@ export default {
 			const zoom = [...zooms][0]
 			const zoomIn = [...zoomIns][0]
 			const zoomOut = [...zoomOuts][0]
-			zoom.style.right = this.position.right || ''
-			zoom.style.left = this.position.left || ''
-			zoom.style.top = this.position.top || ''
-			zoom.style.bottom = this.position.bottom || ''
-			zoomIn.style.backgroundColor = this.backgroundColor || '#ffffff'
-			zoomOut.style.backgroundColor = this.backgroundColor || '#ffffff'
-			zoomIn.style.color = this.color || '#999999'
-			zoomOut.style.color = this.color || '#999999'
+			let zoomStyle = `
+				position: absolute;
+				z-index: 1;
+				box-shadow: 0 0 10px hsla(0, 0%, 40%, .65);
+				right:${this.position.right || ''};
+				left:${this.position.left || ''};
+				top:${this.position.top || ''};
+				bottom:${this.position.bottom || ''};
+			`
+			let zoomInStyle = `
+				background-color:${this.backgroundColor || '#ffffff'};
+				color:${this.color || '#999999'};
+				width:${this.width || '2.2rem'};
+				height:${this.height || '2.2rem'};
+			`
+			let zoomOutStyle = `
+				background-color:${this.backgroundColor || '#ffffff'};
+				color:${this.color || '#999999'};
+				width:${this.width || '2.2rem'};
+				height:${this.height || '2.2rem'};
+			`
 			switch (this.zoomStyle) {
 			case 'origin':
-				zoomIn.style.margin = '0'
-				zoomOut.style.margin = '0'
+				zoomInStyle += `
+					margin:0;
+					border: 1px solid #dedede;
+				`
+				zoomOutStyle += `
+					margin:0;
+					border: 1px solid #dedede;
+				`
 				break
 			case 'circle':
-				zoom.style.boxShadow = 'none'
-				zoom.style.backgroundColor = 'transparent'
-				zoomIn.style.borderRadius = '50%'
-				zoomOut.style.borderRadius = '50%'
-				zoomIn.style.boxShadow = '0 0 10px hsla(0, 0%, 40%, .65)'
-				zoomIn.style.marginBottom = '5px'
-				zoomOut.style.boxShadow = '0 0 10px hsla(0, 0%, 40%, .65)'
+				zoomStyle += `
+					box-shadow:none;
+					background-color: transparent;
+				`
+				zoomInStyle += `
+					border-radius: 50%;
+					box-shadow : 0 0 10px hsla(0, 0%, 40%, .65);
+					margin-bottom : 5px;
+				`
+				zoomOutStyle += `
+					border-radius: 50%;
+					box-shadow : 0 0 10px hsla(0, 0%, 40%, .65);
+				`
 			}
-			// zoomIn.style.cssText += this.backgroundColor || ''
-			// zoomOut.style.cssText += this.backgroundColor || ''
+			zoom && (zoom.style.cssText += zoomStyle)
+			zoomIn && (zoomIn.style.cssText += zoomInStyle)
+			zoomOut && (zoomOut.style.cssText += zoomOutStyle)
+			zoomIn.addEventListener('mouseover', () => {
+				zoomIn.style.color = this.hoverColor
+			})
+			zoomIn.addEventListener('mouseout', () => {
+				zoomIn.style.color = this.color
+			})
+			zoomOut.addEventListener('mouseover', () => {
+				zoomOut.style.color = this.hoverColor
+			})
+			zoomOut.addEventListener('mouseout', () => {
+				zoomOut.style.color = this.color
+			})
 		})
 	},
 	methods: {
@@ -78,26 +123,11 @@ export default {
 </script>
 
 <style >
-.zoom{
-	position: absolute;
-	z-index: 1;
-	box-shadow: 0 0 10px hsla(0, 0%, 40%, .65);
-	right: 3.1rem;
-	top: 1.5rem;
-	/* @apply absolute z-1 top-0 right-0 shadow-2xl */
-}
 .ol-control{
   padding: 0px !important;
-  /* box-shadow: 0 0 10px hsla(0, 0%, 40%, .65); */
 }
 .zoom button{
-  width: 2.2rem !important;
-  height: 2.2rem !important;
-  border: 1px solid #dedede;
   cursor: pointer;
   outline: none;
-}
-.zoom  button:hover{
-	color: #5253FB !important;
 }
 </style>

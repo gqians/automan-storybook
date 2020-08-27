@@ -107,6 +107,9 @@ position: VueTypes.shape({
 	top: VueTypes.string,
 	bottom: VueTypes.string
 }),
+width: VueTypes.string.def('2.2rem'),
+height: VueTypes.string.def('2.2rem'),
+hoverColor: VueTypes.string.def('#5253FB'),
 zoomStyle: VueTypes.oneOf(['origin', 'circle']).def('origin'),
 backgroundColor: VueTypes.string,
 color: VueTypes.string,

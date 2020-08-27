@@ -8,7 +8,7 @@
     "access": "public"
   },
   "dependencies": {
-    "moment": "^2.27.0",
+    "dayjs": "^1.8.34",
     "vue-slider-component": "^3.2.5",
     "vue-types": "^2.0.1"
   }

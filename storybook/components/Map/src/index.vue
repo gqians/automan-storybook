@@ -37,16 +37,16 @@ export default {
 				zIndex: VueTypes.integer
 			})),
 			view: VueTypes.shape({
-				center: VueTypes.arrayOf(Number).def([0, 0]),
-				zoom: VueTypes.integer.def(4),
-				maxZoom: VueTypes.integer.def(18),
-				minZoom: VueTypes.integer.def(4),
+				center: VueTypes.arrayOf(Number),
+				zoom: VueTypes.integer,
+				maxZoom: VueTypes.integer,
+				minZoom: VueTypes.integer,
 				fit: VueTypes.arrayOf(Number),
 				fitElement: VueTypes.string
 			}),
 			control: VueTypes.shape({
 				zoom: VueTypes.shape({
-					show: VueTypes.bool.def(true),
+					show: VueTypes.bool,
 					position: VueTypes.shape({
 						left: VueTypes.string,
 						right: VueTypes.string,
@@ -55,11 +55,11 @@ export default {
 					}),
 					backgroundColor: VueTypes.string,
 					color: VueTypes.string,
-					zoomStyle: VueTypes.oneOf(['origin', 'circle']).def('origin'),
-					duration: VueTypes.integer.def(250),
-					delta: VueTypes.integer.def(1),
-					zoomInTipLabel: VueTypes.string.def('放大'),
-					zoomOutTipLabel: VueTypes.string.def('缩小')
+					zoomStyle: VueTypes.oneOf(['origin', 'circle']),
+					duration: VueTypes.integer,
+					delta: VueTypes.integer,
+					zoomInTipLabel: VueTypes.string,
+					zoomOutTipLabel: VueTypes.string
 				})
 			})
 		})

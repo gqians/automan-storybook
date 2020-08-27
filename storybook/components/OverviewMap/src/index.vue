@@ -13,26 +13,26 @@ export default {
 	props: {
 		overviewMapConfig: VueTypes.shape({
 			tileLayers: VueTypes.arrayOf(VueTypes.shape({
-				sourceType: VueTypes.oneOf(['xyz']).def('xyz'),
-				sourceUrl: VueTypes.string.def(''),
-				crossOrigin: VueTypes.oneOf(['Anonymous']).def('Anonymous'),
-				title: VueTypes.string.def(''),
+				sourceType: VueTypes.oneOf(['xyz']),
+				sourceUrl: VueTypes.string,
+				crossOrigin: VueTypes.oneOf(['Anonymous']),
+				title: VueTypes.string,
 				maxZoom: VueTypes.integer,
 				minZoom: VueTypes.integer
 			})),
 			style: VueTypes.shape({
-				bottom: VueTypes.string.def('20px'),
-				left: VueTypes.string.def('10px'),
-				right: VueTypes.string.def('auto'),
-				top: VueTypes.string.def('auto'),
-				backgroundColor: VueTypes.string.def('transparent'),
-				margin: VueTypes.string.def('0'),
-				border: VueTypes.string.def('solid 2px #4fd1c5')
+				bottom: VueTypes.string,
+				left: VueTypes.string,
+				right: VueTypes.string,
+				top: VueTypes.string,
+				backgroundColor: VueTypes.string,
+				margin: VueTypes.string,
+				border: VueTypes.string
 			}),
-			collapseLabel: VueTypes.string.def('-'),
-			label: VueTypes.string.def('+'),
-			collapsed: VueTypes.bool.def(true),
-			tipLabel: VueTypes.string.def('鹰眼')
+			collapseLabel: VueTypes.string,
+			label: VueTypes.string,
+			collapsed: VueTypes.bool,
+			tipLabel: VueTypes.string
 		}),
 		boxConfig: VueTypes.shape({
 			boxBackgroundColor: VueTypes.string,
@@ -41,12 +41,12 @@ export default {
 			boxBorderWidth: VueTypes.string
 		}),
 		collapseButtonConfig: VueTypes.shape({
-			bottom: VueTypes.string.def('7px'),
-			left: VueTypes.string.def('3px'),
-			right: VueTypes.string.def('auto'),
-			top: VueTypes.string.def('auto'),
-			backgroundColor: VueTypes.string.def('white'),
-			color: VueTypes.string.def('turquoise'),
+			bottom: VueTypes.string,
+			left: VueTypes.string,
+			right: VueTypes.string,
+			top: VueTypes.string,
+			backgroundColor: VueTypes.string,
+			color: VueTypes.string,
 		})
 	},
 	data() {
