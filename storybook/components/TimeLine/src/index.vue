@@ -7,8 +7,9 @@
       <svg v-show="!play" t="1597224938622" :style="{fill:controlStyle.backgroundColor}" viewBox="0 0 1082 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5022" width="40" height="40" @click="pauseClickHandler"><path d="M385.024 267.776c-24.064 0-43.52 19.456-43.52 43.52v401.408c0 24.064 19.456 43.52 43.52 43.52s43.52-19.456 43.52-43.52V311.296c0.512-24.064-18.944-43.52-43.52-43.52zM697.344 267.776c-24.064 0-43.52 19.456-43.52 43.52v401.408c0 24.064 19.456 43.52 43.52 43.52s43.52-19.456 43.52-43.52V311.296c0.512-24.064-18.944-43.52-43.52-43.52z" p-id="5023" /></svg>
       <svg v-show="play" t="1597225249797" :style="{fill:controlStyle.backgroundColor}" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7228" width="40" height="40" @click="showClickHandler"><path d="M804.17792 474.04032L389.0688 187.58656a47.98464 47.98464 0 0 0-67.97312 1.21856 46.8992 46.8992 0 0 0-13.312 32.768c0 14.56128-1.20832 42.48576 0 42.48576V795.648a47.6672 47.6672 0 0 0 48.54784 47.33952 46.8992 46.8992 0 0 0 32.768-13.312L804.17792 543.232a45.9264 45.9264 0 0 0 14.56128-33.98656 44.9024 44.9024 0 0 0-14.56128-35.19488z" p-id="7229" /></svg>
     </div>
-    <div ref="slider" :class="['inline-block','w-11/12','align-middle','cursor-pointer',...slider.extra]">
+    <div :class="['inline-block','w-11/12','align-middle','cursor-pointer',...slider.extra]">
       <VueSlider
+        ref="slider"
         v-model="sliderValue"
         :data="preTime"
         :marks="slider.marks"
@@ -36,6 +37,7 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import dayjs from 'dayjs'
 import VueTypes from 'vue-types'
+// import Mousetrap from 'mousetrap'
 export default {
 	name: 'TimeLine',
 	components: { VueSlider },
@@ -102,7 +104,10 @@ export default {
 	},
 	mounted() {
 		this.initTimeLine()
-		console.log(dayjs.locale())
+		this.$refs.slider.focus(0)
+	},
+	updated() {
+		this.$refs.slider.focus(0)
 	},
 	methods: {
 		playClickHandler() {

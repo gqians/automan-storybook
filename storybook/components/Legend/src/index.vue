@@ -55,34 +55,66 @@ export default {
 	props: {
 		type: VueTypes.oneOf(['default', 'liner']).def('default'),
 		defaultOption: VueTypes.shape({
-			compress: VueTypes.bool.def(false),
+			compress: VueTypes.bool,
 			title: VueTypes.shape({
 				text: VueTypes.string,
 				textColor: VueTypes.string,
 				backgroundColor: VueTypes.string,
-				extra: VueTypes.arrayOf(VueTypes.string).def([])
+				extra: VueTypes.arrayOf(VueTypes.string)
 			}),
 			content: VueTypes.shape({
-				backgroundColor: VueTypes.string.def('bg-white'),
-				extra: VueTypes.arrayOf(VueTypes.string).def([])
+				backgroundColor: VueTypes.string,
+				extra: VueTypes.arrayOf(VueTypes.string)
 			})
-		}),
+		}).def(() => ({
+			title: {
+				text: 'KDBI',
+				textColor: 'text-white',
+				backgroundColor: 'bg-indigo-800',
+				extra: []
+			},
+			content: {
+				backgroundColor: 'bg-white'
+			}
+		})),
 		linerOption: VueTypes.shape({
-			horizontal: VueTypes.bool.def(false),
-			gradient: VueTypes.bool.def(true),
+			horizontal: VueTypes.bool,
+			gradient: VueTypes.bool,
 			backgroundImage: VueTypes.string,
 			title: VueTypes.shape({
 				text: VueTypes.string,
-				backgroudColor: VueTypes.string.def('bg-white'),
-				extra: VueTypes.arrayOf(VueTypes.string).def([])
+				backgroudColor: VueTypes.string,
+				extra: VueTypes.arrayOf(VueTypes.string)
 			}),
-			extra: VueTypes.arrayOf(VueTypes.string).def([])
+			extra: VueTypes.arrayOf(VueTypes.string)
 		}),
 		config: VueTypes.arrayOf(VueTypes.shape({
 			color: VueTypes.string,
 			value: VueTypes.string,
 			key: VueTypes.string
-		}))
+		})).def(() => (
+			[{
+				color: '#fe0000',
+				value: '极高',
+				key: 'kdbi-1'
+			  }, {
+				color: '#ffc801',
+				value: '很高',
+				key: 'kdbi-2'
+			  }, {
+				color: '#b6fe8e',
+				value: '	高',
+				key: 'kdbi-3'
+			  }, {
+				color: '#33c1ff',
+				value: '	中',
+				key: 'kdbi-4'
+			  }, {
+				color: '#0000fe',
+				value: '	低',
+				key: 'kdbi-5'
+			  }]
+		))
 	},
 	data() {
 		return {
