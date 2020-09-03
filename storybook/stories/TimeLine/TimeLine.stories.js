@@ -19,7 +19,8 @@ export const Basic = () => ({
 		TimeLine
 	},
 	template: `
-	<TimeLine
+	<div class="absolute z-1 right-0 left-0 m-auto w-8/12 bottom-2">
+		<TimeLine
 		:controlStyle="controlStyle"
 		:slider="slider"
 		@timeChange="timeChange"
@@ -28,6 +29,7 @@ export const Basic = () => ({
 		:dateFormat="dateFormat"
 		:intervals="intervals"
 	/>
+	</div>
 	`,
 	data() {
 		return {

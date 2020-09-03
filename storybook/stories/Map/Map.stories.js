@@ -65,8 +65,8 @@ export const Basic = () => ({
 						zoomOutTipLabel: '缩小',
 						delta: 1,
 						position: {
-							right: '5rem',
-							top: '2rem',
+							right: '3rem',
+							top: '1.5rem',
 							left: 'auto',
 							bottom: 'auto'
 						},
