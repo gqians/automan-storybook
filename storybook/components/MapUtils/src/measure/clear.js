@@ -6,9 +6,9 @@ export function clear(map, layerID, overlayID) {
 			effectiveLayer = layer
 	  }
 	})
-	effectiveLayer && this.map.removeLayer(effectiveLayer)
+	effectiveLayer && map.removeLayer(effectiveLayer)
 	const clearOverlay = []
-	const overlays = this.map.getOverlays().getArray()
+	const overlays = map.getOverlays().getArray()
 	for (const overlay of overlays) {
 	  if (overlay.getId() === overlayID) {
 			clearOverlay.push(overlay)
@@ -18,7 +18,7 @@ export function clear(map, layerID, overlayID) {
 	  return
 	} else {
 	  clearOverlay.forEach((overlay) => {
-			this.map.removeOverlay(overlay)
+			map.removeOverlay(overlay)
 	  })
 	  // 只删除一次会造成最后一个overlay遗留，所以需要递归删除
 	  this.clear()
