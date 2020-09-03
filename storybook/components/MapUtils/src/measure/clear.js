@@ -21,6 +21,6 @@ export function clear(map, layerID, overlayID) {
 			map.removeOverlay(overlay)
 	  })
 	  // 只删除一次会造成最后一个overlay遗留，所以需要递归删除
-	  this.clear()
+	  clear()
 	}
 }
