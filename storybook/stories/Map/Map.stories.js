@@ -55,7 +55,7 @@ export const Basic = () => ({
 					maxZoom: 18,
 					minZoom: 2,
 					fit: transform([73, 18], 'EPSG:4326', 'EPSG:3857').concat(transform([135, 53.6], 'EPSG:4326', 'EPSG:3857')),
-					fitElement: 'root'
+					fitElement: document.getElementById('root')
 				},
 				control: {
 					zoom: {
@@ -138,7 +138,7 @@ export const AddOverviewMap = () => ({
 					maxZoom: 18,
 					minZoom: 3,
 					fit: transform([73, 18], 'EPSG:4326', 'EPSG:3857').concat(transform([135, 53.6], 'EPSG:4326', 'EPSG:3857')),
-					fitElement: 'root'
+					fitElement: document.getElementById('root')
 				},
 				control: {
 					zoom: {

@@ -15,7 +15,7 @@
         :marks="slider.marks"
         :height="slider.height"
         :lazy="slider.lazy"
-        :use-keyboard="slider.useKeyboard"
+        :use-keyboard="false"
         :hide-label="slider.hideLabel"
         :tooltip="slider.tooltip"
         :rail-style="slider.railStyle"
@@ -37,7 +37,7 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import dayjs from 'dayjs'
 import VueTypes from 'vue-types'
-// import Mousetrap from 'mousetrap'
+import Mousetrap from 'mousetrap'
 export default {
 	name: 'TimeLine',
 	components: { VueSlider },
@@ -105,9 +105,16 @@ export default {
 	mounted() {
 		this.initTimeLine()
 		this.$refs.slider.focus(0)
+		Mousetrap.bind('left', () => {
+			const currentIndex = this.$refs.slider.getIndex()
+			this.$refs.slider.setIndex(currentIndex > 0 ? currentIndex - 1 : currentIndex)
+		})
+		Mousetrap.bind('right', () => {
+			const currentIndex = this.$refs.slider.getIndex()
+			this.$refs.slider.setIndex(currentIndex < this.days - 1 ? currentIndex + 1 : currentIndex)
+		})
 	},
 	updated() {
-		this.$refs.slider.focus(0)
 	},
 	methods: {
 		playClickHandler() {

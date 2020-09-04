@@ -42,7 +42,7 @@ export default {
 				maxZoom: VueTypes.integer,
 				minZoom: VueTypes.integer,
 				fit: VueTypes.arrayOf(Number),
-				fitElement: VueTypes.string
+				fitElement: VueTypes.any
 			}),
 			control: VueTypes.shape({
 				zoom: VueTypes.shape({
@@ -116,9 +116,16 @@ export default {
 		resize() {
 			if (!this.config.view.fitElement) return
 			const erd = elementResizeDetectorMaker()
-			erd.listenTo(document.getElementById(this.config.view.fitElement), () => {
-				this.mapfit()
-			})
+			console.log(this.config.view.fitElement)
+			if (this.config.view.fitElement instanceof Object) {
+				erd.listenTo(this.config.view.fitElement, () => {
+					this.mapfit()
+				})
+			} else {
+				erd.listenTo(document.getElementById(this.config.view.fitElement), () => {
+					this.mapfit()
+				})
+			}
 		},
 		// 设置自适应大小
 		mapfit() {
