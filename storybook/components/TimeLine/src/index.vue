@@ -102,21 +102,33 @@ export default {
 			sliderValue: dayjs(this.startDate).format(this.dateFormat),
 			preTime: [],
 			timer: null,
+			hotkeyScope: null
 		}
 	},
 	mounted() {
 		this.initTimeLine()
-		this.$refs.slider.focus(0)
-		hotkeys('left', () => {
+		// this.$refs.slider.focus(0)
+		this.hotkeys = hotkeys
+		hotkeys.filter = function(event) {
+			const tagName = (event.target || event.srcElement).tagName
+			return !(tagName.isContentEditable || tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA')
+		}
+		this.hotkeys('left', { scope: 'LeftAndRight' }, (event) => {
+			event.preventDefault()
 			const currentIndex = this.$refs.slider.getIndex()
 			this.$refs.slider.setIndex(currentIndex > 0 ? currentIndex - 1 : currentIndex)
 		})
-		hotkeys('right', () => {
+		this.hotkeys('right', { scope: 'LeftAndRight' }, (event) => {
+			event.preventDefault()
 			const currentIndex = this.$refs.slider.getIndex()
 			this.$refs.slider.setIndex(currentIndex < this.days - 1 ? currentIndex + 1 : currentIndex)
 		})
+		this.hotkeys.setScope('LeftAndRight')
 	},
 	updated() {
+	},
+	 beforeDestroy() {
+		this.hotkeys.deleteScope('LeftAndRight')
 	},
 	methods: {
 		playClickHandler() {
