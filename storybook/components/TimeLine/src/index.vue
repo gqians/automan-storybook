@@ -37,7 +37,9 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import dayjs from 'dayjs'
 import VueTypes from 'vue-types'
-import Mousetrap from 'mousetrap'
+// import Mousetrap from 'mousetrap'
+import hotkeys from 'hotkeys-js'
+
 export default {
 	name: 'TimeLine',
 	components: { VueSlider },
@@ -105,11 +107,11 @@ export default {
 	mounted() {
 		this.initTimeLine()
 		this.$refs.slider.focus(0)
-		Mousetrap.bind('left', () => {
+		hotkeys('left', () => {
 			const currentIndex = this.$refs.slider.getIndex()
 			this.$refs.slider.setIndex(currentIndex > 0 ? currentIndex - 1 : currentIndex)
 		})
-		Mousetrap.bind('right', () => {
+		hotkeys('right', () => {
 			const currentIndex = this.$refs.slider.getIndex()
 			this.$refs.slider.setIndex(currentIndex < this.days - 1 ? currentIndex + 1 : currentIndex)
 		})
