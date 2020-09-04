@@ -119,11 +119,11 @@ export default {
 			console.log(this.config.view.fitElement)
 			if (this.config.view.fitElement instanceof Object) {
 				erd.listenTo(this.config.view.fitElement, () => {
-					this.mapfit()
+					this.map.updateSize()
 				})
 			} else {
 				erd.listenTo(document.getElementById(this.config.view.fitElement), () => {
-					this.mapfit()
+					this.map.updateSize()
 				})
 			}
 		},
