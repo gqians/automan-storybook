@@ -1,4 +1,11 @@
 module.exports = {
+	purge: {
+		enabled: true,
+		content: [
+			'./storybook/**/*.js',
+			'./storybook/components/**/*.vue'
+		]
+	},
 	theme: {
 		extend: {
 			width: {
