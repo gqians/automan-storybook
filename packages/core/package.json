@@ -1,0 +1,42 @@
+{
+  "name": "@automan-dev/core",
+  "version": "1.0.0",
+  "main": "bin/index.js",
+  "author": "qianh",
+  "license": "MIT",
+  "bin": {
+    "automan": "bin/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@automanh/logger": "^1.1.2",
+    "@hapi/hapi": "^20.0.0",
+    "commander": "^6.1.0",
+    "esm": "^3.2.25",
+    "nodemon": "^2.0.4",
+    "shell.js": "^3.2.1",
+    "tree-kill": "^1.2.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.10.4",
+    "@babel/plugin-proposal-function-sent": "^7.10.4",
+    "@babel/plugin-proposal-json-strings": "^7.10.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-numeric-separator": "^7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.10.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-plugin-module-resolver": "^4.0.0"
+  }
+}
