@@ -1,6 +1,8 @@
 
 const Hapi = require('@hapi/hapi');
 const {dealLog,loggerPlugin} =require('@automanh/logger');
+const {graphqlPlugin} = require('../packages/postgraphileHapi')
+const {graphqlPluginConfig} = require('../packages/postgraphileHapi/config')
 const log = dealLog();
 process.on('unhandledRejection', (reason, p) => {
 	log.error({...reason}, 'Possibly Unhandled Rejection at: \n', p, '\treason:' );
@@ -18,12 +20,15 @@ const server = async (config = {}) => {
 		process.exit(1);
 	}
 	try {
-		await server.register({
+		await server.register([{
 			plugin: loggerPlugin,
 			options: {}
-        });
+        },{
+			plugin: graphqlPlugin,
+			options:graphqlPluginConfig
+		}]);
 	} catch (error) {
-		log.error({}, 'Register Hapi plugin failed');
+		log.error({error}, 'Register Hapi plugin failed');
 		process.exit(1);
 	}
 	return server;

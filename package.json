@@ -12,7 +12,7 @@
     "build-storybook": "build-storybook -c .storybook -o .out"
   },
   "dependencies": {
-    "@automanh/logger": "^1.1.2",
+    "@automanh/logger": "^1.1.4",
     "@hapi/hapi": "^20.0.0",
     "core-js": "^3.6.5",
     "ol": "^6.4.3",

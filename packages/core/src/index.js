@@ -5,6 +5,7 @@ const path = require('path')
 
 module.exports = async config => {
 	const logger = dealLog()
+	console.log(path.resolve(__dirname, '../../'))
 	// start server
 	nodemon({
 		script: path.join(__dirname, 'startServer.js'),
@@ -12,6 +13,7 @@ module.exports = async config => {
 			path.join(process.cwd(), 'src/server'),
 			path.join(process.cwd(), 'dev'),
 			path.join(process.cwd(), 'src/config.js'),
+			path.resolve(__dirname, '../../')
 		],
 		execMap: {
 			js: 'node -r esm',

@@ -1,0 +1,22 @@
+{
+  "name": "@automan-dev/postgraphile-hapi",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "qianh",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@graphile-contrib/constraint-error-tags": "^1.0.3",
+    "@graphile-contrib/pg-simplify-inflector": "^6.0.0",
+    "@graphile/postgis": "^0.1.0",
+    "@hapi/h2o2": "^9.0.1",
+    "@hapi/nes": "^12.0.3",
+    "graphile-utils": "^4.9.0",
+    "postgraphile": "^4.8.0",
+    "postgraphile-plugin-connection-filter": "^2.0.0",
+    "postgraphile-plugin-connection-filter-postgis": "^1.0.0-alpha.6",
+    "wkx": "^0.5.0"
+  }
+}
