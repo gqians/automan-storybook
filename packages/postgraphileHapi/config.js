@@ -2,7 +2,8 @@ import PostgisPlugin from '@graphile/postgis'
 import ConnectionFilterPlugin from 'postgraphile-plugin-connection-filter'
 import PgSimplifyInflectorPlugin from '@graphile-contrib/pg-simplify-inflector'
 import ConnectionFilterPostgisPlugin from 'postgraphile-plugin-connection-filter-postgis'
-import { MyRegisterUserMutationPlugin } from './src/customSchema'
+// import { MyRegisterUserMutationPlugin } from './src/customSchema'
+// const pluginTest = MyRegisterUserMutationPlugin()
 const graphqlPluginConfig = {
 	DATABASE_USER: 'qianh',
 	DATABASE_PASSWORD: '123456',
@@ -25,7 +26,7 @@ const graphqlPluginConfig = {
 				PostgisPlugin.default || PostgisPlugin,
 				ConnectionFilterPlugin,
 				ConnectionFilterPostgisPlugin,
-				MyRegisterUserMutationPlugin
+				// pluginTest
 			],
 			pgSettings(req) {
 				/* TODO */

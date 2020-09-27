@@ -47,7 +47,7 @@ function Encode(lat, lon) {
 	k += __encode(lat)
 	return k
 }
-// console.log(Encode(28.97025, 102.76027777777777))
-// console.log(DecodeLon('7c70w9gym')) // 7c70w9gym
-// console.log(DecodeLat('7c70w9gym'))
+// console.log(Encode(26.638031, 102.578187))
+// console.log(DecodeLon('7qymur40m')) // 7xjuv0rtj
+// console.log(DecodeLat('7qymur40m'))
 export { Encode, DecodeLon, DecodeLat }

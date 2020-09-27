@@ -117,6 +117,81 @@ type CreateMeteoTestPayload {
   ): MeteoTestsEdge
 }
 
+"""All input for the create `Powerstation` mutation."""
+input CreatePowerstationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Powerstation` to be created by this mutation."""
+  powerstation: PowerstationInput!
+}
+
+"""The output of our create `Powerstation` mutation."""
+type CreatePowerstationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Powerstation` that was created by this mutation."""
+  powerstation: Powerstation
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Powerstation`. May be used by Relay 1."""
+  powerstationEdge(
+    """The method to use when ordering `Powerstation`."""
+    orderBy: [PowerstationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PowerstationsEdge
+}
+
+"""All input for the create `Station` mutation."""
+input CreateStationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Station` to be created by this mutation."""
+  station: StationInput!
+}
+
+"""The output of our create `Station` mutation."""
+type CreateStationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Station` that was created by this mutation."""
+  station: Station
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Station`. May be used by Relay 1."""
+  stationEdge(
+    """The method to use when ordering `Station`."""
+    orderBy: [StationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): StationsEdge
+}
+
+input CreateStationsInput {
+  station: [StationInput]!
+  clientMutationId: String
+}
+
 """A location in a connection that can be used for resuming pagination."""
 scalar Cursor
 
@@ -216,6 +291,112 @@ type DeleteMeteoTestPayload {
   ): MeteoTestsEdge
 }
 
+"""All input for the `deletePowerstationByNodeId` mutation."""
+input DeletePowerstationByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Powerstation` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deletePowerstation` mutation."""
+input DeletePowerstationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""The output of our delete `Powerstation` mutation."""
+type DeletePowerstationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Powerstation` that was deleted by this mutation."""
+  powerstation: Powerstation
+  deletedPowerstationNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Powerstation`. May be used by Relay 1."""
+  powerstationEdge(
+    """The method to use when ordering `Powerstation`."""
+    orderBy: [PowerstationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PowerstationsEdge
+}
+
+"""All input for the `deleteStationByGeom` mutation."""
+input DeleteStationByGeomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  geom: GeoJSON!
+}
+
+"""All input for the `deleteStationByNodeId` mutation."""
+input DeleteStationByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Station` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteStation` mutation."""
+input DeleteStationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""The output of our delete `Station` mutation."""
+type DeleteStationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Station` that was deleted by this mutation."""
+  station: Station
+  deletedStationNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Station`. May be used by Relay 1."""
+  stationEdge(
+    """The method to use when ordering `Station`."""
+    orderBy: [StationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): StationsEdge
+}
+
 """
 The `GeoJSON` scalar type represents GeoJSON values as specified by[RFC 7946](https://tools.ietf.org/html/rfc7946).
 """
@@ -223,6 +404,57 @@ scalar GeoJSON
 
 """All geometry XY types implement this interface"""
 interface GeometryGeometry {
+  """Converts the object to GeoJSON"""
+  geojson: GeoJSON
+
+  """Spatial reference identifier (SRID)"""
+  srid: Int!
+}
+
+type GeometryGeometryCollection implements GeometryInterface & GeometryGeometry {
+  geojson: GeoJSON
+  srid: Int!
+  geometries: [GeometryGeometry]
+}
+
+type GeometryGeometryCollectionM implements GeometryInterface & GeometryGeometryM {
+  geojson: GeoJSON
+  srid: Int!
+  geometries: [GeometryGeometryM]
+}
+
+type GeometryGeometryCollectionZ implements GeometryInterface & GeometryGeometryZ {
+  geojson: GeoJSON
+  srid: Int!
+  geometries: [GeometryGeometryZ]
+}
+
+type GeometryGeometryCollectionZM implements GeometryInterface & GeometryGeometryZM {
+  geojson: GeoJSON
+  srid: Int!
+  geometries: [GeometryGeometryZM]
+}
+
+"""All geometry XYM types implement this interface"""
+interface GeometryGeometryM {
+  """Converts the object to GeoJSON"""
+  geojson: GeoJSON
+
+  """Spatial reference identifier (SRID)"""
+  srid: Int!
+}
+
+"""All geometry XYZ types implement this interface"""
+interface GeometryGeometryZ {
+  """Converts the object to GeoJSON"""
+  geojson: GeoJSON
+
+  """Spatial reference identifier (SRID)"""
+  srid: Int!
+}
+
+"""All geometry XYZM types implement this interface"""
+interface GeometryGeometryZM {
   """Converts the object to GeoJSON"""
   geojson: GeoJSON
 
@@ -239,10 +471,182 @@ interface GeometryInterface {
   srid: Int!
 }
 
+"""
+A filter to be used against GeometryInterface fields. All fields are combined with a logical ‘and.’
+"""
+input GeometryInterfaceFilter {
+  """Bounding box is strictly above the specified geometry's bounding box."""
+  bboxAbove: GeoJSON
+
+  """Bounding box is strictly below the specified geometry's bounding box."""
+  bboxBelow: GeoJSON
+
+  """Bounding box contains the specified geometry's bounding box."""
+  bboxContains: GeoJSON
+
+  """Bounding box is the same as the specified geometry's bounding box."""
+  bboxEquals: GeoJSON
+
+  """2D bounding box intersects the specified geometry's 2D bounding box."""
+  bboxIntersects2D: GeoJSON
+
+  """n-D bounding box intersects the specified geometry's n-D bounding box."""
+  bboxIntersectsND: GeoJSON
+
+  """
+  Bounding box is strictly to the left of the specified geometry's bounding box.
+  """
+  bboxLeftOf: GeoJSON
+
+  """
+  Bounding box overlaps or is above the specified geometry's bounding box.
+  """
+  bboxOverlapsOrAbove: GeoJSON
+
+  """
+  Bounding box overlaps or is below the specified geometry's bounding box.
+  """
+  bboxOverlapsOrBelow: GeoJSON
+
+  """
+  Bounding box overlaps or is to the left of the specified geometry's bounding box.
+  """
+  bboxOverlapsOrLeftOf: GeoJSON
+
+  """
+  Bounding box overlaps or is to the right of the specified geometry's bounding box.
+  """
+  bboxOverlapsOrRightOf: GeoJSON
+
+  """
+  Bounding box is strictly to the right of the specified geometry's bounding box.
+  """
+  bboxRightOf: GeoJSON
+
+  """
+  No points of the specified geometry lie in the exterior, and at least one
+  point of the interior of the specified geometry lies in the interior.
+  """
+  contains: GeoJSON
+
+  """
+  The specified geometry intersects the interior but not the boundary (or exterior).
+  """
+  containsProperly: GeoJSON
+
+  """No point is outside the specified geometry."""
+  coveredBy: GeoJSON
+
+  """No point in the specified geometry is outside."""
+  covers: GeoJSON
+
+  """They have some, but not all, interior points in common."""
+  crosses: GeoJSON
+
+  """They do not share any space together."""
+  disjoint: GeoJSON
+
+  """They represent the same geometry. Directionality is ignored."""
+  equals: GeoJSON
+
+  """Coordinates and coordinate order are the same as specified geometry."""
+  exactlyEquals: GeoJSON
+
+  """They share any portion of space in 2D."""
+  intersects: GeoJSON
+
+  """They share any portion of space in 3D."""
+  intersects3D: GeoJSON
+
+  """
+  They represent the same geometry and points are in the same directional order.
+  """
+  orderingEquals: GeoJSON
+
+  """
+  They share space, are of the same dimension, but are not completely contained by each other.
+  """
+  overlaps: GeoJSON
+
+  """
+  They have at least one point in common, but their interiors do not intersect.
+  """
+  touches: GeoJSON
+
+  """Completely inside the specified geometry."""
+  within: GeoJSON
+}
+
 type GeometryLineString implements GeometryInterface & GeometryGeometry {
   geojson: GeoJSON
   srid: Int!
   points: [GeometryPoint]
+}
+
+type GeometryLineStringM implements GeometryInterface & GeometryGeometryM {
+  geojson: GeoJSON
+  srid: Int!
+  points: [GeometryPointM]
+}
+
+type GeometryLineStringZ implements GeometryInterface & GeometryGeometryZ {
+  geojson: GeoJSON
+  srid: Int!
+  points: [GeometryPointZ]
+}
+
+type GeometryLineStringZM implements GeometryInterface & GeometryGeometryZM {
+  geojson: GeoJSON
+  srid: Int!
+  points: [GeometryPointZM]
+}
+
+type GeometryMultiLineString implements GeometryInterface & GeometryGeometry {
+  geojson: GeoJSON
+  srid: Int!
+  lines: [GeometryLineString]
+}
+
+type GeometryMultiLineStringM implements GeometryInterface & GeometryGeometryM {
+  geojson: GeoJSON
+  srid: Int!
+  lines: [GeometryLineStringM]
+}
+
+type GeometryMultiLineStringZ implements GeometryInterface & GeometryGeometryZ {
+  geojson: GeoJSON
+  srid: Int!
+  lines: [GeometryLineStringZ]
+}
+
+type GeometryMultiLineStringZM implements GeometryInterface & GeometryGeometryZM {
+  geojson: GeoJSON
+  srid: Int!
+  lines: [GeometryLineStringZM]
+}
+
+type GeometryMultiPoint implements GeometryInterface & GeometryGeometry {
+  geojson: GeoJSON
+  srid: Int!
+  points: [GeometryPoint]
+}
+
+type GeometryMultiPointM implements GeometryInterface & GeometryGeometryM {
+  geojson: GeoJSON
+  srid: Int!
+  points: [GeometryPointM]
+}
+
+type GeometryMultiPointZ implements GeometryInterface & GeometryGeometryZ {
+  geojson: GeoJSON
+  srid: Int!
+  points: [GeometryPointZ]
+}
+
+type GeometryMultiPointZM implements GeometryInterface & GeometryGeometryZM {
+  geojson: GeoJSON
+  srid: Int!
+  points: [GeometryPointZM]
 }
 
 type GeometryMultiPolygon implements GeometryInterface & GeometryGeometry {
@@ -355,6 +759,24 @@ input GeometryMultiPolygonFilter {
 
   """Completely inside the specified geometry."""
   within: GeoJSON
+}
+
+type GeometryMultiPolygonM implements GeometryInterface & GeometryGeometryM {
+  geojson: GeoJSON
+  srid: Int!
+  polygons: [GeometryPolygonM]
+}
+
+type GeometryMultiPolygonZ implements GeometryInterface & GeometryGeometryZ {
+  geojson: GeoJSON
+  srid: Int!
+  polygons: [GeometryPolygonZ]
+}
+
+type GeometryMultiPolygonZM implements GeometryInterface & GeometryGeometryZM {
+  geojson: GeoJSON
+  srid: Int!
+  polygons: [GeometryPolygonZM]
 }
 
 type GeometryPoint implements GeometryInterface & GeometryGeometry {
@@ -470,11 +892,53 @@ input GeometryPointFilter {
   within: GeoJSON
 }
 
+type GeometryPointM implements GeometryInterface & GeometryGeometryM {
+  geojson: GeoJSON
+  srid: Int!
+  x: Float!
+  y: Float!
+}
+
+type GeometryPointZ implements GeometryInterface & GeometryGeometryZ {
+  geojson: GeoJSON
+  srid: Int!
+  x: Float!
+  y: Float!
+}
+
+type GeometryPointZM implements GeometryInterface & GeometryGeometryZM {
+  geojson: GeoJSON
+  srid: Int!
+  x: Float!
+  y: Float!
+}
+
 type GeometryPolygon implements GeometryInterface & GeometryGeometry {
   geojson: GeoJSON
   srid: Int!
   exterior: GeometryLineString
   interiors: [GeometryLineString]
+}
+
+type GeometryPolygonM implements GeometryInterface & GeometryGeometryM {
+  geojson: GeoJSON
+  srid: Int!
+  exterior: GeometryLineStringM
+  interiors: [GeometryLineStringM]
+}
+
+type GeometryPolygonZ implements GeometryInterface & GeometryGeometryZ {
+  geojson: GeoJSON
+  srid: Int!
+  exterior: GeometryLineStringZ
+  interiors: [GeometryLineStringZ]
+}
+
+type GeometryPolygonZM implements GeometryInterface & GeometryGeometryZM {
+  geojson: GeoJSON
+  srid: Int!
+  exterior: GeometryLineStringZM
+  interiors: [GeometryLineStringZM]
 }
 
 """
@@ -723,6 +1187,22 @@ type Mutation {
     input: CreateMeteoTestInput!
   ): CreateMeteoTestPayload
 
+  """Creates a single `Powerstation`."""
+  createPowerstation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreatePowerstationInput!
+  ): CreatePowerstationPayload
+
+  """Creates a single `Station`."""
+  createStation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateStationInput!
+  ): CreateStationPayload
+
   """
   Updates a single `MeoteTestPoly` using its globally unique id and a patch.
   """
@@ -757,6 +1237,48 @@ type Mutation {
     input: UpdateMeteoTestInput!
   ): UpdateMeteoTestPayload
 
+  """
+  Updates a single `Powerstation` using its globally unique id and a patch.
+  """
+  updatePowerstationByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdatePowerstationByNodeIdInput!
+  ): UpdatePowerstationPayload
+
+  """Updates a single `Powerstation` using a unique key and a patch."""
+  updatePowerstation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdatePowerstationInput!
+  ): UpdatePowerstationPayload
+
+  """Updates a single `Station` using its globally unique id and a patch."""
+  updateStationByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateStationByNodeIdInput!
+  ): UpdateStationPayload
+
+  """Updates a single `Station` using a unique key and a patch."""
+  updateStation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateStationInput!
+  ): UpdateStationPayload
+
+  """Updates a single `Station` using a unique key and a patch."""
+  updateStationByGeom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateStationByGeomInput!
+  ): UpdateStationPayload
+
   """Deletes a single `MeoteTestPoly` using its globally unique id."""
   deleteMeoteTestPolyByNodeId(
     """
@@ -788,12 +1310,52 @@ type Mutation {
     """
     input: DeleteMeteoTestInput!
   ): DeleteMeteoTestPayload
-  createPoints(
+
+  """Deletes a single `Powerstation` using its globally unique id."""
+  deletePowerstationByNodeId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: [CreateMeteoTestInput]!
-  ): CreateMeteoTestPayload
+    input: DeletePowerstationByNodeIdInput!
+  ): DeletePowerstationPayload
+
+  """Deletes a single `Powerstation` using a unique key."""
+  deletePowerstation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeletePowerstationInput!
+  ): DeletePowerstationPayload
+
+  """Deletes a single `Station` using its globally unique id."""
+  deleteStationByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteStationByNodeIdInput!
+  ): DeleteStationPayload
+
+  """Deletes a single `Station` using a unique key."""
+  deleteStation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteStationInput!
+  ): DeleteStationPayload
+
+  """Deletes a single `Station` using a unique key."""
+  deleteStationByGeom(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteStationByGeomInput!
+  ): DeleteStationPayload
+  InsertPoints(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateStationsInput!
+  ): CreateStationPayload
 }
 
 """An object with a globally unique `ID`."""
@@ -817,6 +1379,98 @@ type PageInfo {
 
   """When paginating forwards, the cursor to continue."""
   endCursor: Cursor
+}
+
+type Powerstation implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+  geom: GeometryInterface!
+}
+
+"""
+A condition to be used against `Powerstation` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input PowerstationCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `geom` field."""
+  geom: GeoJSON
+}
+
+"""
+A filter to be used against `Powerstation` object types. All fields are combined with a logical ‘and.’
+"""
+input PowerstationFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `geom` field."""
+  geom: GeometryInterfaceFilter
+
+  """Checks for all expressions in this list."""
+  and: [PowerstationFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [PowerstationFilter!]
+
+  """Negates the expression."""
+  not: PowerstationFilter
+}
+
+"""An input for mutations affecting `Powerstation`"""
+input PowerstationInput {
+  id: Int
+  geom: GeoJSON!
+}
+
+"""
+Represents an update to a `Powerstation`. Fields that are set will be updated.
+"""
+input PowerstationPatch {
+  id: Int
+  geom: GeoJSON
+}
+
+"""A connection to a list of `Powerstation` values."""
+type PowerstationsConnection {
+  """A list of `Powerstation` objects."""
+  nodes: [Powerstation!]!
+
+  """
+  A list of edges which contains the `Powerstation` and cursor to aid in pagination.
+  """
+  edges: [PowerstationsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Powerstation` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Powerstation` edge in the connection."""
+type PowerstationsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Powerstation` at the end of the edge."""
+  node: Powerstation!
+}
+
+"""Methods to use when ordering `Powerstation`."""
+enum PowerstationsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  GEOM_ASC
+  GEOM_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
 }
 
 """The root query type which gives access points into the data universe."""
@@ -905,8 +1559,79 @@ type Query implements Node {
     """
     filter: MeteoTestFilter
   ): MeteoTestsConnection
+
+  """Reads and enables pagination through a set of `Powerstation`."""
+  powerstations(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Powerstation`."""
+    orderBy: [PowerstationsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: PowerstationCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: PowerstationFilter
+  ): PowerstationsConnection
+
+  """Reads and enables pagination through a set of `Station`."""
+  stations(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Station`."""
+    orderBy: [StationsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: StationCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: StationFilter
+  ): StationsConnection
   meoteTestPoly(id: Int!): MeoteTestPoly
   meteoTest(id: BigInt!): MeteoTest
+  powerstation(id: Int!): Powerstation
+  station(id: UUID!): Station
+  stationByGeom(geom: GeoJSON!): Station
 
   """Reads a single `MeoteTestPoly` using its globally unique `ID`."""
   meoteTestPolyByNodeId(
@@ -921,6 +1646,111 @@ type Query implements Node {
     """The globally unique `ID` to be used in selecting a single `MeteoTest`."""
     nodeId: ID!
   ): MeteoTest
+
+  """Reads a single `Powerstation` using its globally unique `ID`."""
+  powerstationByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `Powerstation`.
+    """
+    nodeId: ID!
+  ): Powerstation
+
+  """Reads a single `Station` using its globally unique `ID`."""
+  stationByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Station`."""
+    nodeId: ID!
+  ): Station
+}
+
+type Station implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  geom: GeometryInterface!
+}
+
+"""
+A condition to be used against `Station` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input StationCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `geom` field."""
+  geom: GeoJSON
+}
+
+"""
+A filter to be used against `Station` object types. All fields are combined with a logical ‘and.’
+"""
+input StationFilter {
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `geom` field."""
+  geom: GeometryInterfaceFilter
+
+  """Checks for all expressions in this list."""
+  and: [StationFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [StationFilter!]
+
+  """Negates the expression."""
+  not: StationFilter
+}
+
+"""An input for mutations affecting `Station`"""
+input StationInput {
+  id: UUID
+  geom: GeoJSON!
+}
+
+"""
+Represents an update to a `Station`. Fields that are set will be updated.
+"""
+input StationPatch {
+  id: UUID
+  geom: GeoJSON
+}
+
+"""A connection to a list of `Station` values."""
+type StationsConnection {
+  """A list of `Station` objects."""
+  nodes: [Station!]!
+
+  """
+  A list of edges which contains the `Station` and cursor to aid in pagination.
+  """
+  edges: [StationsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Station` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Station` edge in the connection."""
+type StationsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Station` at the end of the edge."""
+  node: Station!
+}
+
+"""Methods to use when ordering `Station`."""
+enum StationsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  GEOM_ASC
+  GEOM_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
 }
 
 """All input for the `updateMeoteTestPolyByNodeId` mutation."""
@@ -1035,4 +1865,180 @@ type UpdateMeteoTestPayload {
     """The method to use when ordering `MeteoTest`."""
     orderBy: [MeteoTestsOrderBy!] = [PRIMARY_KEY_ASC]
   ): MeteoTestsEdge
+}
+
+"""All input for the `updatePowerstationByNodeId` mutation."""
+input UpdatePowerstationByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Powerstation` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Powerstation` being updated.
+  """
+  patch: PowerstationPatch!
+}
+
+"""All input for the `updatePowerstation` mutation."""
+input UpdatePowerstationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Powerstation` being updated.
+  """
+  patch: PowerstationPatch!
+  id: Int!
+}
+
+"""The output of our update `Powerstation` mutation."""
+type UpdatePowerstationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Powerstation` that was updated by this mutation."""
+  powerstation: Powerstation
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Powerstation`. May be used by Relay 1."""
+  powerstationEdge(
+    """The method to use when ordering `Powerstation`."""
+    orderBy: [PowerstationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): PowerstationsEdge
+}
+
+"""All input for the `updateStationByGeom` mutation."""
+input UpdateStationByGeomInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Station` being updated.
+  """
+  patch: StationPatch!
+  geom: GeoJSON!
+}
+
+"""All input for the `updateStationByNodeId` mutation."""
+input UpdateStationByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Station` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Station` being updated.
+  """
+  patch: StationPatch!
+}
+
+"""All input for the `updateStation` mutation."""
+input UpdateStationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Station` being updated.
+  """
+  patch: StationPatch!
+  id: UUID!
+}
+
+"""The output of our update `Station` mutation."""
+type UpdateStationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Station` that was updated by this mutation."""
+  station: Station
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Station`. May be used by Relay 1."""
+  stationEdge(
+    """The method to use when ordering `Station`."""
+    orderBy: [StationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): StationsEdge
+}
+
+"""
+A universally unique identifier as defined by [RFC 4122](https://tools.ietf.org/html/rfc4122).
+"""
+scalar UUID
+
+"""
+A filter to be used against UUID fields. All fields are combined with a logical ‘and.’
+"""
+input UUIDFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: UUID
+
+  """Not equal to the specified value."""
+  notEqualTo: UUID
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: UUID
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: UUID
+
+  """Included in the specified list."""
+  in: [UUID!]
+
+  """Not included in the specified list."""
+  notIn: [UUID!]
+
+  """Less than the specified value."""
+  lessThan: UUID
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: UUID
+
+  """Greater than the specified value."""
+  greaterThan: UUID
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: UUID
 }

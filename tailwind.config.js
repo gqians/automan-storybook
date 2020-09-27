@@ -1,6 +1,6 @@
 module.exports = {
 	purge: {
-		enabled: true,
+		enabled: false,
 		content: [
 			'./storybook/**/*.js',
 			'./storybook/components/**/*.vue'
@@ -10,11 +10,14 @@ module.exports = {
 		extend: {
 			width: {
 				// 'w-40': '10rem'
-			}
+			},
 		},
+		// height: {
+		// 	'h-13': '33rem'
+		// },
 		zIndex: {
 			'1': 1
-		}
+		},
 	},
 	future: {
 		removeDeprecatedGapUtilities: true,

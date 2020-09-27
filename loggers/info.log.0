@@ -1,90 +1,11 @@
-{"name":"automan","time":"2020/9/15 上午9:37:59","hostname":"qianh","pid":6066,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午9:37:59","hostname":"qianh","pid":6066,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午9:37:57","hostname":"qianh","pid":6054,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午9:39:28","hostname":"qianh","pid":6353,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午9:39:28","hostname":"qianh","pid":6353,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午9:39:26","hostname":"qianh","pid":6339,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:14:27","hostname":"qianh","pid":9248,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:14:27","hostname":"qianh","pid":9248,"level":50,"path":"core/src/startServer","err":{"message":"listen EADDRINUSE: address already in use 127.0.0.1:8000","name":"Error","stack":"Error: listen EADDRINUSE: address already in use 127.0.0.1:8000\n    at Server.setupListenHandle [as _listen2] (net.js:1316:16)\n    at listenInCluster (net.js:1364:12)\n    at doListen (net.js:1501:7)\n    at processTicksAndRejections (internal/process/task_queues.js:81:21)\n    at process.runNextTicks [as _tickCallback] (internal/process/task_queues.js:62:3)\n    at /home/qianh/workspace/personal/vue-storybook/node_modules/esm/esm.js:1:34535\n    at /home/qianh/workspace/personal/vue-storybook/node_modules/esm/esm.js:1:34176\n    at process.<anonymous> (/home/qianh/workspace/personal/vue-storybook/node_modules/esm/esm.js:1:34506)\n    at Function.<anonymous> (/home/qianh/workspace/personal/vue-storybook/node_modules/esm/esm.js:1:296856)\n    at Function.<anonymous> (/home/qianh/workspace/personal/vue-storybook/node_modules/esm/esm.js:1:296555)","code":"EADDRINUSE"},"msg":"Start server failed","v":0}
-{"name":"automan","time":"2020/9/15 上午10:14:26","hostname":"qianh","pid":9236,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:15:00","hostname":"qianh","pid":9330,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:15:00","hostname":"qianh","pid":9330,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:14:59","hostname":"qianh","pid":9318,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:33:35","hostname":"qianh","pid":10505,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:34:24","hostname":"qianh","pid":10610,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:34:24","hostname":"qianh","pid":10610,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:34:23","hostname":"qianh","pid":10598,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:38:41","hostname":"qianh","pid":10909,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:38:41","hostname":"qianh","pid":10909,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:38:40","hostname":"qianh","pid":10890,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:40:33","hostname":"qianh","pid":11099,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:40:33","hostname":"qianh","pid":11099,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:40:32","hostname":"qianh","pid":11087,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:10","hostname":"qianh","pid":11247,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:10","hostname":"qianh","pid":11247,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:09","hostname":"qianh","pid":11235,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:31","hostname":"qianh","pid":11333,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:31","hostname":"qianh","pid":11333,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:29","hostname":"qianh","pid":11321,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:48","hostname":"qianh","pid":11406,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:48","hostname":"qianh","pid":11406,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:42:46","hostname":"qianh","pid":11394,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 上午10:43:03","hostname":"qianh","pid":11466,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 上午10:43:03","hostname":"qianh","pid":11466,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 上午10:43:01","hostname":"qianh","pid":11454,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午2:29:18","hostname":"qianh","pid":21989,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午2:29:18","hostname":"qianh","pid":21989,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午2:29:16","hostname":"qianh","pid":21977,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午2:30:05","hostname":"qianh","pid":22104,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午2:30:05","hostname":"qianh","pid":22104,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午2:30:04","hostname":"qianh","pid":22092,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午2:47:16","hostname":"qianh","pid":23570,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午2:56:35","hostname":"qianh","pid":24174,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午3:50:46","hostname":"qianh","pid":30268,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午3:52:25","hostname":"qianh","pid":30357,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午3:55:33","hostname":"qianh","pid":30632,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:00:20","hostname":"qianh","pid":31029,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:00:50","hostname":"qianh","pid":31103,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:04:25","hostname":"qianh","pid":31453,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:04:44","hostname":"qianh","pid":31518,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午4:04:44","hostname":"qianh","pid":31518,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午4:04:43","hostname":"qianh","pid":31506,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:05:26","hostname":"qianh","pid":31600,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午4:05:26","hostname":"qianh","pid":31600,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午4:05:25","hostname":"qianh","pid":31588,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:05:55","hostname":"qianh","pid":31816,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午4:05:55","hostname":"qianh","pid":31816,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午4:05:55","hostname":"qianh","pid":31804,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:07:31","hostname":"qianh","pid":32129,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:09:07","hostname":"qianh","pid":32413,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:09:32","hostname":"qianh","pid":32489,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午4:09:32","hostname":"qianh","pid":32489,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午4:09:32","hostname":"qianh","pid":32477,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:09:57","hostname":"qianh","pid":32666,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午4:51:13","hostname":"qianh","pid":5436,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午4:51:13","hostname":"qianh","pid":5436,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午4:51:12","hostname":"qianh","pid":5421,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午6:04:42","hostname":"qianh","pid":10517,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午6:04:42","hostname":"qianh","pid":10517,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午6:04:41","hostname":"qianh","pid":10505,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午6:05:40","hostname":"qianh","pid":10803,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午6:05:40","hostname":"qianh","pid":10803,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午6:05:39","hostname":"qianh","pid":10791,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午6:06:56","hostname":"qianh","pid":11186,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午6:06:56","hostname":"qianh","pid":11186,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午6:06:55","hostname":"qianh","pid":11174,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午6:08:05","hostname":"qianh","pid":11454,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午6:08:05","hostname":"qianh","pid":11454,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午6:08:03","hostname":"qianh","pid":11442,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午6:11:17","hostname":"qianh","pid":11930,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午6:11:17","hostname":"qianh","pid":11930,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午6:11:16","hostname":"qianh","pid":11918,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午6:12:16","hostname":"qianh","pid":12183,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午6:12:16","hostname":"qianh","pid":12183,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午6:12:15","hostname":"qianh","pid":12171,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午6:13:18","hostname":"qianh","pid":12413,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午6:13:18","hostname":"qianh","pid":12413,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午6:13:17","hostname":"qianh","pid":12401,"level":30,"msg":"Stop server SIGINT","v":0}
-{"name":"automan","time":"2020/9/15 下午9:02:57","hostname":"qianh","pid":9681,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
-{"name":"automan","time":"2020/9/15 下午9:02:57","hostname":"qianh","pid":9681,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
-{"name":"automan","time":"2020/9/15 下午9:02:56","hostname":"qianh","pid":9669,"level":30,"msg":"Stop server SIGINT","v":0}
+{"name":"automan","time":"2020/9/20 上午8:59:39","hostname":"qianh","pid":15145,"level":30,"msg":"graphql is proxied in service http://127.0.0.1:8000/graphql","v":0}
+{"name":"automan","time":"2020/9/20 上午8:59:39","hostname":"qianh","pid":15145,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
+{"name":"automan","time":"2020/9/20 上午8:59:39","hostname":"qianh","pid":15145,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:25","hostname":"qianh","pid":10790,"level":30,"msg":"graphql is proxied in service http://127.0.0.1:8000/graphql","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:25","hostname":"qianh","pid":10790,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:25","hostname":"qianh","pid":10790,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:23","hostname":"qianh","pid":10778,"level":30,"msg":"Stop server SIGINT","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:58","hostname":"qianh","pid":10864,"level":30,"msg":"graphql is proxied in service http://127.0.0.1:8000/graphql","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:58","hostname":"qianh","pid":10864,"level":30,"path":"core/src/startServer","msg":"服务器开启","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:58","hostname":"qianh","pid":10864,"level":30,"path":"core/src/startServer","msg":"Server started. API: http://127.0.0.1:8000","v":0}
+{"name":"automan","time":"2020/9/20 下午9:17:57","hostname":"qianh","pid":10852,"level":30,"msg":"Stop server SIGINT","v":0}

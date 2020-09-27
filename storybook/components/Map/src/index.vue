@@ -19,6 +19,11 @@ import 'ol/ol.css'
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile'
 import XYZ from 'ol/source/XYZ'
+// import ImageWMS from 'ol/source/ImageWMS'
+// import ImageLayer from 'ol/layer/Image'
+// import TileWMS from 'ol/source/TileWMS'
+import TileWMTS from 'ol/source/WMTS'
+import WMTSTileGrid from 'ol/tilegrid/WMTS'
 import VueTypes from 'vue-types'
 import Zoom from '@automan-component/zoom'
 import { defaults } from 'ol/control'
@@ -29,12 +34,24 @@ export default {
 	props: {
 		config: VueTypes.shape({
 			tileLayers: VueTypes.arrayOf(VueTypes.shape({
-				sourceType: VueTypes.oneOf(['xyz']).def('xyz'),
+				sourceType: VueTypes.oneOf(['xyz', 'wmts']).def('xyz'),
 				sourceUrl: VueTypes.string.def(''),
 				crossOrigin: VueTypes.oneOf(['Anonymous']).def('Anonymous'),
 				title: VueTypes.string.def(''),
 				visible: VueTypes.bool.def(true),
-				zIndex: VueTypes.integer
+				zIndex: VueTypes.integer,
+				layer: VueTypes.string,
+				matrixSet: VueTypes.string,
+				format: VueTypes.string,
+				projection: VueTypes.any,
+				tileSize: VueTypes.array,
+				extent: VueTypes.array, // 范围
+				loadingExtent: VueTypes.array,
+				origin: VueTypes.array,
+				resolutions: VueTypes.array,
+				matrixIds: VueTypes.array,
+				wrapX: VueTypes.bool,
+				tileLoadFunction: VueTypes.func
 			})),
 			view: VueTypes.shape({
 				center: VueTypes.arrayOf(Number),
@@ -103,6 +120,40 @@ export default {
 					layer.setZIndex(tileLayer.zIndex)
 					layer.setVisible(tileLayer.visible)
 					this.map.addLayer(layer)
+					break
+				case 'wmts':
+					const imageLayer = new TileLayer({
+						title: tileLayer.title,
+						extent: tileLayer.loadingExtent,
+						source: new TileWMTS({
+							// crossOrigin: tileLayer.crossOrigin,
+							url: tileLayer.sourceUrl,
+							layer: tileLayer.layer,
+							// 切片集
+							matrixSet: tileLayer.matrixSet,
+							format: tileLayer.format,
+							projection: tileLayer.projection,
+							// 切片信息
+							tileGrid: new WMTSTileGrid({
+								tileSize: tileLayer.tileSize,
+								extent: tileLayer.extent, // 范围
+								// origin: tileLayer.origin,
+								resolutions: tileLayer.resolutions,
+								matrixIds: tileLayer.matrixIds,
+							}),
+							wrapX: tileLayer.wrapX,
+							tileLoadFunction: (imageTile, src) => {
+								tileLayer.tileLoadFunction(imageTile, src, this.map)
+							}
+						})
+					})
+					imageLayer.setZIndex(tileLayer.zIndex)
+					imageLayer.setVisible(tileLayer.visible)
+					imageLayer.on('error', () => {
+						console.log('err')
+					})
+					this.map.addLayer(imageLayer)
+					break
 				}
 			})
 			if (this.config.control.zoom.show) this.map.addControl(this.zoom.instance)

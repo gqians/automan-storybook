@@ -3,6 +3,9 @@ const Hapi = require('@hapi/hapi');
 const {dealLog,loggerPlugin} =require('@automanh/logger');
 const {graphqlPlugin} = require('../packages/postgraphileHapi')
 const {graphqlPluginConfig} = require('../packages/postgraphileHapi/config')
+const {InsertPointsMutationPlugin,customSchemaConfig} = require('../packages/postgraphileHapi/src/customSchema')
+const InsertPointPlugin = InsertPointsMutationPlugin(customSchemaConfig.InsertPoint)
+graphqlPluginConfig.graphql.commonOptions.appendPlugins.push(InsertPointPlugin)
 const log = dealLog();
 process.on('unhandledRejection', (reason, p) => {
 	log.error({...reason}, 'Possibly Unhandled Rejection at: \n', p, '\treason:' );

@@ -8,6 +8,7 @@
     "@automan-component/zoom": "^1.0.12",
     "element-resize-detector": "^1.2.1",
     "ol": "^6.4.3",
+    "urijs": "^1.19.2",
     "vue-types": "^2.0.1"
   },
   "publishConfig": {

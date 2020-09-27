@@ -1,0 +1,15 @@
+{
+  "name": "@automan-component/toolbarselect",
+  "version": "1.0.0",
+  "main": "src/index.vue",
+  "author": "qianh",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "pretty-checkbox": "^3.0.3",
+    "vue-infinite-loading": "^2.4.5",
+    "vue-types": "^2.0.1"
+  }
+}
