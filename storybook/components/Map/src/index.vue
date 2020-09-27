@@ -34,11 +34,11 @@ export default {
 	props: {
 		config: VueTypes.shape({
 			tileLayers: VueTypes.arrayOf(VueTypes.shape({
-				sourceType: VueTypes.oneOf(['xyz', 'wmts']).def('xyz'),
-				sourceUrl: VueTypes.string.def(''),
-				crossOrigin: VueTypes.oneOf(['Anonymous']).def('Anonymous'),
-				title: VueTypes.string.def(''),
-				visible: VueTypes.bool.def(true),
+				sourceType: VueTypes.oneOf(['xyz', 'wmts']),
+				sourceUrl: VueTypes.string,
+				crossOrigin: VueTypes.oneOf(['Anonymous']),
+				title: VueTypes.string,
+				visible: VueTypes.bool,
 				zIndex: VueTypes.integer,
 				layer: VueTypes.string,
 				matrixSet: VueTypes.string,
