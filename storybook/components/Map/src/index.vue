@@ -59,7 +59,8 @@ export default {
 				maxZoom: VueTypes.integer,
 				minZoom: VueTypes.integer,
 				fit: VueTypes.arrayOf(Number),
-				fitElement: VueTypes.any
+				fitElement: VueTypes.any,
+				extent: VueTypes.arrayOf(Number)
 			}),
 			control: VueTypes.shape({
 				zoom: VueTypes.shape({
@@ -103,7 +104,8 @@ export default {
 					center: this.config.view.center,
 					zoom: this.config.view.zoom,
 					maxZoom: this.config.view.maxZoom,
-					minZoom: this.config.view.minZoom
+					minZoom: this.config.view.minZoom,
+					extent: this.config.view.extent
 				}),
 				controls: defaults({ zoom: false, rotate: false })
 			})

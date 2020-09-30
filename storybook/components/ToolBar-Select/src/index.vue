@@ -107,7 +107,7 @@ export default {
 				stationNumber: '12324',
 				stationName: 'add',
 			})
-			 $state.complete()
+			$state.complete()
 		}
 	}
 }
