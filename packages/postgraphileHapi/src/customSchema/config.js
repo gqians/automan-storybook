@@ -13,8 +13,8 @@ const customSchemaConfig = {
 		`,
 		attribute: 'geom',
 		dealArgs: (args) => { return args.input.station.map((arg) => { return arg }) },
-		queryString: `INSERT INTO point_meteo.station(geom)
-		SELECT ST_GeomFromGeoJSON(geom) FROM jsonb_to_recordset($1) AS t (geom text) RETURNING *`
+		queryString: `INSERT INTO point_meteo.station(geom,"stationName","kCode",address)
+		SELECT ST_GeomFromGeoJSON(geom),"stationName","kCode",address FROM jsonb_to_recordset($1) AS t(geom text,"stationName" text,"kCode" text,address text) RETURNING *`
 	}
 }
 export { customSchemaConfig }
