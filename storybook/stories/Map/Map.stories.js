@@ -10,7 +10,9 @@ import { Vector as VectorLayer } from 'ol/layer'
 import GeoJSON from 'ol/format/GeoJSON'
 import { Fill, Icon, Stroke, Style } from 'ol/style'
 import liangsan from './liangshanBorder.json'
-import jingsha from './jingshaBorder.json'
+// import jingsha from './jingshaBorder.json'
+import URI from 'urijs'
+import axios from 'axios'
 import { getVectorContext } from 'ol/render'
 // import Point from 'ol/geom/Point'
 import MapMd from './Map.md'
@@ -40,25 +42,30 @@ export const Basic = () => ({
 		return {
 			mapConfig: {
 				tileLayers: [{
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
+					sourceType: 'wmts',
+					sourceUrl: `http://192.168.3.7:8080/geoserver/gwc/service/wmts`,
 					crossOrigin: 'Anonymous',
-					title: '3857_vec',
+					title: 'googlewmts',
+					layer: 'LS_BaseMap:L04',
+					matrixSet: 'EPSG:3857',
+					format: 'image/png',
+					tileSize: [256, 256],
+					loadingExtent: [11138622.9106820914894342, 3005026.1373932794667780, 11563449.6935122832655907, 3414672.2973421183414757],
+					extent: [-20037508.34, -20037508.34, 20037508.34, 20037508.34], // 范围
+					origin: [-20037508.34, -20037508.34],
+					resolutions: [9783.939619140625, 4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033],
+					matrixIds: ['EPSG:3857:4', 'EPSG:3857:5', 'EPSG:3857:6', 'EPSG:3857:7', 'EPSG:3857:8', 'EPSG:3857:9', 'EPSG:3857:10', 'EPSG:3857:11', 'EPSG:3857:12', 'EPSG:3857:13'],
+					tileLoadFunction: (imageTile, src, map) => {
+						const zoom = Math.round(map.getView().getZoom())
+						src = URI(src).setSearch({ layer: `LS_BaseMap:L${zoom < 10 ? '0' + zoom : zoom}`, TileMatrix: `EPSG:3857:${zoom}` })
+						axios.head(src).then((data) => {
+							imageTile.getImage().src = src
+						}).catch((e) => {
+							imageTile.getImage().src = ''
+						})
+					},
+					wrapX: false,
 					zIndex: 0,
-					visible: true
-				}, {
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
-					crossOrigin: 'Anonymous',
-					title: '3857_img',
-					zIndex: 1,
-					visible: false
-				}, {
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
-					crossOrigin: 'Anonymous',
-					title: '3857_cva',
-					zIndex: 2,
 					visible: true
 				}],
 				view: {
@@ -113,10 +120,9 @@ export const Basic = () => ({
 				console.log(fts)
 				const ft = fts?.[0]
 				converLayer.getSource().addFeature(ft)
-				return converLayer
 			}
-			const newcliplayer = addPolyon(clipLayer, jingsha)
-			const wmtsLayer = map.getLayers().getArray()[2]
+			addPolyon(clipLayer, liangsan)
+			const wmtsLayer = map.getLayers().getArray()[0]
 			wmtsLayer.on('postrender', function(e) {
 				// ctx.filter = 'sepia(80%)'// 设置滤镜值
 				e.context.globalCompositeOperation = 'destination-in'

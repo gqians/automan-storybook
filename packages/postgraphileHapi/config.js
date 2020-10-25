@@ -1,7 +1,7 @@
-import PostgisPlugin from '@graphile/postgis'
-import ConnectionFilterPlugin from 'postgraphile-plugin-connection-filter'
-import PgSimplifyInflectorPlugin from '@graphile-contrib/pg-simplify-inflector'
-import ConnectionFilterPostgisPlugin from 'postgraphile-plugin-connection-filter-postgis'
+const PostgisPlugin = require('@graphile/postgis')
+const ConnectionFilterPlugin = require('postgraphile-plugin-connection-filter')
+const PgSimplifyInflectorPlugin = require('@graphile-contrib/pg-simplify-inflector')
+const ConnectionFilterPostgisPlugin = require('postgraphile-plugin-connection-filter-postgis')
 // import { MyRegisterUserMutationPlugin } from './src/customSchema'
 // const pluginTest = MyRegisterUserMutationPlugin()
 const graphqlPluginConfig = {
@@ -19,7 +19,7 @@ const graphqlPluginConfig = {
 			setofFunctionsContainNulls: false,
 			ignoreRBAC: false,
 			enableQueryBatching: true,
-  			legacyRelations: 'omit',
+			legacyRelations: 'omit',
 			  // ignoreIndexes: false,
 			appendPlugins: [
 				PgSimplifyInflectorPlugin,
@@ -52,4 +52,4 @@ const graphqlPluginConfig = {
 		}
 	}
 }
-export { graphqlPluginConfig }
+module.exports = graphqlPluginConfig

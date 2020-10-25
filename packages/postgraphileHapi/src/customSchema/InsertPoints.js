@@ -1,4 +1,4 @@
-import { makeExtendSchemaPlugin, gql } from 'graphile-utils'
+const { makeExtendSchemaPlugin, gql } = require('graphile-utils')
 const InsertPointsMutationPlugin = (config) => {
 	return makeExtendSchemaPlugin(build => {
 		const { pgSql: sql } = build
@@ -9,7 +9,7 @@ const InsertPointsMutationPlugin = (config) => {
 					${config.mutationString}
 				}
 			`,
-	  		resolvers: {
+			resolvers: {
 				Mutation: {
 					InsertPoints: async(_query, args, context, resolveInfo) => {
 						const { pgClient } = context
@@ -31,10 +31,10 @@ const InsertPointsMutationPlugin = (config) => {
 						} finally {
 							await pgClient.query('RELEASE SAVEPOINT graphql_mutation')
 						}
-		 			},
+					},
 				},
 			},
 		}
 	})
 }
-export { InsertPointsMutationPlugin }
+module.exports = InsertPointsMutationPlugin

@@ -17,4 +17,5 @@ const customSchemaConfig = {
 		SELECT ST_GeomFromGeoJSON(geom),"stationName","kCode",address FROM jsonb_to_recordset($1) AS t(geom text,"stationName" text,"kCode" text,address text) RETURNING *`
 	}
 }
-export { customSchemaConfig }
+module.exports = customSchemaConfig
+// export { customSchemaConfig }

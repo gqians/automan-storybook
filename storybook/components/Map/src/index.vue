@@ -28,6 +28,7 @@ import VueTypes from 'vue-types'
 import Zoom from '@automan-component/zoom'
 import { defaults } from 'ol/control'
 import elementResizeDetectorMaker from 'element-resize-detector'
+import axios from 'axios'
 export default {
 	name: 'Map',
 	components: { Zoom },

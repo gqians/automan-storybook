@@ -1,3 +1,3 @@
-import { InsertPointsMutationPlugin } from './InsertPoints'
-import { customSchemaConfig } from './config'
-export { InsertPointsMutationPlugin, customSchemaConfig }
+const InsertPointsMutationPlugin = require('./InsertPoints')
+const customSchemaConfig = require('./config')
+module.exports = { InsertPointsMutationPlugin, customSchemaConfig }
