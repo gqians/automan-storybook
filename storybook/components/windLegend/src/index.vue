@@ -2,7 +2,7 @@
   <div class="border-solid border-2 border-gray-300 rounded-lg bg-white bg-opacity-75 p-3 flex flex-row flex-wrap justify-content justify-between" style="width:18rem">
     <span v-for="i in data" :key="i.level" class="align-middle mt-3 inline-block text-gray-700 w-32">
       <img :src="require(`../windIcons/level_${i.level}.svg`)" class="w-6 h-6 inline-block">
-      {{ i.level===0?'':i.level*2-1 }} {{ i.level===0?'':'-' }} {{ i.level*2 }}m/s
+      {{ i.level===0?'':i.level*2-2 }} {{ i.level===0?'':'-' }} {{ i.level*2 }}m/s
     </span>
   </div>
 </template>
