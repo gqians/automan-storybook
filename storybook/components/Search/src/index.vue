@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="w-2/3 relative mx-auto text-gray-600 inline-block align-middle">
+    <div class="relative mx-auto text-gray-600 inline-block align-middle">
       <input
         class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
         type="search"
@@ -8,7 +8,11 @@
         placeholder="请输入站号"
         @keyup.enter="searchSubmitHandler"
       >
-      <button type="submit" class="absolute right-0 top-0 bottom-0 my-auto focus:outline-none mr-2" @click="searchSubmitHandler">
+      <button
+        type="submit"
+        class="absolute right-0 top-0 bottom-0 my-auto focus:outline-none mr-2"
+        @click="searchSubmitHandler"
+      >
         <svg
           id="Capa_1"
           class="text-gray-600 h-4 w-4 fill-current"
@@ -37,11 +41,9 @@ export default {
 	methods: {
 		searchSubmitHandler() {
 			this.$emit('searchSubmit')
-		}
+		},
 	},
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

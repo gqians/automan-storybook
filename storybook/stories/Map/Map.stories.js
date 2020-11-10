@@ -25,13 +25,13 @@ export default {
 	parameters: {
 		viewport: {
 			viewports: INITIAL_VIEWPORTS,
-			defaultViewport: 'reset'
-		}
-	}
+			defaultViewport: 'reset',
+		},
+	},
 }
 export const Basic = () => ({
 	components: {
-		Map
+		Map,
 	},
 	template: `
 	<div style="height:100%">
@@ -41,39 +41,81 @@ export const Basic = () => ({
 	data() {
 		return {
 			mapConfig: {
-				tileLayers: [{
-					sourceType: 'wmts',
-					sourceUrl: `http://localhost:8080/geoserver/gwc/service/wmts`,
-					crossOrigin: 'Anonymous',
-					title: 'googlewmts',
-					layer: 'LS_BaseMap:L04',
-					matrixSet: 'EPSG:3857',
-					format: 'image/png',
-					tileSize: [256, 256],
-					loadingExtent: [11138622.9106820914894342, 3005026.1373932794667780, 11563449.6935122832655907, 3414672.2973421183414757],
-					extent: [-20037508.34, -20037508.34, 20037508.34, 20037508.34], // 范围
-					origin: [-20037508.34, -20037508.34],
-					resolutions: [9783.939619140625, 4891.9698095703125, 2445.9849047851562, 1222.9924523925781, 611.4962261962891, 305.74811309814453, 152.87405654907226, 76.43702827453613, 38.218514137268066, 19.109257068634033],
-					matrixIds: ['EPSG:3857:4', 'EPSG:3857:5', 'EPSG:3857:6', 'EPSG:3857:7', 'EPSG:3857:8', 'EPSG:3857:9', 'EPSG:3857:10', 'EPSG:3857:11', 'EPSG:3857:12', 'EPSG:3857:13'],
-					tileLoadFunction: (imageTile, src, map) => {
-						const zoom = Math.round(map.getView().getZoom())
-						src = URI(src).setSearch({ layer: `LS_BaseMap:L${zoom < 10 ? '0' + zoom : zoom}`, TileMatrix: `EPSG:3857:${zoom}` })
-						axios.head(src).then((data) => {
-							imageTile.getImage().src = src
-						}).catch((e) => {
-							imageTile.getImage().src = ''
-						})
+				tileLayers: [
+					{
+						sourceType: 'wmts',
+						sourceUrl: `http://localhost:8080/geoserver/gwc/service/wmts`,
+						crossOrigin: 'Anonymous',
+						title: 'googlewmts',
+						layer: 'LS_BaseMap:L04',
+						matrixSet: 'EPSG:3857',
+						format: 'image/png',
+						tileSize: [256, 256],
+						loadingExtent: [
+							11138622.9106820914894342,
+							3005026.137393279466778,
+							11563449.6935122832655907,
+							3414672.2973421183414757,
+						],
+						extent: [
+							-20037508.34,
+							-20037508.34,
+							20037508.34,
+							20037508.34,
+						], // 范围
+						origin: [-20037508.34, -20037508.34],
+						resolutions: [
+							9783.939619140625,
+							4891.9698095703125,
+							2445.9849047851562,
+							1222.9924523925781,
+							611.4962261962891,
+							305.74811309814453,
+							152.87405654907226,
+							76.43702827453613,
+							38.218514137268066,
+							19.109257068634033,
+						],
+						matrixIds: [
+							'EPSG:3857:4',
+							'EPSG:3857:5',
+							'EPSG:3857:6',
+							'EPSG:3857:7',
+							'EPSG:3857:8',
+							'EPSG:3857:9',
+							'EPSG:3857:10',
+							'EPSG:3857:11',
+							'EPSG:3857:12',
+							'EPSG:3857:13',
+						],
+						tileLoadFunction: (imageTile, src, map) => {
+							const zoom = Math.round(map.getView().getZoom())
+							src = URI(src).setSearch({
+								layer: `LS_BaseMap:L${
+									zoom < 10 ? '0' + zoom : zoom
+								}`,
+								TileMatrix: `EPSG:3857:${zoom}`,
+							})
+							axios
+								.head(src)
+								.then(data => {
+									imageTile.getImage().src = src
+								})
+								.catch(e => {
+									imageTile.getImage().src = ''
+								})
+						},
+						wrapX: false,
+						zIndex: 0,
+						visible: true,
 					},
-					wrapX: false,
-					zIndex: 0,
-					visible: true
-				}],
+				],
 				view: {
 					center: transform([102, 32], 'EPSG:4326', 'EPSG:3857'),
 					zoom: 7,
 					maxZoom: 13,
 					minZoom: 4,
-					fitElement: document.getElementById('root')
+					fitElement: document.getElementById('root'),
 				},
 				control: {
 					zoom: {
@@ -86,15 +128,15 @@ export const Basic = () => ({
 							right: '3rem',
 							top: '1.5rem',
 							left: 'auto',
-							bottom: 'auto'
+							bottom: 'auto',
 						},
 						resetButton: true,
 						backgroundColor: '#ffffff',
 						color: '#999999',
-						zoomStyle: 'origin'
-					}
-				}
-			}
+						zoomStyle: 'origin',
+					},
+				},
+			},
 		}
 	},
 	methods: {
@@ -103,18 +145,18 @@ export const Basic = () => ({
 				source: new VectorSource(),
 				style: new Style({
 					fill: new Fill({
-						color: 'rgb(255,0,255)'
+						color: 'rgb(255,0,255)',
 					}),
 					stroke: new Stroke({
-						color: 'red'
+						color: 'red',
 					}),
-				})
+				}),
 			})
 
 			const style = new Style({
 				fill: new Fill({
 					color: 'red',
-				})
+				}),
 			})
 			function addPolyon(converLayer, geo_data) {
 				const fts = new GeoJSON().readFeatures(geo_data)
@@ -137,20 +179,20 @@ export const Basic = () => ({
 		// getMap: action('getMap')
 		resetClickHandler() {
 			console.log(1)
-		}
+		},
 	},
 })
 
 Basic.story = {
 	parameters: {
-		notes: { MapMd }
-	}
+		notes: { MapMd },
+	},
 }
 
 export const AddOverviewMap = () => ({
 	components: {
 		Map,
-		OverView
+		OverView,
 	},
 	template: `
 	<div :style="{width:'100%',height:'100%'}">
@@ -165,34 +207,45 @@ export const AddOverviewMap = () => ({
 	data() {
 		return {
 			mapConfig: {
-				tileLayers: [{
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
-					crossOrigin: 'Anonymous',
-					title: '3857_vec',
-					zIndex: 0,
-					visible: true
-				}, {
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
-					crossOrigin: 'Anonymous',
-					title: '3857_img',
-					zIndex: 1,
-					visible: false
-				}, {
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
-					crossOrigin: 'Anonymous',
-					title: '3857_cva',
-					zIndex: 2,
-					visible: true
-				}],
+				tileLayers: [
+					{
+						sourceType: 'xyz',
+						sourceUrl:
+							'http://t3.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
+						crossOrigin: 'Anonymous',
+						title: '3857_vec',
+						zIndex: 0,
+						visible: true,
+					},
+					{
+						sourceType: 'xyz',
+						sourceUrl:
+							'http://t3.tianditu.com/DataServer?T=img_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
+						crossOrigin: 'Anonymous',
+						title: '3857_img',
+						zIndex: 1,
+						visible: false,
+					},
+					{
+						sourceType: 'xyz',
+						sourceUrl:
+							'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=6e9650f48c0a7f5212f2243a4af7f14b',
+						crossOrigin: 'Anonymous',
+						title: '3857_cva',
+						zIndex: 2,
+						visible: true,
+					},
+				],
 				view: {
-					center: transform([102.06327, 31.66074], 'EPSG:4326', 'EPSG:3857'),
+					center: transform(
+						[102.06327, 31.66074],
+						'EPSG:4326',
+						'EPSG:3857'
+					),
 					zoom: 5,
 					maxZoom: 18,
 					minZoom: 3,
-					fitElement: document.getElementById('root')
+					fitElement: document.getElementById('root'),
 				},
 				control: {
 					zoom: {
@@ -205,30 +258,35 @@ export const AddOverviewMap = () => ({
 							right: '5rem',
 							top: '2rem',
 							left: 'auto',
-							bottom: 'auto'
+							bottom: 'auto',
 						},
 						backgroundColor: '#ffffff',
 						color: '#999999',
-						zoomStyle: 'circle'
-					}
-				}
+						zoomStyle: 'circle',
+					},
+				},
 			},
 			overviewConfig: {
-				tileLayers: [{
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=8224438ab24856da5d3aae952e06b5de',
-					crossOrigin: 'Anonymous',
-					title: '3857_vec_overview',
-					maxZoom: 18,
-					minZoom: 0,
-				}, {
-					sourceType: 'xyz',
-					sourceUrl: 'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=8224438ab24856da5d3aae952e06b5de',
-					crossOrigin: 'Anonymous',
-					title: '3857_cva_overview',
-					maxZoom: 18,
-					minZoom: 0,
-				}],
+				tileLayers: [
+					{
+						sourceType: 'xyz',
+						sourceUrl:
+							'http://t3.tianditu.com/DataServer?T=vec_w&x={x}&y={y}&l={z}&tk=8224438ab24856da5d3aae952e06b5de',
+						crossOrigin: 'Anonymous',
+						title: '3857_vec_overview',
+						maxZoom: 18,
+						minZoom: 0,
+					},
+					{
+						sourceType: 'xyz',
+						sourceUrl:
+							'http://t3.tianditu.com/DataServer?T=cva_w&x={x}&y={y}&l={z}&tk=8224438ab24856da5d3aae952e06b5de',
+						crossOrigin: 'Anonymous',
+						title: '3857_cva_overview',
+						maxZoom: 18,
+						minZoom: 0,
+					},
+				],
 				style: {
 					bottom: '20px',
 					left: '10px',
@@ -236,18 +294,18 @@ export const AddOverviewMap = () => ({
 					top: 'auto',
 					backgroundColor: 'transparent',
 					margin: '0',
-					border: 'solid 2px #4fd1c5'
+					border: 'solid 2px #4fd1c5',
 				},
 				collapseLabel: '-',
 				label: '+',
 				collapsed: false,
-				tipLabel: '鹰眼'
+				tipLabel: '鹰眼',
 			},
 			boxConfig: {
 				boxBackgroundColor: 'rgba(79,209,197,0.4)',
 				boxBorderColor: 'rgb(79,209,197)',
 				boxBorderStyle: 'solid',
-				boxBorderWidth: '4px'
+				boxBorderWidth: '4px',
 			},
 			collapseButtonConfig: {
 				bottom: '9px',
@@ -255,8 +313,8 @@ export const AddOverviewMap = () => ({
 				right: 'auto',
 				top: 'auto',
 				backgroundColor: 'white',
-				color: 'turquoise'
-			}
+				color: 'turquoise',
+			},
 		}
 	},
 	methods: {
@@ -265,13 +323,12 @@ export const AddOverviewMap = () => ({
 		},
 		getOverviewMapControl(control) {
 			this.overviewControl = control
-		}
+		},
 	},
 })
 
 AddOverviewMap.story = {
 	parameters: {
-		notes: { OverviewMd }
-	}
+		notes: { OverviewMd },
+	},
 }
-
