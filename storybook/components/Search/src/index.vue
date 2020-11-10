@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="relative mx-auto text-gray-600 inline-block align-middle">
+    <div class="w-full relative mx-auto text-gray-600 inline-block align-middle">
       <input
         class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
         type="search"
