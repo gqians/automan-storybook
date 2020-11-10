@@ -9,7 +9,10 @@
       :background-color="config.control.zoom.backgroundColor"
       :color="config.control.zoom.color"
       :zoom-style="config.control.zoom.zoomStyle"
+      :reset-button="config.control.zoom.resetButton"
+      :reset-button-style="config.control.zoom.resetButtonStyle"
       @getZoom="getZoom"
+      @resetClick="resetClickHandler"
     />
   </div>
 </template>
@@ -28,7 +31,7 @@ import VueTypes from 'vue-types'
 import Zoom from '@automan-component/zoom'
 import { defaults } from 'ol/control'
 import elementResizeDetectorMaker from 'element-resize-detector'
-import axios from 'axios'
+// import axios from 'axios'
 export default {
 	name: 'Map',
 	components: { Zoom },
@@ -78,7 +81,12 @@ export default {
 					duration: VueTypes.integer,
 					delta: VueTypes.integer,
 					zoomInTipLabel: VueTypes.string,
-					zoomOutTipLabel: VueTypes.string
+					zoomOutTipLabel: VueTypes.string,
+					resetButton: VueTypes.bool,
+					resetButtonStyle: VueTypes.shape({
+						width: VueTypes.string,
+						height: VueTypes.string
+					}),
 				})
 			})
 		})
@@ -165,6 +173,9 @@ export default {
 		// 获取zoom
 		getZoom(zoom) {
 			this.zoom.instance = zoom
+		},
+		resetClickHandler() {
+			this.$emit('resetClick')
 		},
 		// 设置resize事件
 		resize() {

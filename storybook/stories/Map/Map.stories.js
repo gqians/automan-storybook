@@ -8,7 +8,7 @@ import { transform } from 'ol/proj'
 import VectorSource from 'ol/source/Vector'
 import { Vector as VectorLayer } from 'ol/layer'
 import GeoJSON from 'ol/format/GeoJSON'
-import { Fill, Icon, Stroke, Style } from 'ol/style'
+import { Fill, Stroke, Style } from 'ol/style'
 import liangsan from './liangshanBorder.json'
 // import jingsha from './jingshaBorder.json'
 import URI from 'urijs'
@@ -35,7 +35,7 @@ export const Basic = () => ({
 	},
 	template: `
 	<div style="height:100%">
-		<Map :config="mapConfig" @getMap="getMap" />
+		<Map :config="mapConfig" @getMap="getMap" @resetClick="resetClickHandler" />
 	</div>
 	`,
 	data() {
@@ -43,7 +43,7 @@ export const Basic = () => ({
 			mapConfig: {
 				tileLayers: [{
 					sourceType: 'wmts',
-					sourceUrl: `http://192.168.3.7:8080/geoserver/gwc/service/wmts`,
+					sourceUrl: `http://localhost:8080/geoserver/gwc/service/wmts`,
 					crossOrigin: 'Anonymous',
 					title: 'googlewmts',
 					layer: 'LS_BaseMap:L04',
@@ -88,6 +88,7 @@ export const Basic = () => ({
 							left: 'auto',
 							bottom: 'auto'
 						},
+						resetButton: true,
 						backgroundColor: '#ffffff',
 						color: '#999999',
 						zoomStyle: 'origin'
@@ -134,6 +135,9 @@ export const Basic = () => ({
 			})
 		},
 		// getMap: action('getMap')
+		resetClickHandler() {
+			console.log(1)
+		}
 	},
 })
 
