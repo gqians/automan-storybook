@@ -1,11 +1,11 @@
 <template>
   <section>
-    <div class="w-full relative mx-auto text-gray-600 inline-block align-middle">
+    <div :class="classContainerStyle">
       <input
-        class="w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+        :class="inputStyle"
         type="search"
         name="search"
-        placeholder="请输入站号"
+        :placeholder="placeholder"
         @keyup.enter="searchSubmitHandler"
       >
       <button
@@ -37,7 +37,13 @@
 </template>
 
 <script>
+import VueTypes from 'vue-types'
 export default {
+	props: {
+		placeholder: VueTypes.string.def('请输入信息...'),
+		classContainerStyle: VueTypes.string.def('w-full relative mx-auto text-gray-600 inline-block align-middle'),
+		inputStyle: VueTypes.string.def('w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none')
+	},
 	methods: {
 		searchSubmitHandler() {
 			this.$emit('searchSubmit')

@@ -6,5 +6,8 @@
   "author": "qianh",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "vue-types": "^2.0.2"
   }
 }
