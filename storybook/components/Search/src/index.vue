@@ -2,11 +2,14 @@
   <section>
     <div :class="classContainerStyle">
       <input
+        v-model="serachStationNumber"
         :class="inputStyle"
         type="search"
         name="search"
         :placeholder="placeholder"
+        autocomplete="off"
         @keyup.enter="searchSubmitHandler"
+        @input="inputHandler"
       >
       <button
         type="submit"
@@ -44,10 +47,18 @@ export default {
 		classContainerStyle: VueTypes.string.def('w-full relative mx-auto text-gray-600 inline-block align-middle'),
 		inputStyle: VueTypes.string.def('w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none')
 	},
+	data() {
+		return {
+			serachStationNumber: ''
+		}
+	},
 	methods: {
 		searchSubmitHandler() {
-			this.$emit('searchSubmit')
+			this.$emit('searchSubmit', this.serachStationNumber)
 		},
+		inputHandler() {
+			this.$emit('seachInput', this.serachStationNumber)
+		}
 	},
 }
 </script>
