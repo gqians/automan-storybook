@@ -2,7 +2,7 @@
   <section>
     <div :class="classContainerStyle">
       <input
-        v-model="serachStationNumber"
+        v-model="searchString"
         :class="inputStyle"
         type="search"
         name="search"
@@ -49,15 +49,15 @@ export default {
 	},
 	data() {
 		return {
-			serachStationNumber: ''
+			searchString: ''
 		}
 	},
 	methods: {
 		searchSubmitHandler() {
-			this.$emit('searchSubmit', this.serachStationNumber)
+			this.$emit('searchSubmit', this.searchString)
 		},
 		inputHandler() {
-			this.$emit('seachInput', this.serachStationNumber)
+			this.$emit('searchInput', this.searchString)
 		}
 	},
 }
