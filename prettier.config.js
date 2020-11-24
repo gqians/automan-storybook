@@ -3,8 +3,8 @@ module.exports = {
 	trailingComma: 'all',
 	printWidth: 80,
 	proseWrap: 'always',
-	tabWidth: 4,
-	useTabs: false,
+	tabWidth: 1,
+	useTabs: true,
 	bracketSpacing: true,
 	semi: true,
 	arrowParens: 'avoid',
@@ -29,4 +29,4 @@ module.exports = {
 			},
 		},
 	],
-}
+};

@@ -1,22 +1,22 @@
-import '../../css/utils.css'
-import './global.css'
+import '../../css/utils.css';
+import './global.css';
 // import { action } from '@storybook/addon-actions'
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-import Map from '../../components/Map'
-import OverView from '../../components/OverviewMap'
-import { transform } from 'ol/proj'
-import VectorSource from 'ol/source/Vector'
-import { Vector as VectorLayer } from 'ol/layer'
-import GeoJSON from 'ol/format/GeoJSON'
-import { Fill, Stroke, Style } from 'ol/style'
-import liangsan from './liangshanBorder.json'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import Map from '../../components/Map';
+import OverView from '../../components/OverviewMap';
+import { transform } from 'ol/proj';
+import VectorSource from 'ol/source/Vector';
+import { Vector as VectorLayer } from 'ol/layer';
+import GeoJSON from 'ol/format/GeoJSON';
+import { Fill, Stroke, Style } from 'ol/style';
+import liangsan from './liangshanBorder.json';
 // import jingsha from './jingshaBorder.json'
-import URI from 'urijs'
-import axios from 'axios'
-import { getVectorContext } from 'ol/render'
+import URI from 'urijs';
+import axios from 'axios';
+import { getVectorContext } from 'ol/render';
 // import Point from 'ol/geom/Point'
-import MapMd from './Map.md'
-import OverviewMd from './OverviewMap.md'
+import MapMd from './Map.md';
+import OverviewMd from './OverviewMap.md';
 // import { toSize } from 'ol/size'
 // import URI from 'urijs'
 export default {
@@ -28,16 +28,16 @@ export default {
 			defaultViewport: 'reset',
 		},
 	},
-}
+};
 export const Basic = () => ({
 	components: {
 		Map,
 	},
 	template: `
-	<div style="height:100%">
-		<Map :config="mapConfig" @getMap="getMap" @resetClick="resetClickHandler" />
-	</div>
-	`,
+    <div style="height:100%">
+        <Map :config="mapConfig" @getMap="getMap" @resetClick="resetClickHandler" />
+    </div>
+    `,
 	data() {
 		return {
 			mapConfig: {
@@ -57,12 +57,7 @@ export const Basic = () => ({
 							11563449.6935122832655907,
 							3414672.2973421183414757,
 						],
-						extent: [
-							-20037508.34,
-							-20037508.34,
-							20037508.34,
-							20037508.34,
-						], // 范围
+						extent: [-20037508.34, -20037508.34, 20037508.34, 20037508.34], // 范围
 						origin: [-20037508.34, -20037508.34],
 						resolutions: [
 							9783.939619140625,
@@ -89,21 +84,19 @@ export const Basic = () => ({
 							'EPSG:3857:13',
 						],
 						tileLoadFunction: (imageTile, src, map) => {
-							const zoom = Math.round(map.getView().getZoom())
+							const zoom = Math.round(map.getView().getZoom());
 							src = URI(src).setSearch({
-								layer: `LS_BaseMap:L${
-									zoom < 10 ? '0' + zoom : zoom
-								}`,
+								layer: `LS_BaseMap:L${zoom < 10 ? '0' + zoom : zoom}`,
 								TileMatrix: `EPSG:3857:${zoom}`,
-							})
+							});
 							axios
 								.head(src)
 								.then(data => {
-									imageTile.getImage().src = src
+									imageTile.getImage().src = src;
 								})
 								.catch(e => {
-									imageTile.getImage().src = ''
-								})
+									imageTile.getImage().src = '';
+								});
 						},
 						wrapX: false,
 						zIndex: 0,
@@ -137,7 +130,7 @@ export const Basic = () => ({
 					},
 				},
 			},
-		}
+		};
 	},
 	methods: {
 		getMap(map) {
@@ -151,43 +144,43 @@ export const Basic = () => ({
 						color: 'red',
 					}),
 				}),
-			})
+			});
 
 			const style = new Style({
 				fill: new Fill({
 					color: 'red',
 				}),
-			})
+			});
 			function addPolyon(converLayer, geo_data) {
-				const fts = new GeoJSON().readFeatures(geo_data)
-				console.log(fts)
-				const ft = fts?.[0]
-				converLayer.getSource().addFeature(ft)
+				const fts = new GeoJSON().readFeatures(geo_data);
+				console.log(fts);
+				const ft = fts?.[0];
+				converLayer.getSource().addFeature(ft);
 			}
-			addPolyon(clipLayer, liangsan)
-			const wmtsLayer = map.getLayers().getArray()[0]
+			addPolyon(clipLayer, liangsan);
+			const wmtsLayer = map.getLayers().getArray()[0];
 			wmtsLayer.on('postrender', function(e) {
 				// ctx.filter = 'sepia(80%)'// 设置滤镜值
-				e.context.globalCompositeOperation = 'destination-in'
-				const vectorContext = getVectorContext(e)
+				e.context.globalCompositeOperation = 'destination-in';
+				const vectorContext = getVectorContext(e);
 				clipLayer.getSource().forEachFeature(feature => {
-					vectorContext.drawFeature(feature, style)
-				})
-				e.context.globalCompositeOperation = 'source-over'
-			})
+					vectorContext.drawFeature(feature, style);
+				});
+				e.context.globalCompositeOperation = 'source-over';
+			});
 		},
 		// getMap: action('getMap')
 		resetClickHandler() {
-			console.log(1)
+			console.log(1);
 		},
 	},
-})
+});
 
 Basic.story = {
 	parameters: {
 		notes: { MapMd },
 	},
-}
+};
 
 export const AddOverviewMap = () => ({
 	components: {
@@ -195,15 +188,15 @@ export const AddOverviewMap = () => ({
 		OverView,
 	},
 	template: `
-	<div :style="{width:'100%',height:'100%'}">
-		<OverView
-			:overview-map-config="overviewConfig"
-			:box-config="boxConfig"
-			:collapse-button-config="collapseButtonConfig"
-			@getOverviewMapControl="getOverviewMapControl" />
-		<Map :config="mapConfig" @getMap="getMap" />
-	</div>
-	`,
+    <div :style="{width:'100%',height:'100%'}">
+        <OverView
+            :overview-map-config="overviewConfig"
+            :box-config="boxConfig"
+            :collapse-button-config="collapseButtonConfig"
+            @getOverviewMapControl="getOverviewMapControl" />
+        <Map :config="mapConfig" @getMap="getMap" />
+    </div>
+    `,
 	data() {
 		return {
 			mapConfig: {
@@ -237,11 +230,7 @@ export const AddOverviewMap = () => ({
 					},
 				],
 				view: {
-					center: transform(
-						[102.06327, 31.66074],
-						'EPSG:4326',
-						'EPSG:3857'
-					),
+					center: transform([102.06327, 31.66074], 'EPSG:4326', 'EPSG:3857'),
 					zoom: 5,
 					maxZoom: 18,
 					minZoom: 3,
@@ -315,20 +304,20 @@ export const AddOverviewMap = () => ({
 				backgroundColor: 'white',
 				color: 'turquoise',
 			},
-		}
+		};
 	},
 	methods: {
 		getMap(map) {
-			map.addControl(this.overviewControl)
+			map.addControl(this.overviewControl);
 		},
 		getOverviewMapControl(control) {
-			this.overviewControl = control
+			this.overviewControl = control;
 		},
 	},
-})
+});
 
 AddOverviewMap.story = {
 	parameters: {
 		notes: { OverviewMd },
 	},
-}
+};
