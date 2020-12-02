@@ -162,7 +162,7 @@ export default {
 							},
 						}),
 					});
-					layer.set('id', tileLayer.id);
+					imageLayer.set('id', tileLayer.id);
 					imageLayer.setZIndex(tileLayer.zIndex);
 					imageLayer.setVisible(tileLayer.visible);
 					imageLayer.on('error', () => {
