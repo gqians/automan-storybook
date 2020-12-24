@@ -1,6 +1,6 @@
 {
   "name": "@automan-component/map",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "main": "src/index.vue",
   "license": "MIT",
   "author": "qianh",
