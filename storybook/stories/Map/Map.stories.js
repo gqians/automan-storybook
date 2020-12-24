@@ -123,7 +123,7 @@ export const Basic = () => ({
 							left: 'auto',
 							bottom: 'auto',
 						},
-						resetButton: true,
+						resetButton: false,
 						backgroundColor: '#ffffff',
 						color: '#999999',
 						zoomStyle: 'origin',

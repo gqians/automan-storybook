@@ -5,6 +5,7 @@
   "author": "qianh",
   "license": "MIT",
   "dependencies": {
+    "@icon-park/vue": "^1.1.4",
     "ol": "^6.4.3",
     "vue-types": "^2.0.1"
   },
