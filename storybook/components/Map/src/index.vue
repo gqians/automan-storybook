@@ -12,6 +12,7 @@
 			:reset-button="config.control.zoom.resetButton"
 			:reset-button-style="config.control.zoom.resetButtonStyle"
 			:border-color="config.control.zoom.borderColor"
+			:hover-color="config.control.zoom.hoverColor"
 			@getZoom="getZoom"
 			@resetClick="resetClickHandler"
 		/>
@@ -88,6 +89,7 @@ export default {
 					zoomOutTipLabel: VueTypes.string,
 					borderColor: VueTypes.string,
 					resetButton: VueTypes.bool,
+					hoverColor: VueTypes.string,
 					resetButtonStyle: VueTypes.shape({
 						width: VueTypes.string,
 						height: VueTypes.string,
