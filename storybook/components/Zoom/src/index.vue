@@ -196,7 +196,7 @@ export default {
 </script>
 
 <style>
-.ol-control {
+#zoom .ol-control {
 	padding: 0px !important;
 	position: static !important;
 }

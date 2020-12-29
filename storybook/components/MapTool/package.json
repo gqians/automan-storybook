@@ -1,0 +1,14 @@
+{
+  "name": "@automan-component/maptool",
+  "version": "1.0.0",
+  "main": "src/index.vue",
+  "license": "MIT",
+  "author": "qianh",
+  "dependencies": {
+    "@icon-park/vue": "^1.1.5-alpha.0",
+    "vue-types": "^2.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
