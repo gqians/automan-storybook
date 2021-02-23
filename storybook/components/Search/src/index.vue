@@ -2,7 +2,7 @@
 	<section>
 		<div :class="classContainerStyle">
 			<input
-				:ref="ref"
+				:ref="refName"
 				v-model="searchString"
 				:class="inputStyle"
 				type="search"
@@ -53,7 +53,7 @@ export default {
 			'w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none'
 		),
 		disableSearch: VueTypes.bool.def(false),
-		ref: VueTypes.string.def('inputSearch')
+		refName: VueTypes.string.def('inputSearch')
 	},
 	data() {
 		return {
