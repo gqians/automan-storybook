@@ -292,7 +292,7 @@ export const LinerHorizontal = () => ({
 			type: 'liner',
 			linerOption: {
 				horizontal: true,
-				gradient: true,
+				gradient: false,
 				backgroundImage: 'linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)',
 				title: {
 					text: '',
@@ -369,7 +369,7 @@ export const LinerHorizontal = () => ({
 				key: 'tem-16'
 			  }, {
 				color: '#0F2795',
-				value: '<-30',
+				value: '===<-30',
 				key: 'tem-17'
 			  }]
 		}

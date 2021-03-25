@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import VueTypes from 'vue-types'
-import TEXTColor from 'textcolor'
+import VueTypes from 'vue-types';
+import TEXTColor from 'textcolor';
 export default {
 	name: 'Legend',
 	props: {
@@ -119,38 +119,38 @@ export default {
 	data() {
 		return {
 
-		}
+		};
 	},
 	computed: {
 		defaultStyle: function() {
 			const finalClass = {
 				itemObject: ['flex justify-between text-sm items-center px-8'],
 				squreObject: []
-			}
-			if (this.type !== 'default') return finalClass
+			};
+			if (this.type !== 'default') return finalClass;
 			if (this.defaultOption.compress) {
-				finalClass.itemObject.push(['leading-7'])
-				finalClass.squreObject.push(['w-5', 'h-2'])
+				finalClass.itemObject.push(['leading-7']);
+				finalClass.squreObject.push(['w-5', 'h-2']);
 			} else {
-				finalClass.itemObject.push(['leading-10'])
-				finalClass.squreObject.push(['w-4', 'h-4'])
+				finalClass.itemObject.push(['leading-10']);
+				finalClass.squreObject.push(['w-4', 'h-4']);
 			}
-			return finalClass
+			return finalClass;
 		},
 		linerStyle: function() {
-			if (this.type !== 'liner') return []
+			if (this.type !== 'liner') return [];
 			const finalClass = {
 				content: ['inline-flex', 'content-center'],
 				span: ['text-center']
-			}
+			};
 			if (this.linerOption.horizontal) {
-				finalClass.span.push('w-8')
-				finalClass.content.push(['flex-row'])
+				finalClass.span.push('min-8');
+				finalClass.content.push(['flex-row']);
 			} else {
-				finalClass.span.push('w-10')
-				finalClass.content.push(['flex-col'])
+				finalClass.span.push('min-10');
+				finalClass.content.push(['flex-col']);
 			}
-			return finalClass
+			return finalClass;
 		}
 	},
 	mounted() {
@@ -158,8 +158,14 @@ export default {
 	methods: {
 		findTextColor: TEXTColor.findTextColor
 	}
-}
+};
 </script>
 
-<style scoped>
+<style>
+.min-8{
+	min-width: 2rem;
+}
+.min-10{
+	min-width: 2.5rem;
+}
 </style>
