@@ -20,7 +20,7 @@
 			>
 				<svg
 					id="Capa_1"
-					class="text-gray-600 h-4 w-4 fill-current"
+					:class="iconStyle"
 					xmlns="http://www.w3.org/2000/svg"
 					xmlns:xlink="http://www.w3.org/1999/xlink"
 					version="1.1"
@@ -52,6 +52,7 @@ export default {
 		inputStyle: VueTypes.string.def(
 			'w-full border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none'
 		),
+		iconStyle: VueTypes.string.def('text-gray-600 h-4 w-4 fill-current'),
 		disableSearch: VueTypes.bool.def(false),
 		refName: VueTypes.string.def('inputSearch')
 	},
