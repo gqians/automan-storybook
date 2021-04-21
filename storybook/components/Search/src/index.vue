@@ -12,6 +12,8 @@
 				:disabled="disableSearch"
 				@keyup.enter="searchSubmitHandler"
 				@input="inputHandler"
+				@keydown="keydownHandler"
+				@keyup="keypressHandler"
 			/>
 			<button
 				type="submit"
@@ -54,11 +56,13 @@ export default {
 		),
 		iconStyle: VueTypes.string.def('text-gray-600 h-4 w-4 fill-current'),
 		disableSearch: VueTypes.bool.def(false),
-		refName: VueTypes.string.def('inputSearch')
+		refName: VueTypes.string.def('inputSearch'),
+		timeoutVal: VueTypes.number.def(1000)
 	},
 	data() {
 		return {
 			searchString: '',
+			timer: null
 		};
 	},
 	methods: {
@@ -68,6 +72,19 @@ export default {
 		inputHandler() {
 			this.$emit('searchInput', this.searchString);
 		},
+		keydownHandler(e) {
+			if (e.keyCode === 13) return;
+
+			this.timer && window.clearTimeout(this.timer);
+		},
+		keypressHandler(e) {
+			if (e.keyCode === 13) return;
+
+			this.timer && window.clearTimeout(this.timer);
+			this.timer = window.setTimeout(() => {
+				this.$emit('searchKeypress', this.searchString);
+			}, this.timeoutVal);
+		}
 	},
 };
 </script>
