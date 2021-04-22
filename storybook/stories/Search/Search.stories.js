@@ -3,6 +3,7 @@ import './global.css';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { withKnobs } from '@storybook/addon-knobs';
 import Search from '../../components/Search';
+import SearchMd from './Search.md';
 // import LegendMd from './Legend.md'
 export default {
 	title: 'Search',
@@ -28,3 +29,8 @@ export const Default = () => ({
 	},
 	methods: {},
 });
+Default.story = {
+	parameters: {
+		notes: { SearchMd },
+	},
+};

@@ -1,9 +1,9 @@
-import '../../css/utils.css'
-import './global.css'
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-import { withKnobs } from '@storybook/addon-knobs'
-import Legend from '../../components/windLegend'
-import LegendMd from './Legend.md'
+import '../../css/utils.css';
+import './global.css';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { withKnobs } from '@storybook/addon-knobs';
+import Legend from '../../components/windLegend';
+// import LegendMd from './Legend.md';
 export default {
 	title: 'windLegend',
 	component: Legend,
@@ -14,7 +14,7 @@ export default {
 			defaultViewport: 'reset'
 		}
 	}
-}
+};
 export const Default = () => ({
 	components: {
 		Legend
@@ -26,14 +26,14 @@ export const Default = () => ({
     <Legend />
 	`,
 	data() {
-		return {}
+		return {};
 	},
 	methods: {
 	},
-})
+});
 
-Default.story = {
-	parameters: {
-		notes: { LegendMd }
-	}
-}
+// Default.story = {
+// 	parameters: {
+// 		notes: { LegendMd }
+// 	}
+// };

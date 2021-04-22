@@ -1,9 +1,9 @@
-import '../../css/utils.css'
-import './global.css'
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-import { withKnobs } from '@storybook/addon-knobs'
-import ToolBar from '../../components/ToolBar-Select'
-import LegendMd from './Legend.md'
+import '../../css/utils.css';
+import './global.css';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { withKnobs } from '@storybook/addon-knobs';
+import ToolBar from '../../components/ToolBar-Select';
+// import LegendMd from './Legend.md';
 export default {
 	title: 'ToolBar',
 	component: ToolBar,
@@ -14,7 +14,7 @@ export default {
 			defaultViewport: 'reset'
 		}
 	}
-}
+};
 export const Default = () => ({
 	components: {
 		ToolBar
@@ -29,14 +29,14 @@ export const Default = () => ({
 	`,
 	data() {
 		return {
-		}
+		};
 	},
 	methods: {
 	},
-})
+});
 
-Default.story = {
-	parameters: {
-		notes: { LegendMd }
-	}
-}
+// Default.story = {
+// 	parameters: {
+// 		notes: { LegendMd }
+// 	}
+// };
