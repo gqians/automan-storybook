@@ -1,6 +1,6 @@
 module.exports = {
 	purge: {
-		enabled: false,
+		enabled: process.env.NODE_ENV === 'production',
 		content: [
 			'./storybook/**/*.js',
 			'./storybook/components/**/*.vue'
@@ -28,4 +28,4 @@ module.exports = {
 		// height: true,
 		// width: true
 	}
-}
+};

@@ -1,26 +1,17 @@
-# storybook-demo
+### Install dependencies
+```
+yarn install
 
-## Project setup
 ```
-npm install
+### start
 ```
-
-### Compiles and hot-reloads for development
+yarn storybook
 ```
-npm run serve
+### publish to npm
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
+first:
+Committing changes to git
+second (Run the following command):
+npx lerna bootstrap
+npx lerna publish
 ```

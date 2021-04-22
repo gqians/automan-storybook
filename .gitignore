@@ -2,13 +2,13 @@ public/bundle.*
 public/utils.*
 package-lock.json
 yarn.lock
-
+dist
 ### Node ###
 # Logs
 logs
 *.log
 npm-debug.log*
-
+.out
 # Runtime data
 pids
 *.pid
