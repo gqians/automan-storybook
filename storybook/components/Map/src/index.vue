@@ -1,6 +1,7 @@
 <template>
 	<div ref="map" class="relative h-full">
 		<Zoom
+			v-if="config.control.zoom.show"
 			:duration="config.control.zoom.duration"
 			:zoom-in-tip-label="config.control.zoom.zoomInTipLabel"
 			:zoom-out-tip-label="config.control.zoom.zoomOutTipLabel"

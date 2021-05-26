@@ -205,7 +205,7 @@ export const AddOverviewMap = () => ({
 				},
 				control: {
 					zoom: {
-						show: true,
+						show: false,
 						duration: 250,
 						zoomInTipLabel: '放大',
 						zoomOutTipLabel: '缩小',
