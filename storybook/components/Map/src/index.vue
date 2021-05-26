@@ -1,5 +1,5 @@
 <template>
-	<div id="map" class="relative h-full">
+	<div ref="map" class="relative h-full">
 		<Zoom
 			:duration="config.control.zoom.duration"
 			:zoom-in-tip-label="config.control.zoom.zoomInTipLabel"
@@ -117,7 +117,7 @@ export default {
 		// 初始化地图
 		initMap() {
 			this.map = new Map({
-				target: 'map',
+				target: this.$refs.map,
 				view: new View({
 					center: this.config.view.center,
 					zoom: this.config.view.zoom,
