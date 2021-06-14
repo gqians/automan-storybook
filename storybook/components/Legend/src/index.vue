@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="automanLegend">
     <div v-if="type === 'default'" class="w-40 shadow-md">
       <div
         class="w-full leading-10 text-center text-base"
