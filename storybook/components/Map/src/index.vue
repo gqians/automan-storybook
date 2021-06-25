@@ -1,5 +1,5 @@
 <template>
-	<div ref="map" class="relative h-full">
+	<div id="map" ref="map" class="relative h-full">
 		<Zoom
 			v-if="config.control.zoom.show"
 			:duration="config.control.zoom.duration"
