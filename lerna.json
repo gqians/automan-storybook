@@ -6,5 +6,10 @@
   ],
   "npmClient": "yarn",
   "useWorkspaces": false,
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "bootstrap": {
+      "mutex": "network:3030"
+    }
+  }
 }
