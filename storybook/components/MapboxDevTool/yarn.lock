@@ -72,6 +72,11 @@ dash-ast@^1.0.0:
   resolved "https://registry.nlark.com/dash-ast/download/dash-ast-1.0.0.tgz#12029ba5fb2f8aa6f0a861795b23c1b4b6c27d37"
   integrity sha1-EgKbpfsviqbwqGF5WyPBtLbCfTc=
 
+es6-tree@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.npmmirror.com/es6-tree/download/es6-tree-0.3.4.tgz#3a1c39987294789187b725d28ca18573d7e24407"
+  integrity sha1-Ohw5mHKUeJGHtyXSjKGFc9fiRAc=
+
 escape-string-regexp@^1.0.2:
   version "1.0.5"
   resolved "https://registry.nlark.com/escape-string-regexp/download/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"

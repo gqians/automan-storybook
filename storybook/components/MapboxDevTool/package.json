@@ -5,6 +5,7 @@
   "license": "MIT",
   "author": "qianh",
   "dependencies": {
+    "es6-tree": "^0.3.4",
     "nanohtml": "^1.9.1",
     "tko": "^4.0.0-alpha5h"
   },
