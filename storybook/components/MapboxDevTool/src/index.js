@@ -1,6 +1,6 @@
 import setDevElement from './setDevElement';
-import EsTree from 'es6-tree';
-
+import simpleTree from 'simple-tree-component';
+import 'simple-tree-component/dist/simple-tree-component.min.css';
 class MapboxGLDebuggerControl {
 	constructor({
 		title = '',
@@ -23,39 +23,27 @@ class MapboxGLDebuggerControl {
 		this._map = undefined;
 	}
 	_addTreeView() {
-		const config = {
-			types: {
-				folder: {
-					css: 'icon icon-file-directory'
-				},
-				file: {
-					css: 'icon icon-file'
-				}
-			}
-		};
-		const data = [{
-			id: 'master-node',
-			name: '#',
-			type: 'main',
-			expanded: true,
-			children: [{
-				id: 'folder-1',
-				type: 'folder',
-				name: 'A folder',
-				children: [{
-					id: 'article-1',
-					name: 'An article',
-					type: 'file',
-				},
+		const instance = simpleTree('#tree-view', 'singleSelectDropdown', {
+			nodes: [
 				{
-					id: 'article-2',
-					name: 'Another article',
-					type: 'file'
+					label: 'Parent 1',
+					value: 'p1',
+					children: [
+						{
+							label: 'Parent 1 - Child 1',
+							value: 'p1c1'
+						},
+						{
+							label: 'Parent 1 - Child 2',
+							value: 'p1c2',
+							selected: true
+						}
+					]
 				}
-				]
-			}]
-		}];
-		const tree = new EsTree('tree-view', config, data);
+			]
+		});
+		// new EsTree('tree-view', config, data);
+		console.log(this._map);
 	}
 }
 export default MapboxGLDebuggerControl;

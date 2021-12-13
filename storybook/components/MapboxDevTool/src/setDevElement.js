@@ -1,5 +1,4 @@
 import html from 'nanohtml';
-import ko from 'tko';
 let active = false;
 let currentX;
 let currentY;
