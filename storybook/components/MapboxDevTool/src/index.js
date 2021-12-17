@@ -1,6 +1,8 @@
 import setDevElement from './setDevElement';
 import simpleTree from 'simple-tree-component';
+import { mapConfig } from './map/map.config';
 import 'simple-tree-component/dist/simple-tree-component.min.css';
+import './css/tree.css';
 class MapboxGLDebuggerControl {
 	constructor({
 		title = '',
@@ -23,27 +25,30 @@ class MapboxGLDebuggerControl {
 		this._map = undefined;
 	}
 	_addTreeView() {
-		const instance = simpleTree('#tree-view', 'singleSelectDropdown', {
+		const mapChildren = mapConfig.map((config) => {
+			return {
+				label: config.labelFormat(this._map[config.getMethod]()),
+				value: config.value,
+			};
+		});
+		const instance = simpleTree('#tree-view', 'view', {
 			nodes: [
 				{
-					label: 'Parent 1',
-					value: 'p1',
-					children: [
-						{
-							label: 'Parent 1 - Child 1',
-							value: 'p1c1'
-						},
-						{
-							label: 'Parent 1 - Child 2',
-							value: 'p1c2',
-							selected: true
-						}
-					]
-				}
+					label: 'map',
+					value: 'map',
+					children: mapChildren,
+				},
 			]
 		});
+		this._map.on('move', () => {
+			// instance.updateNodeLabel(instance.getNode('zoom'), `zoom -- ${String(this._map.getZoom())}`);
+			// instance.updateNodeLabel(instance.getNode('bounds'), `bounds -- [${this._map.getBounds()._sw.lng.toFixed(3)},${this._map.getBounds()._sw.lat.toFixed(3)},${this._map.getBounds()._ne.lng.toFixed(3)},${this._map.getBounds()._ne.lat.toFixed(3)}]`);
+			mapConfig.forEach((config) => {
+				instance.updateNodeLabel(instance.getNode(config.value), config.labelFormat(this._map[config.getMethod]()));
+			});
+		});
 		// new EsTree('tree-view', config, data);
-		console.log(this._map);
+		console.log(this._map.getPadding());
 	}
 }
 export default MapboxGLDebuggerControl;

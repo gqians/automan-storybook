@@ -1,0 +1,6 @@
+.simple-tree.simple-tree-view-only{
+	height: 100%;
+}
+.simple-tree .simple-tree-input-container input{
+	border: 1px gray solid;
+}
