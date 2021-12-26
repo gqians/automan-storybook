@@ -1,6 +1,35 @@
+.simple-tree{
+	border: none;
+	box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);
+}
 .simple-tree.simple-tree-view-only{
 	height: 100%;
 }
 .simple-tree .simple-tree-input-container input{
-	border: 1px gray solid;
+	border: 1px #8ACA58 solid;
+	border-radius: 5px;
+}
+.simple-tree .simple-tree-input-container input:focus-visible{
+	outline: none;
+}
+.simple-tree-node-container .simple-tree-node-wrapper .simple-tree-node-chevron-container .simple-tree-node-chevron-down{
+	border-top: 0.5rem solid #60D06C;
+}
+.simple-tree-node-container-root{
+	font-size: 16px;
+	color: #707070;
+}
+.simple-tree-node-container .simple-tree-node-wrapper.simple-tree-node-selected{
+	background-color: #569A3E;
+	color: white;
+}
+.simple-tree-node-container .simple-tree-node-wrapper.simple-tree-node-hovered {
+  background-color: #8BBA7B;
+	color: white;
+}
+.simple-tree-node-wrapper{
+	line-height: 25px;
+}
+.simple-tree-node-container-root{
+	padding-right:5px;
 }

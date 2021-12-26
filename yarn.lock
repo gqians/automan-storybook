@@ -4296,13 +4296,6 @@
   resolved "https://registry.nlark.com/@vue/preload-webpack-plugin/download/@vue/preload-webpack-plugin-1.1.2.tgz#ceb924b4ecb3b9c43871c7a429a02f8423e621ab"
   integrity sha1-zrkktOyzucQ4ccekKaAvhCPmIas=
 
-"@vue/reactivity@~3.1.1":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.1.5.tgz#dbec4d9557f7c8f25c2635db1e23a78a729eb991"
-  integrity sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==
-  dependencies:
-    "@vue/shared" "3.1.5"
-
 "@vue/ref-transform@3.2.23":
   version "3.2.23"
   resolved "https://registry.npmmirror.com/@vue/ref-transform/download/@vue/ref-transform-3.2.23.tgz#5c8b0c0638db27094ddd689020c60cf1aa33d873"
@@ -4313,11 +4306,6 @@
     "@vue/shared" "3.2.23"
     estree-walker "^2.0.2"
     magic-string "^0.25.7"
-
-"@vue/shared@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.5.tgz#74ee3aad995d0a3996a6bb9533d4d280514ede03"
-  integrity sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==
 
 "@vue/shared@3.2.23":
   version "3.2.23"
@@ -4644,13 +4632,6 @@ alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.nlark.com/alphanum-sort/download/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
-
-alpinejs@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.7.0.tgz#5aa4d286e69c2772b32be335129e81cac074a4ef"
-  integrity sha512-FL+DHOsO5gfE2YZqKoXUrNEOoaZnxta4Z+eZvJU6KEAwCW1ZnDEppUJ1Yo6MIBKLrVbB0ZnWphJyotX9khkm6A==
-  dependencies:
-    "@vue/reactivity" "~3.1.1"
 
 ansi-align@^3.0.0:
   version "3.0.1"

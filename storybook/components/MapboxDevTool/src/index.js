@@ -12,8 +12,11 @@ class MapboxGLDebuggerControl {
 
 	onAdd(map) {
 		this._container = document.createElement('div');
-		this._container.appendChild(setDevElement());
+		this._container.innerHTML = setDevElement();
+		// this._container = this._container.firstChild;
+		// this._container.appendChild();
 		this._map = map;
+		window.mapboxMap = map;
 		map.on('load', () => {
 			this._addTreeView();
 		});
@@ -29,6 +32,7 @@ class MapboxGLDebuggerControl {
 			return {
 				label: config.labelFormat(this._map[config.getMethod]()),
 				value: config.value,
+				selectable: config.selectable,
 			};
 		});
 		const instance = simpleTree('#tree-view', 'view', {
@@ -36,6 +40,7 @@ class MapboxGLDebuggerControl {
 				{
 					label: 'map',
 					value: 'map',
+					selectable: false,
 					children: mapChildren,
 				},
 			]
@@ -47,8 +52,21 @@ class MapboxGLDebuggerControl {
 				instance.updateNodeLabel(instance.getNode(config.value), config.labelFormat(this._map[config.getMethod]()));
 			});
 		});
+		const subscription = instance.subscribe('selectionChanged', (selected, eventName, e) => {
+			// do whatever you want
+			console.log(selected, eventName, e);
+			// window.Alpine.store['clickItem'].changeType(selected.value);
+			// window.Alpine.store('clickItem', {
+			// 	type: '',
+			// 	value: '',
+			// 	setType(label) { this.type = label.split(' ')[0]; },
+			// 	setValue(label) { this.value = label.split(' ')[2]; },
+			// });
+			window.Alpine.store('clickItem').setType(selected.label);
+			window.Alpine.store('clickItem').setValue(selected.label);
+		});
 		// new EsTree('tree-view', config, data);
-		console.log(this._map.getPadding());
+		console.log(subscription);
 	}
 }
 export default MapboxGLDebuggerControl;

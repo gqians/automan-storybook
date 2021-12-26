@@ -17,7 +17,6 @@
     "@icon-park/vue": "^1.1.4",
     "@popperjs/core": "^2.5.1",
     "@svgdotjs/svg.js": "^3.0.16",
-    "alpinejs": "^3.7.0",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "mapbox-gl": "^2.6.1",
