@@ -46,7 +46,5 @@ const mapConfig = [{
 	settingFormat: (value) => { return { top: JSON.parse(value)[0], right: JSON.parse(value)[1], bottom: JSON.parse(value)[2], left: JSON.parse(value)[3] }; },
 	labelFormat: (value) => `padding -- [ ${value.top}, ${value.right}, ${value.bottom}, ${value.left} ]`,
 }];
-export { mapConfig };
-export default () => ({
-	mapConfig,
-});
+const layerConfig = [{}];
+export { mapConfig, layerConfig };

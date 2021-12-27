@@ -1,6 +1,7 @@
 import setDevElement from './setDevElement';
 import simpleTree from 'simple-tree-component';
 import { mapConfig } from './map/map.config';
+import { v4 as uuidv4 } from 'uuid';
 import 'simple-tree-component/dist/simple-tree-component.min.css';
 import './css/tree.css';
 class MapboxGLDebuggerControl {
@@ -17,6 +18,9 @@ class MapboxGLDebuggerControl {
 		// this._container.appendChild();
 		this._map = map;
 		window.mapboxMap = map;
+		window.simpleTree = simpleTree;
+		window.uuidv4 = uuidv4;
+		window.treeInstance = null;
 		map.on('load', () => {
 			this._addTreeView();
 		});
@@ -45,6 +49,7 @@ class MapboxGLDebuggerControl {
 				},
 			]
 		});
+		window.treeInstance = instance;
 		this._map.on('move', () => {
 			// instance.updateNodeLabel(instance.getNode('zoom'), `zoom -- ${String(this._map.getZoom())}`);
 			// instance.updateNodeLabel(instance.getNode('bounds'), `bounds -- [${this._map.getBounds()._sw.lng.toFixed(3)},${this._map.getBounds()._sw.lat.toFixed(3)},${this._map.getBounds()._ne.lng.toFixed(3)},${this._map.getBounds()._ne.lat.toFixed(3)}]`);
@@ -52,6 +57,7 @@ class MapboxGLDebuggerControl {
 				instance.updateNodeLabel(instance.getNode(config.value), config.labelFormat(this._map[config.getMethod]()));
 			});
 		});
+		// window.Alpine.store('treeInstance').setValue(instance);
 		const subscription = instance.subscribe('selectionChanged', (selected, eventName, e) => {
 			// do whatever you want
 			console.log(selected, eventName, e);

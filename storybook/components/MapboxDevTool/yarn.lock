@@ -25,3 +25,8 @@ simple-tree-component@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/simple-tree-component/-/simple-tree-component-1.3.0.tgz#f0d673d36553960fdfedc2ec698456bd5fe9deff"
   integrity sha512-fORjPKiIA266oRiYu6NuJSWhuLxy2Mf0xhf23xSVsu6gO/67uO3IS1azP5Bb8iG4jQEIm39fCMjfVDQOhBWLYg==
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
