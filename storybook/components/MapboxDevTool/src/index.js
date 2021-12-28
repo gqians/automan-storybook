@@ -54,13 +54,13 @@ class MapboxGLDebuggerControl {
 			// instance.updateNodeLabel(instance.getNode('zoom'), `zoom -- ${String(this._map.getZoom())}`);
 			// instance.updateNodeLabel(instance.getNode('bounds'), `bounds -- [${this._map.getBounds()._sw.lng.toFixed(3)},${this._map.getBounds()._sw.lat.toFixed(3)},${this._map.getBounds()._ne.lng.toFixed(3)},${this._map.getBounds()._ne.lat.toFixed(3)}]`);
 			mapConfig.forEach((config) => {
-				instance.updateNodeLabel(instance.getNode(config.value), config.labelFormat(this._map[config.getMethod]()));
+				window.treeInstance.getNode(config.value) && window.treeInstance.updateNodeLabel(window.treeInstance.getNode(config.value), config.labelFormat(this._map[config.getMethod]()));
 			});
 		});
 		// window.Alpine.store('treeInstance').setValue(instance);
-		const subscription = instance.subscribe('selectionChanged', (selected, eventName, e) => {
+		instance.subscribe('selectionChanged', (selected, eventName, e) => {
 			// do whatever you want
-			console.log(selected, eventName, e);
+			// console.log(selected, eventName, e);
 			// window.Alpine.store['clickItem'].changeType(selected.value);
 			// window.Alpine.store('clickItem', {
 			// 	type: '',
@@ -72,7 +72,7 @@ class MapboxGLDebuggerControl {
 			window.Alpine.store('clickItem').setValue(selected.label);
 		});
 		// new EsTree('tree-view', config, data);
-		console.log(subscription);
+		// console.log(subscription);
 	}
 }
 export default MapboxGLDebuggerControl;

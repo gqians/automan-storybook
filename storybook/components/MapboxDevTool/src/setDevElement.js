@@ -6,7 +6,7 @@ const setDevElement = () => {
 		window.Alpine = Alpine;
 		document.addEventListener('alpine:init', () => {
 			store();
-			console.log(window.Alpine);
+			// console.log(window.Alpine);
 		});
 		window.Alpine.start();
 	}
@@ -29,7 +29,7 @@ const setDevElement = () => {
 		</div>
 	</div>
 	`;
-	console.log(el);
+	// console.log(el);
 	const s = document.createElement('script');
 	s.type = 'text/javascript';
 	const code = `
@@ -81,63 +81,35 @@ const setDevElement = () => {
 			el.style.transform = 'translate3d(' + xPos + 'px, ' + yPos + 'px, 0)';
 		};
 		const mapBottonClickHandler = (type,value,mapconfig) => {
-			console.log(type);
-			console.log(value);
-			console.log(mapconfig[0]);
+			// console.log(type);
+			// console.log(value);
+			// console.log(mapconfig[0]);
 			const item = mapconfig.find(item => item.value === type);
 			window.mapboxMap[item.setMethod](item.settingFormat(value));
 		};
 		const changeTab = (type) => {
-			console.log(type);
+			// console.log(type);
 			window.treeInstance?.destroy();
 			initTree(type);
 		};
 		const initTree = (type) => {
-			let config;
 			switch (type) {
 				case 'map':
-					config = initMapTree();
+					initMapTree(type);
 					break;
 				case 'layers':
-					config = initLayersTree();
+					initLayersTree(type);
+					break;
+				case 'sources':
+					initSourceTree(type);
 					break;
 			};
-			initTreeByConfig(config, type);
-			setTimeout(() => {
-				console.log(window.treeInstance.getNode('5181-1416248492'));
-			},2000);
 		};
-		const initTreeByConfig = (config, type) => {
-			const instance = window.simpleTree('#tree-view', 'tree', {
-				dragAndDrop: true,
-				nodes: [
-					{
-						label: type,
-						value: type,
-						selectable: false,
-						children: config,
-					},
-				]
-			});
-			const subscription = instance.subscribe('selectionChanged', (selected, eventName, e) => {
-				// do whatever you want
-				console.log(selected, eventName, e);
-				window.treeInstance.moveNode(window.treeInstance.getNode(selected.value),'down');
-				// window.Alpine.store['clickItem'].changeType(selected.value);
-				// window.Alpine.store('clickItem', {
-				// 	type: '',
-				// 	value: '',
-				// 	setType(label) { this.type = label.split(' ')[0]; },
-				// 	setValue(label) { this.value = label.split(' ')[2]; },
-				// });
-				// window.Alpine.store('clickItem').setType(selected.label);
-				// window.Alpine.store('clickItem').setValue(selected.label);
-			});
-			window.treeInstance = instance;
-		};
-		const initMapTree = () => {
+
+
+		const initMapTree = (type) => {
 			const mapConfig = window.Alpine.store('treeConfig').map;
-			console.log(mapConfig);
+			// console.log(mapConfig);
 			const mapChildren = mapConfig.map((config) => {
 				return {
 					label: config.labelFormat(window.mapboxMap[config.getMethod]()),
@@ -145,42 +117,92 @@ const setDevElement = () => {
 					selectable: config.selectable,
 				};
 			});
-			return mapChildren;
+			const instance = window.simpleTree('#tree-view', 'tree', {
+				dragAndDrop: false,
+				nodes: [
+					{
+						label: type,
+						value: type,
+						selectable: false,
+						children: mapChildren,
+					},
+				]
+			});
+			const subscription = instance.subscribe('selectionChanged', (selected, eventName, e) => {
+				window.Alpine.store('clickItem').setType(selected.label);
+				window.Alpine.store('clickItem').setValue(selected.label);
+			});
+			window.treeInstance = instance;
 		};
-		const initLayersTree = () => {
-			console.log(window.mapboxMap.getStyle().layers);
+
+
+		const initLayersTree = (type) => {
+			// console.log(window.mapboxMap.getStyle().layers);
 			const layers = window.mapboxMap.getStyle().layers;
-			layerConfig = layers.map((layer) => {
+			const layerConfig = layers.map((layer) => {
 				return {
 					label: layer.id,
 					value: layer.id,
 					selectable: true,
 					children: [
 						{
-							label: 'type',
+							label: 'type -- ' + layer.type,
 							value: window.uuidv4(),
 							selectable: false,
-
-							children: [{
-								label: layer.type,
-								value: window.uuidv4(),
-								selectable: false,
-							}]
 						},
 						layer.source ? {
-							label: 'source',
+							label: 'source -- ' + layer.source,
 							value: window.uuidv4(),
 							selectable: false,
-							children: [{
-								label: layer.source,
-								value: window.uuidv4(),
-								selectable: false,
-							}]
 						}: null,
 					]
 				}
 			});
-			return layerConfig;
+			const instance = window.simpleTree('#tree-view', 'tree', {
+				dragAndDrop: true,
+				nodes: [
+					{
+						label: type,
+						value: type,
+						selectable: false,
+						children: layerConfig,
+					},
+				]
+			});
+			// instance.collapseAllNodes();
+			// window.treeInstance = instance;
+			// addUpandDownBotton();
+		};
+
+		const initSourceTree = (type) => {
+			const sources = window.mapboxMap.getStyle().sources;
+			const sourceConfig = Reflect.ownKeys(sources).map((key) => {
+				return {
+					label: key,
+					value: key,
+					selectable: true,
+					children: [
+						{
+							label: 'type -- ' + sources[key].type,
+							value: window.uuidv4(),
+							selectable: false,
+						},
+					]
+				}
+			});
+			const instance = window.simpleTree('#tree-view', 'tree', {
+				dragAndDrop: false,
+				nodes: [
+					{
+						label: type,
+						value: type,
+						selectable: false,
+						children: sourceConfig,
+					},
+				]
+			});
+			// instance.collapseAllNodes();
+			window.treeInstance = instance;
 		}
 	`;
 	s.appendChild(document.createTextNode(code));

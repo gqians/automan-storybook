@@ -5,7 +5,7 @@ const path = require('path')
 
 module.exports = async config => {
 	const logger = dealLog()
-	console.log(path.resolve(__dirname, '../../'))
+	// console.log(path.resolve(__dirname, '../../'))
 	// start server
 	nodemon({
 		script: path.join(__dirname, 'startServer.js'),

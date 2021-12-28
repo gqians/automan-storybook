@@ -39,8 +39,43 @@ export const Basic = () => ({
 				title: 'test'
 			})
 		);
+		map.on('load', () => {
+			this.addTduRasterLayer(map);
+		});
 	},
 	methods: {
+		addTduRasterLayer(map) {
+			map.addSource('tdt-img-tiles', {
+				type: 'raster',
+				tiles: [
+					'http://t0.tianditu.gov.cn/DataServer?T=img_w&X={x}&Y={y}&L={z}&tk=' +
+						'4b01c1b56c6bcba2eb9b8e987529c44f'
+				],
+				tileSize: 256
+			});
+			map.addSource('tdt-tiles', {
+				type: 'raster',
+				tiles: [
+					'http://t0.tianditu.gov.cn/DataServer?T=cia_w&X={x}&Y={y}&L={z}&tk=' +
+						'4b01c1b56c6bcba2eb9b8e987529c44f'
+				],
+				tileSize: 256
+			});
+			map.addLayer({
+				id: 'tdt-img-tiles',
+				type: 'raster',
+				source: 'tdt-img-tiles',
+				minzoom: 9,
+				maxzoom: 17
+			});
+			map.addLayer({
+				id: 'tdt-tiles',
+				type: 'raster',
+				source: 'tdt-tiles',
+				minzoom: 9,
+				// maxzoom: 18
+			});
+		}
 	},
 });
 

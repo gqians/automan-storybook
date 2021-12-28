@@ -11,7 +11,7 @@ function hasDrawLayer(map, layerId) {
 	let has = false;
 	let effectiveLayer = null;
 	layers.forEach(layer => {
-		// console.log(layer.get('id'))
+		// // console.log(layer.get('id'))
 		if (layer.get('id') === layerId) {
 			has = true;
 			effectiveLayer = layer;

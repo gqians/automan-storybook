@@ -173,7 +173,7 @@ export default {
 					imageLayer.setZIndex(tileLayer.zIndex);
 					imageLayer.setVisible(tileLayer.visible);
 					imageLayer.on('error', () => {
-						console.log('err');
+						// console.log('err');
 					});
 					this.map.addLayer(imageLayer);
 					break;
@@ -195,7 +195,7 @@ export default {
 		resize() {
 			if (!this.config.view.fitElement) return;
 			const erd = elementResizeDetectorMaker();
-			console.log(this.config.view.fitElement);
+			// console.log(this.config.view.fitElement);
 			if (this.config.view.fitElement instanceof Object) {
 				erd.listenTo(this.config.view.fitElement, () => {
 					this.map.updateSize();

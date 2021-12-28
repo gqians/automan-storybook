@@ -120,7 +120,7 @@ export const Basic = () => ({
 			});
 			// function addPolyon(converLayer, geo_data) {
 			// 	const fts = new GeoJSON().readFeatures(geo_data);
-			// 	console.log(fts);
+			// 	// console.log(fts);
 			// 	const ft = fts?.[0];
 			// 	converLayer.getSource().addFeature(ft);
 			// }
@@ -138,7 +138,7 @@ export const Basic = () => ({
 		},
 		// getMap: action('getMap')
 		resetClickHandler() {
-			console.log(1);
+			// console.log(1);
 		},
 	},
 });
