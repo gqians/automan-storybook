@@ -18,7 +18,7 @@ const setDevElement = () => {
 				</span>
 			</template>
 		</div>
-		<div style="flex: 1 1 auto;max-height: 435px;margin-top:10px;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);" id="tree-view"></div>
+		<div style="flex: 1 1 auto;max-height: 435px;margin-top:10px;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);" class="tree" id="div_tree"></div>
 		<div x-data style="padding-left:10px;display: flex;align-items: center;flex: 0 0 auto;min-height:60px;margin-top:10px;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);">
 			<span x-data x-text="$store.clickItem.type" style="font-size:16px;color: #707070"></span>
 			<div x-show="$store.clickItem.type.length>0" style="display:inline-block;">
@@ -101,7 +101,7 @@ const setDevElement = () => {
 					initLayersTree(type);
 					break;
 				case 'sources':
-					initSourceTree(type);
+					// initSourceTree(type);
 					break;
 			};
 		};
@@ -112,25 +112,37 @@ const setDevElement = () => {
 			// console.log(mapConfig);
 			const mapChildren = mapConfig.map((config) => {
 				return {
-					label: config.labelFormat(window.mapboxMap[config.getMethod]()),
-					value: config.value,
-					selectable: config.selectable,
+					n_id: config.value,
+					n_title: config.labelFormat(window.mapboxMap[config.getMethod]()),
+					n_order_num: 0,
+					n_parentid: 0,
+					n_editable: true
 				};
 			});
-			const instance = window.simpleTree('#tree-view', 'tree', {
-				dragAndDrop: false,
-				nodes: [
-					{
-						label: type,
-						value: type,
-						selectable: false,
-						children: mapChildren,
-					},
-				]
-			});
-			const subscription = instance.subscribe('selectionChanged', (selected, eventName, e) => {
-				window.Alpine.store('clickItem').setType(selected.label);
-				window.Alpine.store('clickItem').setValue(selected.label);
+			const instance = new window.PickleTree({
+				c_target: 'div_tree',
+				nodeEditCallback: (node, text) => {
+					console.log(node, text);
+					const config = mapConfig.find(i => i.value === node.value);
+					window.mapboxMap[config.setMethod](config.settingFormat(text));
+				},
+				c_config: {
+					// start as folded or unfolded
+					foldedStatus: false,
+					// for logging
+					logMode: false,
+					// for switch element
+					switchMode: false,
+					// for automaticly select childs
+					autoChild: true,
+					// for automaticly select parents
+					autoParent: true,
+					// for drag / drop
+					drag: false,
+					// for ordering
+					order: false,
+				},
+				c_data: mapChildren
 			});
 			window.treeInstance = instance;
 		};
@@ -140,38 +152,65 @@ const setDevElement = () => {
 			// console.log(window.mapboxMap.getStyle().layers);
 			const layers = window.mapboxMap.getStyle().layers;
 			const layerConfig = layers.map((layer) => {
-				return {
-					label: layer.id,
-					value: layer.id,
-					selectable: true,
-					children: [
-						{
-							label: 'type -- ' + layer.type,
-							value: window.uuidv4(),
-							selectable: false,
-						},
-						layer.source ? {
-							label: 'source -- ' + layer.source,
-							value: window.uuidv4(),
-							selectable: false,
-						}: null,
-					]
+				let checkStatus = false;
+				if(window.mapboxMap.getLayoutProperty(layer.id, 'visibility') === 'visible' || window.mapboxMap.getLayoutProperty(layer.id, 'visibility') === undefined){
+					checkStatus = true;
 				}
-			});
-			const instance = window.simpleTree('#tree-view', 'tree', {
-				dragAndDrop: true,
-				nodes: [
-					{
-						label: type,
-						value: type,
-						selectable: false,
-						children: layerConfig,
-					},
+				const perentNode = {
+					n_id: layer.id,
+					n_title: layer.id,
+					n_order_num: 0,
+					n_parentid: 0,
+					n_editable: false,
+					n_showOrder: true,
+					n_showSwitch: true,
+					n_checkStatus: checkStatus,
+				};
+				console.log(window.mapboxMap.getLayoutProperty(layer.id, 'visibility'));
+				const childrenNode = Reflect.ownKeys(layer).map((key) => {
+					if(typeof(layer[key]) === 'object' || typeof(layer[key]) === 'function') return null;
+					return {
+						n_id: layer.id+key,
+						n_title: key+' -- '+layer[key],
+						n_order_num: 0,
+						n_parentid: layer.id,
+						n_editable: false
+					};
+				});
+				return [
+					perentNode,
+					...childrenNode,
 				]
 			});
-			// instance.collapseAllNodes();
-			// window.treeInstance = instance;
-			// addUpandDownBotton();
+			console.log(layerConfig.flat().filter(i => i));
+			const instance = new window.PickleTree({
+				c_target: 'div_tree',
+				switchCallback: (node)=>{
+					window.mapboxMap.setLayoutProperty(node.value, 'visibility', node.checkStatus ? 'visible' : 'none');
+				},
+				orderCallback: (main, target, isbefore)=>{
+					console.log(main, target, isbefore);
+					isbefore ? window.mapboxMap.moveLayer(main.value, target.value) : window.mapboxMap.moveLayer(target.value, main.value);
+				},
+				c_config: {
+					// start as folded or unfolded
+					foldedStatus: true,
+					// for logging
+					logMode: false,
+					// for switch element
+					switchMode: true,
+					// for automaticly select childs
+					autoChild: false,
+					// for automaticly select parents
+					autoParent: true,
+					// for drag / drop
+					drag: false,
+					// for ordering
+					order: true,
+				},
+				c_data: layerConfig.flat().filter(i => i)
+			});
+			window.treeInstance = instance;
 		};
 
 		const initSourceTree = (type) => {
