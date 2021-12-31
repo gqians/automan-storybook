@@ -38,6 +38,7 @@ export default class MapboxGLDebuggerControl {
 	}
 	_addTreeView() {
 		const mapChildren = window.Alpine.store('treeConfig').map.map((config, index) => {
+			if (!window.mapboxMap[config.getMethod]) return null;
 			return {
 				// label: config.labelFormat(this._map[config.getMethod]()),
 				// value: config.value,
@@ -49,7 +50,7 @@ export default class MapboxGLDebuggerControl {
 				n_parentid: 0,
 				n_editable: true
 			};
-		});
+		}).filter(item => item);
 		const instance = new PickleTree({
 			c_target: 'div_tree',
 			nodeEditCallback: (node, text) => {
@@ -78,6 +79,7 @@ export default class MapboxGLDebuggerControl {
 		window.treeInstance = instance;
 		this._map.on('move', () => {
 			mapConfig.forEach((config) => {
+				if (!window.mapboxMap[config.getMethod]) return;
 				window?.treeInstance?.getNode(config.value) && window.treeInstance.updateNodeTitle(window.treeInstance.getNode(config.value), config.labelFormat(window.mapboxMap[config.getMethod]()));
 			});
 		});
