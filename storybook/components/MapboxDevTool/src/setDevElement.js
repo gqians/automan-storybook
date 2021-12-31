@@ -98,6 +98,7 @@ const setDevElement = () => {
 			const mapConfig = window.Alpine.store('treeConfig').map;
 			// // console.log(mapConfig);
 			const mapChildren = mapConfig.map((config) => {
+				if(!window.mapboxMap[config.getMethod]) return null;
 				return {
 					n_id: config.value,
 					n_title: config.labelFormat(window.mapboxMap[config.getMethod]()),
@@ -105,7 +106,7 @@ const setDevElement = () => {
 					n_parentid: 0,
 					n_editable: true
 				};
-			});
+			}).filter(item => item);
 			const instance = new window.PickleTree({
 				c_target: 'div_tree',
 				nodeEditCallback: (node, text) => {
