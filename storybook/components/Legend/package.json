@@ -1,6 +1,6 @@
 {
   "name": "@automan-component/legend",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "src/index.vue",
   "author": "qianh",
   "license": "MIT",

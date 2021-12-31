@@ -1,6 +1,6 @@
 {
   "name": "@automan-component/wind-legend",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./src/index.vue",
   "license": "MIT",
   "publishConfig": {
