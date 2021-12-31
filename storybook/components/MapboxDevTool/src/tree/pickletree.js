@@ -88,11 +88,11 @@ class PickleTree {
 
 			// draging
 			this.main_container.addEventListener('drag', (e) => {
-				// console.log('drag happenign');
+				// // // console.log('drag happenign');
 			});
 			// drag end
 			this.main_container.addEventListener('dragend', async(e) => {
-				// console.log('drag end')
+				// // // console.log('drag end')
 				// remove border to container
 				this.invalid_area.container.classList.remove('invalid');
 				this.invalid_area.container.classList.remove('valid');
@@ -127,7 +127,7 @@ class PickleTree {
 			});
 			// drag location
 			this.main_container.addEventListener('dragenter', (e) => {
-				// console.log('drag enter')
+				// // // console.log('drag enter')
 				this.clearDebris();
 				try {
 					// check position is valid
@@ -154,7 +154,7 @@ class PickleTree {
 						}
 					}
 				} catch (e) {
-					// console.log('dragging have exception..');
+					// // // console.log('dragging have exception..');
 					this.drag_target = undefined;
 				}
 			});
@@ -194,7 +194,7 @@ class PickleTree {
    */
 	log(message) {
 		if (this.config.logMode) {
-			console.log(message);
+			// // console.log(message);
 		}
 	}
 
@@ -240,7 +240,7 @@ class PickleTree {
 		// referance for some events
 		this.main_container = document.getElementById(this.target);
 		this.main_container.innerHTML = '<div id="' + this.config.key + '_div_pickletree"><ul id="' + this.config.key + '_tree_picklemain"></ul></div>';
-		// console.log(this.main_container.getElementById(this.config.key+'_tree_picklemain'));
+		// // // console.log(this.main_container.getElementById(this.config.key+'_tree_picklemain'));
 
 		this.area = document.getElementById(this.config.key + '_tree_picklemain');
 		this.log('tree build started..');
@@ -423,7 +423,7 @@ class PickleTree {
    * @param {object} node
    */
 	checkNode(node) {
-		// console.log(node);
+		// // // console.log(node);
 		// then if is checked and folded unfold and open childs
 		const clength = node.childs.length;
 		if (node.checkStatus && clength > 0) {
@@ -515,7 +515,7 @@ class PickleTree {
    * @param {object} obj
    */
 	createNode(obj) {
-		console.log(obj);
+		// // console.log(obj);
 		const id = Date.now();
 		const node = {
 			// node value
@@ -569,7 +569,7 @@ class PickleTree {
 
 		// node is added to container
 		this.nodeList[obj['n_id']] = node;
-		console.log(node);
+		// // console.log(node);
 		// node is drawed
 		this.drawNode(node);
 		// logged
@@ -584,7 +584,7 @@ class PickleTree {
    */
 	updateNode(node) {
 		// first remove old node
-		// console.log(this.getNode(node.id.split('_')[1]))
+		// // // console.log(this.getNode(node.id.split('_')[1]))
 		this.getNode(node.id.split('node_')[1]).deleteNode();
 		// clear old parent's childs if old parent info is exist
 		if (node.old_parent !== undefined && node.old_parent.id !== 0) {
@@ -839,13 +839,13 @@ class PickleTree {
                         //replace data
                         const targetNode = this.getNode(target.id.split('_treenode_')[1]);
                         const mainNode   = this.getNode(main.id.split('_treenode_')[1]);
-                        //console.log( mainNode.order,targetNode.order);
+                        //// // console.log( mainNode.order,targetNode.order);
                         const currentOrder = mainNode.order;
                         const targetOrder  = targetNode.order === mainNode.order ? (isBefore ? targetNode.order-1 : targetNode.order+1 )  : targetNode.order;
                         //change order data
                         targetNode.order = currentOrder;
                         mainNode.order   = targetOrder;
-                        //console.log( mainNode.order,targetNode.order);
+                        //// // console.log( mainNode.order,targetNode.order);
                         //replace element
                         main.parentNode.replaceChild(main,target);
                         main.parentNode.insertBefore(target, isBefore ? main.nextSibling : main);

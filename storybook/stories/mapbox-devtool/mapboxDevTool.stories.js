@@ -33,11 +33,10 @@ export const Basic = () => ({
 			center: [-74.5, 40], // starting position [lng, lat]
 			zoom: 9 // starting zoom
 		});
+		console.log(mapboxDevtool);
 		map.addControl(
 			// eslint-disable-next-line new-cap
-			new mapboxDevtool({
-				title: 'test'
-			})
+			new mapboxDevtool()
 		);
 		map.on('load', () => {
 			this.addTduRasterLayer(map);

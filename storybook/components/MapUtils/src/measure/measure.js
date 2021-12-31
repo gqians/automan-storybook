@@ -11,7 +11,7 @@ function hasDrawLayer(map, layerId) {
 	let has = false;
 	let effectiveLayer = null;
 	layers.forEach(layer => {
-		// // console.log(layer.get('id'))
+		// // // console.log(layer.get('id'))
 		if (layer.get('id') === layerId) {
 			has = true;
 			effectiveLayer = layer;
@@ -175,7 +175,7 @@ export function measure(
 		const sourceProj = map.getView().getProjection();
 		const area = getArea(polygon, { projection: sourceProj });
 		// let area = getArea(polygon);
-		// console.info(area)
+		// // console.info(area)
 		let output;
 		if (area > 10000) {
 			output = Math.round((area / 1000000) * 100) / 100 + ' ' + 'km<sup>2</sup>';
@@ -238,7 +238,7 @@ export function measure(
 				map.un('pointermove', pointerMoveHandler);
 				map.removeInteraction(draw);
 				helpTooltipElement.classList.add('hidden');
-				// console.info(helpTooltipElement.classList)
+				// // console.info(helpTooltipElement.classList)
 			},
 			this,
 		);

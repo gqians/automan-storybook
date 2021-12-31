@@ -104,7 +104,7 @@ module.exports = {
 		'no-dupe-else-if': 0,
 		'no-caller': 2,
 		'no-case-declarations': 'off',
-		'no-console': 'off',
+		'no-// console': 'off',
 		'no-class-assign': 2,
 		'no-cond-assign': 2,
 		'no-const-assign': 2,

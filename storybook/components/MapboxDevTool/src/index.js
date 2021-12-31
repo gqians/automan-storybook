@@ -1,15 +1,10 @@
 import setDevElement from './setDevElement';
 import { mapConfig } from './map/map.config';
-import { v4 as uuidv4 } from 'uuid';
 import PickleTree from './tree/pickletree';
-// import './css/tree.css';
-class MapboxGLDebuggerControl {
-	constructor({
-		title = '',
-	}) {
-		this._title = title;
-	}
+import Alpine from 'alpinejs';
+import store from './store';
 
+export default class MapboxGLDebuggerControl {
 	onAdd(map) {
 		this._container = document.createElement('div');
 		this._container.innerHTML = setDevElement();
@@ -18,8 +13,15 @@ class MapboxGLDebuggerControl {
 		this._map = map;
 		window.mapboxMap = map;
 		window.PickleTree = PickleTree;
-		window.uuidv4 = uuidv4;
 		window.treeInstance = null;
+		if (!window.Alpine) {
+			window.Alpine = Alpine;
+			console.log(Alpine);
+			document.addEventListener('alpine:init', () => {
+				store();
+			});
+			window.Alpine.start();
+		}
 		map.on('load', () => {
 			this._addTreeView();
 		});
@@ -29,6 +31,10 @@ class MapboxGLDebuggerControl {
 	onRemove() {
 		this._container.parentNode.removeChild(this._container);
 		this._map = undefined;
+		window.mapboxMap = undefined;
+		window.PickleTree = undefined;
+		window.treeInstance = undefined;
+		window.Alpine = undefined;
 	}
 	_addTreeView() {
 		const mapChildren = window.Alpine.store('treeConfig').map.map((config, index) => {
@@ -47,7 +53,7 @@ class MapboxGLDebuggerControl {
 		const instance = new PickleTree({
 			c_target: 'div_tree',
 			nodeEditCallback: (node, text) => {
-				console.log(node, text);
+				// console.log(node, text);
 				const config = mapConfig.find(i => i.value === node.value);
 				window.mapboxMap[config.setMethod](config.settingFormat(text));
 			},
@@ -77,4 +83,4 @@ class MapboxGLDebuggerControl {
 		});
 	}
 }
-export default MapboxGLDebuggerControl;
+

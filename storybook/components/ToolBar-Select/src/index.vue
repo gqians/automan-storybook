@@ -102,7 +102,7 @@ export default {
 	},
 	methods: {
 		infiniteHandler($state) {
-			// console.log('push')
+			// // console.log('push')
 			this.list.push({
 				stationNumber: '12324',
 				stationName: 'add',
