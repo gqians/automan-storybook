@@ -1,13 +1,18 @@
 const setDevElement = () => {
 	const el = `
-	<div id="mapbox-dev-tool" @touchstart="dragStart" @mousedown="dragStart" @touchmove="drag" @mousemove="drag"  @touchend="dragEnd" @mouseup="dragEnd" style="padding:10px;pointer-events:all;width:400px;height:600px;background-color:white;display:flex;flex-direction: column;">
-		<div id="mapbox-dev-headTab" x-data="{ types: ['map', 'layers', 'sources'], click: 'map' }" style="flex: 0 0 auto;min-height:70px;display:flex;align-items: center;justify-content: space-around;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);">
+	<div x-data="{ types: ['map', 'layers', 'sources', 'features'], click: 'map' }" id="mapbox-dev-tool" @touchstart="dragStart" @mousedown="dragStart" @touchmove="drag" @mousemove="drag"  @touchend="dragEnd" @mouseup="dragEnd" style="padding:10px;pointer-events:all;width:400px;height:600px;background-color:white;display:flex;flex-direction: column;">
+		<div id="mapbox-dev-headTab" style="flex: 0 0 auto;min-height:70px;display:flex;align-items: center;justify-content: space-around;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);">
 			<template x-for="type in types">
 				<span x-text="type" style="max-width:80px;font-size:18px;cursor: pointer;display:inline-block;flex:1 1 auto;text-align:center;" :style="{color: type === click ? '#26CE4B' : 'black' }" @click="(click=type) && changeTab(type)">
 				</span>
 			</template>
 		</div>
-		<div style="flex: 1 1 auto;max-height: 500px;margin-top:10px;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);" class="tree" id="div_tree"></div>
+		<div style="flex: 1 1 auto;max-height: 500px;margin-top:10px;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);" >
+			<div x-show="click === 'features'" style="height:30px;width:100%;">
+				<input name='input-custom-dropdown' class='some_class_name' placeholder='select layer' value=''>
+			</div>
+			<div class="tree" id="div_tree"></div>
+		</div>
 	</div>
 	`;
 	// // console.log(el);
@@ -89,6 +94,9 @@ const setDevElement = () => {
 					break;
 				case 'sources':
 					initSourceTree(type);
+					break;
+				case 'features':
+					initFeaturesTree(type);
 					break;
 			};
 		};
@@ -248,7 +256,22 @@ const setDevElement = () => {
 				c_data: sourceConfig
 			});
 			window.treeInstance = instance;
-		}
+		};
+		const initFeaturesTree = (type) => {
+			console.log(window.mapboxMap.getStyle().layers);
+			const layers = window.mapboxMap.getStyle().layers.map(layer=>layer.id);
+			const input = document.querySelector('input[name="input-custom-dropdown"]');
+			const tagify = new Tagify(input, {
+				whitelist: layers,
+				//maxTags: 10,
+				dropdown: {
+					//maxItems: 20,           // <- mixumum allowed rendered suggestions
+					classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
+					enabled: 0,             // <- show suggestions on focus
+					closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+				}
+			})
+		};
 	`;
 	s.appendChild(document.createTextNode(code));
 	document.body.appendChild(s);

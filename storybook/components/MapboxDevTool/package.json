@@ -1,10 +1,11 @@
 {
   "name": "@automan-component/mapbox-devtool",
   "version": "0.2.2-alpha.0",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "author": "qianh",
   "dependencies": {
+    "@yaireo/tagify": "^4.9.4",
     "alpinejs": "^3.7.1"
   },
   "scripts": {

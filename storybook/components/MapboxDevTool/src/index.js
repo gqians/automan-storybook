@@ -3,7 +3,8 @@ import { mapConfig } from './map/map.config';
 import PickleTree from './tree/pickletree';
 import Alpine from 'alpinejs';
 import store from './store';
-
+import Tagify from '@yaireo/tagify';
+import '@yaireo/tagify/dist/tagify.css';
 export default class MapboxGLDebuggerControl {
 	onAdd(map) {
 		this._container = document.createElement('div');
@@ -14,6 +15,7 @@ export default class MapboxGLDebuggerControl {
 		window.mapboxMap = map;
 		window.PickleTree = PickleTree;
 		window.treeInstance = null;
+		window.Tagify = Tagify;
 		if (!window.Alpine) {
 			window.Alpine = Alpine;
 			console.log(Alpine);
