@@ -9,7 +9,8 @@ const setDevElement = () => {
 		</div>
 		<div style="flex: 1 1 auto;max-height: 500px;margin-top:10px;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);" >
 			<div x-show="click === 'features'" style="height:30px;width:100%;">
-				<input name='input-custom-dropdown' class='some_class_name' placeholder='select layer' value=''>
+				<input name='tags' placeholder='select layer' value=''>
+				<div id="jsonTreeWrapper"></div>
 			</div>
 			<div class="tree" id="div_tree"></div>
 		</div>
@@ -260,17 +261,30 @@ const setDevElement = () => {
 		const initFeaturesTree = (type) => {
 			console.log(window.mapboxMap.getStyle().layers);
 			const layers = window.mapboxMap.getStyle().layers.map(layer=>layer.id);
-			const input = document.querySelector('input[name="input-custom-dropdown"]');
-			const tagify = new Tagify(input, {
+			console.log(layers);
+			const input = document.querySelector('input[name="tags"]');
+			const tagify = new window.Tagify(input, {
 				whitelist: layers,
-				//maxTags: 10,
+				maxTags: Infinity,
 				dropdown: {
-					//maxItems: 20,           // <- mixumum allowed rendered suggestions
-					classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
-					enabled: 0,             // <- show suggestions on focus
-					closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+					maxItems: Infinity,
+					classname: "tags-look",
+					enabled: 0,
+					closeOnSelect: false
 				}
-			})
+			});
+			// var data = {
+			// 	"firstName": "Jonh",
+			// 	"lastName": "Smith",
+			// 	"phones": [
+			// 			"123-45-67",
+			// 			"987-65-43"
+			// 	]
+			// };
+			const data = window.mapboxMap.queryRenderedFeatures({layers: layers});
+			console.log(JSON.parse(JSON.stringify(data)));
+			const tree = window.jsonTree.create(JSON.parse(JSON.stringify(data.splice(0,10))), document.getElementById('jsonTreeWrapper'));
+			// console.log(window.jsonTree);
 		};
 	`;
 	s.appendChild(document.createTextNode(code));

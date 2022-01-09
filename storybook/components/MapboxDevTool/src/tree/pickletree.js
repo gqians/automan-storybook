@@ -1,5 +1,5 @@
 // Pickle tree component created by Kadir Barış Bozat
-import './font-awesome.css';
+// import './font-awesome.css';
 import './pickletree.css';
 // eslint-disable-next-line no-unused-vars
 class PickleTree {
