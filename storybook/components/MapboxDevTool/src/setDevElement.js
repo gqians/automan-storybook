@@ -13,6 +13,37 @@ const setDevElement = () => {
 				<div id="jsonTreeWrapper"></div>
 			</div>
 			<div class="tree" id="div_tree"></div>
+			<div>
+			<ol class="p-pagination">
+				<li class="p-pagination__item">
+					<a class="p-pagination__link--previous" href="#previous" title="Previous page"><i class="p-icon--chevron-down">Previous page</i></a>
+				</li>
+				<li class="p-pagination__item">
+					<a class="p-pagination__link" href="#1">1</a>
+				</li>
+				<li class="p-pagination__item p-pagination__item--truncation">
+					…
+				</li>
+				<li class="p-pagination__item">
+					<a class="p-pagination__link" href="#33">33</a>
+				</li>
+				<li class="p-pagination__item">
+					<a class="p-pagination__link is-active" href="#34">34</a>
+				</li>
+				<li class="p-pagination__item">
+					<a class="p-pagination__link" href="#35">35</a>
+				</li>
+				<li class="p-pagination__item p-pagination__item--truncation">
+					…
+				</li>
+				<li class="p-pagination__item">
+					<a class="p-pagination__link" href="#7">100</a>
+				</li>
+				<li class="p-pagination__item">
+					<a class="p-pagination__link--next" href="#next" title="Next page"><i class="p-icon--chevron-down">Next page</i></a>
+				</li>
+			</ol>
+			</div>
 		</div>
 	</div>
 	`;

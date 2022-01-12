@@ -290,3 +290,88 @@ ul li:last-child>div>div>.fa.fa-arrow-down.fa-arrow-disabled:hover{
   background: lightyellow;
   border-color: gold;
 }
+.p-pagination {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	margin-bottom: 0;
+	margin-left: 0;
+	padding-left: 0;
+}
+.p-pagination__item {
+	width: auto;
+}
+li {
+	margin: 0;
+	padding: 0;
+}
+.p-pagination__link--previous, .p-pagination__link--next, .p-pagination__link {
+	background-color: #fff;
+	border-color: rgba(0,0,0,.56);
+	color: #111;
+}
+.p-tabs__link:last-child, .p-side-navigation__toggle:last-child, .p-side-navigation__toggle--in-drawer:last-child, .p-pagination__link--previous:last-child, .p-pagination__link--next:last-child, .p-pagination__link:last-child, .p-button--base:last-child, .p-button--negative:last-child, .p-button--positive:last-child, .p-button--brand:last-child, .p-button:last-child, .p-article-pagination__link--next:last-child, .p-article-pagination__link--previous:last-child, button:last-child {
+	margin-right: 0;
+}
+.p-pagination__link--next [class*=p-icon]:last-child, .p-pagination__link--previous [class*=p-icon]:last-child {
+	margin-right: -0.5rem;
+}
+.p-pagination__link--next [class*=p-icon]:first-child, .p-pagination__link--previous [class*=p-icon]:first-child {
+	margin-left: -0.5rem;
+}
+.p-pagination__link--previous [class*=p-icon] {
+	transform: rotate(0.25turn);
+}
+.p-pagination__link--next [class*=p-icon], .p-pagination__link--previous [class*=p-icon] {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+.p-icon--chevron-down, .p-icon--chevron-up {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath fill='%23666' d='M8.187 11.748l6.187-6.187-1.06-1.061-5.127 5.127L3.061 4.5 2 5.561z'/%3E%3C/svg%3E");
+}
+.u-hide-text, .p-notification--information .p-notification__close, .p-notification--negative .p-notification__close, .p-notification--caution .p-notification__close, .p-notification--positive .p-notification__close, .p-notification .p-notification__close, .p-icon--email, .p-icon--rss, .p-icon--youtube, .p-icon--linkedin, .p-icon--instagram, .p-icon--twitter, .p-icon--github, .p-icon--facebook, .p-side-navigation__toggle::before, .p-side-navigation__toggle--in-drawer::before, .p-top::after, .p-icon--hide, .p-icon--show, .p-icon--spinner, .p-icon--user, .p-icon--share, .p-icon--success, .p-icon--search, .p-icon--copy, .p-icon--menu, .p-icon--code, .p-icon--drag, .p-icon--external-link, .p-icon--warning, .p-icon--error, .p-icon--delete, .p-icon--information, .p-icon--help, .p-icon--question, .p-icon--close, .p-icon--chevron-down, .p-icon--chevron-up, .p-icon--collapse, .p-icon--expand, .p-icon--minus, .p-icon--plus, .p-icon--anchor, .p-chip .p-chip__dismiss, .p-chip--positive .p-chip__dismiss, .p-chip--caution .p-chip__dismiss, .p-chip--negative .p-chip__dismiss, .p-chip--information .p-chip__dismiss, .p-code-snippet .p-code-snippet__block--icon::before {
+	overflow: hidden;
+	text-indent: 110vw;
+	white-space: nowrap;
+}
+.p-pagination__link--previous, .p-pagination__link--next, .p-pagination__link {
+	background-color: #fff;
+	border-color: rgba(0,0,0,.56);
+	color: #111;
+}
+.p-tabs__link, .p-side-navigation__toggle, .p-side-navigation__toggle--in-drawer, .p-pagination__link--previous, .p-pagination__link--next, .p-pagination__link, .p-button--base, .p-button--negative, .p-button--positive, .p-button--brand, .p-button, .p-article-pagination__link--next, .p-article-pagination__link--previous, button {
+	transition-duration: .1s;
+	transition-property: background-color, border-color;
+	transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	border-radius: 0.125rem;
+	border-style: solid;
+	border-width: 1px;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: 300;
+	justify-content: center;
+	line-height: 1.5rem;
+	margin: 0 1rem 1.2rem 0;
+	padding: calc(0.4rem - 1px) 1rem;
+	text-align: center;
+	text-decoration: none;
+}
+.p-button--link, a {
+	color: #06c;
+	text-decoration: none;
+}
+.p-pagination__link--previous, .p-pagination__link--next, .p-pagination__link {
+	background-color: #fff;
+	border-color: rgba(0,0,0,.56);
+	color: #111;
+}
+.p-pagination__item+.p-pagination__item:not(:nth-child(2)):not(:nth-last-child(1)) {
+	margin-left: 0.5rem;
+}
+.p-pagination__item--truncation {
+	padding: calc(0.4rem - 1px) 0;
+}
+.p-pagination__item {
+	width: auto;
+}
