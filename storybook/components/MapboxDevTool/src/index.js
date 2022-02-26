@@ -5,11 +5,12 @@ import store from './store';
 import Tagify from '@yaireo/tagify';
 import '@yaireo/tagify/dist/tagify.css';
 import PickleTree from './tree/pickletree';
-import jsonTree from './jsonTreeViewer/libs/jsonTree/jsonTree';
-import './jsonTreeViewer/libs/jsonTree/jsonTree.css';
+
 export default class MapboxGLDebuggerControl {
 	onAdd(map) {
+		// console.log(document.getElementById('mapbox-gl-debugger'));
 		this._container = document.createElement('div');
+		this._container.id = 'mapbox-gl-debugger';
 		this._container.innerHTML = setDevElement();
 		// this._container = this._container.firstChild;
 		// this._container.appendChild();
@@ -18,10 +19,18 @@ export default class MapboxGLDebuggerControl {
 		window.PickleTree = PickleTree;
 		window.treeInstance = null;
 		window.Tagify = Tagify;
-		window.jsonTree = jsonTree();
+		window.dragConfig = {
+			active: false,
+			currentX: 0,
+			currentY: 0,
+			initialX: 0,
+			initialY: 0,
+			xOffset: 0,
+			yOffset: 0,
+		};
 		if (!window.Alpine) {
 			window.Alpine = Alpine;
-			console.log(Alpine);
+			// console.log(Alpine);
 			document.addEventListener('alpine:init', () => {
 				store();
 			});
@@ -40,6 +49,7 @@ export default class MapboxGLDebuggerControl {
 		window.PickleTree = undefined;
 		window.treeInstance = undefined;
 		window.Alpine = undefined;
+		window.dragConfig = undefined;
 	}
 	_addTreeView() {
 		const mapChildren = window.Alpine.store('treeConfig').map.map((config, index) => {

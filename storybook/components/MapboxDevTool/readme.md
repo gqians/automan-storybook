@@ -1,5 +1,9 @@
 ## mapbox devtool
 
+![Draggable](./docs/draggable.png)
+
+
+You can drag the whole window in the blue box. Click the Refresh button to update the current page.
 ### usage
 
 ``` bash
@@ -17,3 +21,23 @@ map.addControl(
 );
 
 ```
+
+### map
+
+![Map](./docs/map.png)
+
+
+
+You can modify the data on the Map page, and press the Enter key to execute it after you finish entering.
+
+### layers
+
+![Layers](./docs/layers.png)
+
+
+
+You can click on the arrows to modify the position of a layer, and click on the eye icon to show or hide a layer.
+
+### sources
+
+![Sources](./docs/sources.png)

@@ -1,10 +1,16 @@
 const setDevElement = () => {
 	const el = `
-	<div x-data="{ types: ['map', 'layers', 'sources', 'features'], click: 'map' }" id="mapbox-dev-tool" @touchstart="dragStart" @mousedown="dragStart" @touchmove="drag" @mousemove="drag"  @touchend="dragEnd" @mouseup="dragEnd" style="padding:10px;pointer-events:all;width:400px;height:600px;background-color:white;display:flex;flex-direction: column;">
+	<div x-data="{ types: ['map', 'layers', 'sources'], click: 'map' }" id="mapbox-dev-tool" @touchstart="dragStart" @mousedown="dragStart" @touchmove="drag" @mousemove="drag"  @touchend="dragEnd" @mouseup="dragEnd" style="padding:10px;pointer-events:all;width:400px;height:600px;background-color:white;display:flex;flex-direction: column;">
 		<div id="mapbox-dev-headTab" style="flex: 0 0 auto;min-height:70px;display:flex;align-items: center;justify-content: space-around;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);">
 			<template x-for="type in types">
-				<span x-text="type" style="max-width:80px;font-size:18px;cursor: pointer;display:inline-block;flex:1 1 auto;text-align:center;" :style="{color: type === click ? '#26CE4B' : 'black' }" @click="(click=type) && changeTab(type)">
-				</span>
+				<div style="width:95px";>
+					<span x-text="type" style="max-width:80px;font-size:18px;cursor: pointer;display:inline-block;flex:1 1 auto;text-align:center;" :style="{color: type === click ? '#26CE4B' : 'black' }" @click="(click=type) && changeTab(type)">
+					</span>
+					<span x-show="type === click" style="cursor: pointer;vertical-align: bottom;" @click="refresh(type)">
+						<svg t="1645885184810" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2044" width="23" height="23"><path d="M674.133333 878.933333l-98.133333-102.4c128-17.066667 230.4-123.733333 230.4-251.733333 0-123.733333-93.866667-230.4-217.6-251.733333l-89.6-89.6h38.4c196.266667 0 354.133333 153.6 354.133333 341.333333 0 128-76.8 243.2-183.466666 298.666667v85.333333l-34.133334-29.866667z m-93.866666-17.066666c-12.8 0-29.866667 4.266667-46.933334 4.266666-196.266667 0-354.133333-153.6-354.133333-341.333333 0-128 76.8-243.2 183.466667-298.666667V128l55.466666 55.466667 85.333334 85.333333c-132.266667 12.8-234.666667 123.733333-234.666667 256 0 128 98.133333 234.666667 226.133333 251.733333l85.333334 85.333334z" fill="#26CE4B" p-id="2045"></path>
+						</svg>
+					</span>
+				</div>
 			</template>
 		</div>
 		<div style="flex: 1 1 auto;max-height: 500px;margin-top:10px;box-shadow: 0px 0px 4px 0px rgba(20.19, 19.85, 19.85, 0.25);" >
@@ -13,41 +19,12 @@ const setDevElement = () => {
 				<div id="jsonTreeWrapper"></div>
 			</div>
 			<div class="tree" id="div_tree"></div>
-			<div>
-			<ol class="p-pagination">
-				<li class="p-pagination__item">
-					<a class="p-pagination__link--previous" href="#previous" title="Previous page"><i class="p-icon--chevron-down">Previous page</i></a>
-				</li>
-				<li class="p-pagination__item">
-					<a class="p-pagination__link" href="#1">1</a>
-				</li>
-				<li class="p-pagination__item p-pagination__item--truncation">
-					…
-				</li>
-				<li class="p-pagination__item">
-					<a class="p-pagination__link" href="#33">33</a>
-				</li>
-				<li class="p-pagination__item">
-					<a class="p-pagination__link is-active" href="#34">34</a>
-				</li>
-				<li class="p-pagination__item">
-					<a class="p-pagination__link" href="#35">35</a>
-				</li>
-				<li class="p-pagination__item p-pagination__item--truncation">
-					…
-				</li>
-				<li class="p-pagination__item">
-					<a class="p-pagination__link" href="#7">100</a>
-				</li>
-				<li class="p-pagination__item">
-					<a class="p-pagination__link--next" href="#next" title="Next page"><i class="p-icon--chevron-down">Next page</i></a>
-				</li>
-			</ol>
-			</div>
 		</div>
 	</div>
 	`;
-	// // console.log(el);
+	if (document.getElementById('jsonTreeScript')) {
+		return el;
+	}
 	const s = document.createElement('script');
 	const link = document.createElement('link');
 	link.href = 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
@@ -56,49 +33,50 @@ const setDevElement = () => {
 	link.integrity = 'sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN';
 	document.head.appendChild(link);
 	s.type = 'text/javascript';
+	s.id = 'jsonTreeScript';
 	const code = `
-		let active = false;
-		let currentX;
-		let currentY;
-		let initialX;
-		let initialY;
-		let xOffset = 0;
-		let yOffset = 0;
+		// let active = false;
+		// let currentX;
+		// let currentY;
+		// let initialX;
+		// let initialY;
+		// let xOffset = 0;
+		// let yOffset = 0;
 		const dragStart = (e) => {
 			const dragItem = document.getElementById('mapbox-dev-headTab');
 			if (e.type === 'touchstart') {
-				initialX = e.touches[0].clientX - xOffset;
-				initialY = e.touches[0].clientY - yOffset;
+				window.dragConfig.initialX = e.touches[0].clientX - window.dragConfig.xOffset;
+				window.dragConfig.initialY = e.touches[0].clientY - window.dragConfig.yOffset;
 			} else {
-				initialX = e.clientX - xOffset;
-				initialY = e.clientY - yOffset;
+				window.dragConfig.initialX = e.clientX - window.dragConfig.xOffset;
+				window.dragConfig.initialY = e.clientY - window.dragConfig.yOffset;
 			}
 
 			if (dragItem.contains(e.target)) {
-				active = true;
+				window.dragConfig.active = true;
 			}
 		};
 		const dragEnd = (e) => {
-			initialX = currentX;
-			initialY = currentY;
-			active = false;
+			window.dragConfig.initialX = window.dragConfig.currentX;
+			window.dragConfig.initialY = window.dragConfig.currentY;
+			window.dragConfig.active = false;
 		};
 		const drag = (e) => {
-			if (active) {
+			if (window.dragConfig.active) {
 				e.preventDefault();
 
 				if (e.type === 'touchmove') {
-					currentX = e.touches[0].clientX - initialX;
-					currentY = e.touches[0].clientY - initialY;
+					window.dragConfig.currentX = e.touches[0].clientX - window.dragConfig.initialX;
+					window.dragConfig.currentY = e.touches[0].clientY - window.dragConfig.initialY;
 				} else {
-					currentX = e.clientX - initialX;
-					currentY = e.clientY - initialY;
+					window.dragConfig.currentX = e.clientX - window.dragConfig.initialX;
+					window.dragConfig.currentY = e.clientY - window.dragConfig.initialY;
 				}
 
-				xOffset = currentX;
-				yOffset = currentY;
+				window.dragConfig.xOffset = window.dragConfig.currentX;
+				window.dragConfig.yOffset = window.dragConfig.currentY;
 				const dragItem = document.getElementById('mapbox-dev-tool');
-				setTranslate(currentX, currentY, dragItem);
+				setTranslate(window.dragConfig.currentX, window.dragConfig.currentY, dragItem);
 			}
 		};
 		const setTranslate = (xPos, yPos, el) => {
@@ -290,9 +268,9 @@ const setDevElement = () => {
 			window.treeInstance = instance;
 		};
 		const initFeaturesTree = (type) => {
-			console.log(window.mapboxMap.getStyle().layers);
+			// console.log(window.mapboxMap.getStyle().layers);
 			const layers = window.mapboxMap.getStyle().layers.map(layer=>layer.id);
-			console.log(layers);
+			// console.log(layers);
 			const input = document.querySelector('input[name="tags"]');
 			const tagify = new window.Tagify(input, {
 				whitelist: layers,
@@ -313,12 +291,16 @@ const setDevElement = () => {
 			// 	]
 			// };
 			const data = window.mapboxMap.queryRenderedFeatures({layers: layers});
-			console.log(JSON.parse(JSON.stringify(data)));
+			// console.log(JSON.parse(JSON.stringify(data)));
 			const tree = window.jsonTree.create(JSON.parse(JSON.stringify(data.splice(0,10))), document.getElementById('jsonTreeWrapper'));
 			// console.log(window.jsonTree);
 		};
+		const refresh = (type) => {
+			changeTab(type);
+		}
 	`;
 	s.appendChild(document.createTextNode(code));
+
 	document.body.appendChild(s);
 	return el;
 };
